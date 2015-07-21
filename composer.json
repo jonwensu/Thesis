@@ -4,7 +4,10 @@
     "type": "project",
     "description": "The \"Symfony Standard Edition\" distribution",
     "autoload": {
-        "psr-0": { "": "src/", "SymfonyStandard": "app/" }
+        "psr-0": {
+            "": "src/",
+            "SymfonyStandard": "app/"
+        }
     },
     "require": {
         "php": ">=5.3.3",
@@ -57,6 +60,13 @@
         },
         "branch-alias": {
             "dev-master": "2.5-dev"
+        },
+        "heroku": {
+            "document-root": "web",
+            "index-document": "app.php",
+            "framework": "symfony2",
+            "php": "5.4.*",
+            "nginx": "default"
         }
     }
 }
