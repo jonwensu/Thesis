@@ -1,0 +1,112 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('plugins/bootstrap/css/bootstrap.css') }}"/>
+        <link id="bs-css" href="{{ asset('template/css/bootstrap-cerulean.min.css') }}" rel="stylesheet">
+        <link id="bs-css" href="{{ asset('template/css/charisma-app.css') }}" rel="stylesheet">
+        <link id="bs-css" href="{{ asset('template/css/animate.min.css') }}" rel="stylesheet">
+        <style>
+            input.invalid{
+                border: 2px solid red;
+            }
+            .text-white{
+                color: white;
+            }
+
+            .login-header{
+                margin-bottom: 50px;
+            }
+        </style>
+
+        <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+        <script src="{{ asset('plugins/angular/angular.min.js') }}"></script>
+        <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    {% trans_default_domain 'FOSUserBundle' %}
+    <body>
+        <div class="ch-container">
+            <div class="row">
+                <div class="row">
+                    <div class="col-md-12 center login-header">
+                        <img src="{{ asset('pics/coe.png') }}" />
+                    </div>
+                    <!--/span-->
+                </div><!--/row-->
+                <div class="row col-md-3 center">
+                    <div class="panel panel-primary login-box">
+                        <div class="panel-heading">
+                            <h4 class="text-white"> Please login with your Username and Password </h4>
+                        </div>
+                        <div class="panel-body">
+                            <form class="form-horizontal" name="loginFrm" action="{{ path("fos_user_security_check") }}" novalidate method="post">
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                                <fieldset>
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-user"></i>
+                                        </span>
+                                        <input type="text" class="form-control" placeholder="Username" id="username" name="_username" value="{{ last_username }}" required="required" />
+                                    </div>
+                                    <div class="clearfix"></div><br>
+
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-lock"></i>
+                                        </span>
+                                        <input type="password" class="form-control" placeholder="Password" id="password" name="_password" required="required">
+                                    </div>
+                                    <p class="center col-md-5">
+                                        <button type="submit" id="_submit" name="_submit" disabled class="btn btn-primary">Login</button>
+                                    </p>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!--/fluid-row-->
+
+        </div><!--/.fluid-container-->
+        {% if error %}
+            <div id="errors" hidden>
+                Invalid username or password
+            </div>
+        {% endif %}
+        <!-- external javascript -->
+
+        <script>
+
+            $(document).ready(function () {
+
+                $('[data-toggle="tooltip"]').tooltip()
+                if ($('#errors').html() != null) {
+                    var n = noty({
+                        text: $('#errors').html(),
+                        type: 'error',
+                        layout: 'topRight',
+                        animation: {
+                            open: 'animated tada', // Animate.css class names
+                            close: 'animated bounceOut', // Animate.css class names
+                        },
+                        timeout: 10000
+                    });
+                }
+
+                $('input').on('input', function () {
+                    if ($(this).val() === "") {
+                        $(this).addClass("invalid");
+                    } else {
+                        $(this).removeClass("invalid");
+                    }
+                    
+                    $('#_submit').attr('disabled', $('#username').val() === "" || $('#password').val() === "" )
+                    
+                });
+
+            });
+        </script>   
+        <script src="{{ asset('template/js/jquery.noty.packaged.min.js') }}"></script>
+    </body>
+</html>

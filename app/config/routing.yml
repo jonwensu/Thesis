@@ -1,0 +1,16 @@
+thesis_bulletin:
+    resource: "@ThesisBulletinBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+    
+fos_user_registration_register:
+    pattern:  /register
+    defaults: { _controller: ThesisBulletinBundle:Registration:register }
+    options:
+        expose: true

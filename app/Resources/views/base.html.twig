@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('plugins/bootstrap/css/bootstrap.css') }}"/>
+        <link href="{{ asset('template/css/bootstrap-cerulean.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('template/css/charisma-app.css') }}" rel="stylesheet">
+        <link href="{{ asset('template/bootstrap-tour/build/css/bootstrap-tour.min.css') }}" rel="stylesheet">
+        <link id="bs-css" href="{{ asset('template/css/animate.min.css') }}" rel="stylesheet">
+        <link id="bs-css" href="{{ asset('plugins/fontawesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+        <link id="bs-css" href="{{ asset('fonts/fftusj/stylesheet.css') }}" rel="stylesheet" type="text/css">
+        <link id="bs-css" href="{{ asset('app.css') }}" rel="stylesheet">
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% block stylesheets %}
+        {% endblock %}
+
+        <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+
+    </head>
+    <body>
+        <div class="navbar navbar-default" role="navigation">
+
+            <div class="navbar-inner">
+                <a class="navbar-brand text-center" ui-sref="home">
+                    CPU COE
+                </a>
+                <div class="col-md-4">
+                    <form class="navbar-search pull-left col-md-12">
+                        <input placeholder="Search" class="search-query form-control" name="query"
+                               type="text">
+                    </form>
+                </div>
+                <!-- user dropdown starts -->
+                <div class="btn-group pull-right">
+                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> {{ app.user.username }} </span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Profile</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+                    </ul>
+                </div>
+                <!-- user dropdown ends -->
+
+            </div>
+        </div>
+        <!-- topbar ends -->
+        <div class="ch-container">
+            <div class="row" id="cont">
+
+                <!-- left menu starts -->
+                <div class="col-sm-2 col-lg-2">
+                    <div class="sidebar-nav">
+                        <div class="nav-canvas">
+                            <div class="nav-sm nav nav-stacked">
+
+                            </div>
+                            <ul class="nav nav-pills nav-stacked main-menu">
+                                <li class="nav-header">Main</li>
+                                <li><a ui-sref="home"><i class="glyphicon glyphicon-home"></i><span> Dashboard</span></a>
+                                </li>
+                                <li><a class="ajax-link" href="#calendar"><i class="fa fa-calendar"></i><span> Calendar</span></a>
+                                </li>
+                                <li><a ui-sref="home"><i class="fa fa-newspaper-o"></i><span> Bulletin Board</span></a>
+                                </li>
+                                <li><a class="ajax-link" href="#calendar"><i class="fa fa-map-marker"></i><span> Map</span></a>
+                                </li>
+                                <li class="accordion">
+                                    <a href="#"><i class="fa fa-bullhorn"></i><span> Anouncements</span> <span class="accordion-arrow pull-right"><i class='fa fa-chevron-right'></i></span></a>
+                                    <ul class="nav nav-pills nav-stacked">
+                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Browse Announcements"><i class="fa fa-angle-double-right"></i> Browse</a></li>
+                                        <li><a ui-sref="announcement.new"   data-toggle="tooltip" data-placement="right" title="Create Announcement"><i class="fa fa-angle-double-right"></i> Create</a></li>
+                                    </ul>
+                                </li>
+                                <li class="accordion">
+                                    <a href="#"><i class="fa fa-user"></i><span> Admins</span> <span class="accordion-arrow pull-right"><i class='fa fa-chevron-right'></i></span></a>
+                                    <ul class="nav nav-pills nav-stacked">
+                                        <li><a href="#" data-placement="right" data-toggle="tooltip" title="Browse Admins"><i class="fa fa-angle-double-right"></i> Browse</a></li>
+                                        <li><a ui-sref="user.new" data-placement="right" data-toggle="tooltip" title="Register Admin"><i class="fa fa-angle-double-right"></i> Register</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--/span-->
+                <!-- left menu ends -->
+
+                <div id="content" class="col-lg-10 col-sm-10">
+                    <!-- content starts -->
+
+                    {% block body %}
+
+                    {% endblock %}
+                    <!-- content ends -->
+                </div><!--/#content.col-md-0-->
+            </div><!--/fluid-row-->
+            <hr>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            <h3>Settings</h3>
+                        </div>
+                        <div class="modal-body">
+                            <p>Here settings can be configured...</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+                            <a href="#" class="btn btn-primary" data-dismiss="modal">Save changes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="row">
+                <p class="col-md-9 col-sm-9 col-xs-12 copyright center">&copy; 
+                    <a href="#" target="_blank">
+                        Central Philippine University College of Engineering
+                    </a>
+                </p>
+            </footer>
+
+        </div><!--/.fluid-container-->
+        {% block javascripts %}
+        {% endblock %}
+
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+        <script src="{{ asset('plugins/tinymce/tinymce.min.js') }}"></script>
+        <script src="{{ asset('plugins/angular/angular.min.js') }}"></script>
+        <script src="{{ asset('plugins/angular/angular-ui-router.min.js') }}"></script>
+        <script src="{{ asset('plugins/angular/angular-animate.min.js') }}"></script>
+        <script src="{{ asset('plugins/angular/angular-ui-tinymce.js') }}"></script>
+        <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js')}}"></script>
+        <script src="{{ asset('plugins/bootstrap/js/ui-bootstrap.min.js')}}"></script>
+        <script src="{{ asset('app.js')}}"></script>
+        <script src="{{ asset('directives/compareTo.js')}}"></script>
+        <script src="{{ asset('partials/announcement/announcement.js')}}"></script>
+        <script src="{{ asset('partials/announcement/new/new.js')}}"></script>
+        <script src="{{ asset('partials/user/user.js')}}"></script>
+        <script src="{{ asset('partials/user/new/new.js')}}"></script>
+        <script src="{{ asset('template/js/jquery.noty.packaged.min.js')}}"></script>
+        <script src="{{ asset('template/bootstrap-tour/build/js/bootstrap-tour.min.js')}}"></script>
+        <script src="{{ asset('js/script.js')}}"></script>
+
+    </body>
+</html>

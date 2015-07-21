@@ -1,0 +1,1 @@
+fos.Router.setData({"base_url":"","routes":{"announcement_create":{"tokens":[["text","\/announcement\/create"]],"defaults":[],"requirements":{"_method":"POST"},"hosttokens":[]},"home":{"tokens":[["text","\/"]],"defaults":[],"requirements":[],"hosttokens":[]}},"prefix":"","host":"localhost","scheme":"http"});
