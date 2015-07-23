@@ -15,11 +15,13 @@
             <file>file:/C:/xampp/htdocs/Thesis/app/Resources/views/base.html.twig</file>
             <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/ThesisBulletinBundle.php</file>
             <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Resources/config/services.yml</file>
+            <file>file:/C:/xampp/htdocs/Thesis/app/config/config_prod.yml</file>
             <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Form/Type/RegistrationFormType.php</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/user/new/new.js</file>
             <file>file:/C:/xampp/htdocs/Thesis/app/AppKernel.php</file>
             <file>file:/C:/xampp/htdocs/Thesis/app/config/config.yml</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/announcement/new/new.js</file>
+            <file>file:/C:/xampp/htdocs/Thesis/.gitignore</file>
             <file>file:/C:/xampp/htdocs/Thesis/app/config/parameters.yml</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/announcement/new/new.html</file>
             <file>file:/C:/xampp/htdocs/Thesis/app/config/security.yml</file>
