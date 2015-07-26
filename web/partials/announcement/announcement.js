@@ -5,6 +5,6 @@ angular.module('myApp.announcement', [
                 $stateProvider
                         .state('announcement', {
                             url: "/announcement",
-                            templateUrl: PATH + 'nestedbase.html'
+                            templateUrl: constants.viewPath() + 'nestedbase.html'
                         });
             }])

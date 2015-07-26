@@ -1,6 +1,12 @@
-var ORIGIN = document.location.origin;
-var FOLDER = document.location.pathname.split('/')[1];
-var PATH = ORIGIN + "/" + FOLDER + "/web/partials/";
+
+var constants = new (function () {
+    var ORIGIN = document.location.origin;
+    var FOLDER = document.location.pathname.split('/')[1];
+    var PATH = ORIGIN + "/" + FOLDER + "/web/partials/";
+    this.viewPath = function () {
+        return PATH;
+    };
+})();
 
 
 $(document).ready(function () {

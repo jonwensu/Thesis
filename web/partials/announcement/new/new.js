@@ -7,7 +7,7 @@
                             .state('announcement.new', {
                                 url: "/new",
                                 controller: "NewAnnouncementCtrl",
-                                templateUrl: PATH + 'announcement/new/new.html'
+                                templateUrl: constants.viewPath() + 'announcement/new/new.html'
                             });
                 }])
 

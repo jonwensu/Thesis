@@ -11,26 +11,26 @@
         </li>
     </ul>
 </div>
-<div class="well row  col-lg-10 center">
+<div class="well row  col-lg-8 center">
     <h1>
         Register Admin
     </h1>
     <form class="form-group text-left" ng-submit="submit()" novalidate name="userFrm">
         <div class="form-group">
             <label for="user.email" class="required">Email</label>
-            <input id="user.email" name="user.username" class="form-control" type="text" ng-model="user.email" />
+            <input id="user.email" name="user.username" class="form-control" required type="text" ng-model="user.email" />
         </div>
         <div class="form-group">
             <label for="user.username" class="required">Username</label>
-            <input id="user.username" name="user.username" class="form-control" type="text" ng-model="user.username" />
+            <input id="user.username" name="user.username" class="form-control" required type="text" ng-model="user.username" />
         </div>
         <div class="form-group">
             <label for="user.plainPassword.first" class="required">Password</label>
-            <input id="user.plainPassword.first" name="user.plainPassword.first" class="form-control" type="password" ng-model="user.plainPassword.first" />
+            <input id="user.plainPassword.first" name="user.plainPassword.first" required class="form-control" type="password" ng-model="user.plainPassword.first" />
         </div>
         <div class="form-group">
             <label for="user.plainPassword.second" class="required">Confirm Password</label>
-            <input id="user.plainPassword.second" name="user.plainPassword.second" compare-to="user.plainPassword.first" class="form-control" type="password" ng-model="user.plainPassword.second" />
+            <input id="user.plainPassword.second" name="user.plainPassword.second" required compare-to="user.plainPassword.first" class="form-control" type="password" ng-model="user.plainPassword.second" />
         </div>
         <input type="submit" value="Register" ng-disabled="userFrm.$invalid"  class="btn btn-primary center-block col-lg-2" />
     </form>

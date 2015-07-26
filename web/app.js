@@ -5,9 +5,10 @@
         'ui.router',
         'ngAnimate',
         'ui.tinymce',
+        'ui.bootstrap',
         'myApp.announcement',
         'myApp.user',
-        'myApp.directive.compareTo'
+        'myApp.directive.compareTo',
     ])
             .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
@@ -16,15 +17,13 @@
                     $stateProvider.state('home', {
                         url: "/",
                         controller: "MainCtrl",
-                        templateUrl: PATH + "index.html"
+                        templateUrl: constants.viewPath() + "index.html"
                     });
                 }])
             .config(['$httpProvider', function ($httpProvider) {
                     $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
                 }])
             .controller("MainCtrl", ["$scope", function ($scope) {
-                    $scope.message = "asaa";
-
                     $('.btn-minimize').click(function (e) {
                         e.preventDefault();
 
@@ -35,6 +34,7 @@
                             $('i', $(this)).removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
                         $target.slideToggle();
                     });
+
 
                 }])
 }());

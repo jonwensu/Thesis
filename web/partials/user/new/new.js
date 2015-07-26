@@ -7,7 +7,7 @@
                             .state('user.new', {
                                 url: "/new",
                                 controller: "NewUserCtrl",
-                                templateUrl: PATH + 'user/new/new.html'
+                                templateUrl: constants.viewPath() + 'user/new/new.html'
                             });
                 }])
 
@@ -26,9 +26,7 @@
                             $('.invalid').removeClass('invalid');
                             $.each(fields, function (i, r) {
                                 $("label[for='user." + r + "']").addClass('invalid');
-                                a += "label[for='user." + r + "']" + ", ";
                             });
-console.log(a);
                             $.each(errors, function (i, v) {
                                 if (v != "") {
                                     var n = noty({

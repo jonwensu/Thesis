@@ -14,3 +14,13 @@ fos_user_registration_register:
     defaults: { _controller: ThesisBulletinBundle:Registration:register }
     options:
         expose: true
+        
+announcements:
+    type: rest
+    resource: Thesis\BulletinBundle\Controller\AnnouncementController
+    
+users:
+    type: rest
+    resource: Thesis\BulletinBundle\Controller\UserController
+    options:
+        expose: true
