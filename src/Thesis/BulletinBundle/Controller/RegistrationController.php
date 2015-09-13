@@ -39,7 +39,6 @@ class RegistrationController extends Controller {
         $formFactory = $this->get('fos_user.registration.form.factory');
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
         $userManager = $this->get('fos_user.user_manager');
-
         $user = $userManager->createUser();
         $user->setEnabled(true);
         $form = $formFactory->createForm();

@@ -5,6 +5,10 @@ angular.module('myApp.announcement', [
                 $stateProvider
                         .state('announcement', {
                             url: "/announcement",
-                            templateUrl: constants.viewPath() + 'nestedbase.html'
+                            abstract: true,
+                            templateUrl: constants.viewPath() + 'nestedbase.html',
+                            data: {
+                                roles: ["ADMIN"]
+                            }
                         });
             }])

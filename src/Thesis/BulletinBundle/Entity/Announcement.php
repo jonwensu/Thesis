@@ -3,12 +3,14 @@
 namespace Thesis\BulletinBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\ExecutionContextInterface;
 
 /**
  * Announcement
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Thesis\BulletinBundle\Entity\AnnouncementRepository")
+ * @ORM\Entity(repositoryClass="AnnouncementRepository")
  */
 class Announcement
 {
@@ -124,4 +126,25 @@ class Announcement
     {
         return $this->datePosted;
     }
+    
+    /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context) {
+        $blank = false;
+        if ($this->title === null ||
+                $this->content === null) {
+            $context->addViolation("Please fill in all fields");
+        }
+
+        if ($this->title === null) {
+            $context->addViolationAt('title', null);
+        }
+        
+        if ($this->content === null) {
+            $context->addViolationAt('content', null);
+        }
+    }
+
+    
 }

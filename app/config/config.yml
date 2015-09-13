@@ -74,6 +74,12 @@ services:
         arguments: ["%fos_user.model.user.class%"]
         tags:
             - { name: form.type, alias: thesis_user_registration }
+            
+    thesis.profile.form.type:
+        class: Thesis\BulletinBundle\Form\Type\ProfileFormType
+        arguments: ["%fos_user.model.user.class%"]
+        tags:
+            - { name: form.type, alias: thesis_user_profile }
     
 fos_user:
     db_driver: orm
@@ -81,7 +87,10 @@ fos_user:
     user_class: Thesis\BulletinBundle\Entity\User
     registration:
         form:
-            type: thesis_user_registration
+            type: thesis_user_registration     
+    profile:
+        form:
+            type: thesis_user_profile
             
 fos_rest:
     param_fetcher_listener: true

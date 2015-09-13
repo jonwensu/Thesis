@@ -7,7 +7,10 @@
                             .state('announcement.new', {
                                 url: "/new",
                                 controller: "NewAnnouncementCtrl",
-                                templateUrl: constants.viewPath() + 'announcement/new/new.html'
+                                templateUrl: constants.viewPath() + 'announcement/new/new.html',
+                                data: {
+                                    roles: ["ADMIN"]
+                                }
                             });
                 }])
 

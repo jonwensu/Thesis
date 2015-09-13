@@ -9,9 +9,9 @@
         <link href="{{ asset('template/bootstrap-tour/build/css/bootstrap-tour.min.css') }}" rel="stylesheet">
         <link id="bs-css" href="{{ asset('template/css/animate.min.css') }}" rel="stylesheet">
         <link id="bs-css" href="{{ asset('plugins/angular/ui-grid.min.css') }}" rel="stylesheet" type="text/css">
+        <link id="bs-css" href="{{ asset('plugins/icheck/skins/flat/blue.css') }}" rel="stylesheet" type="text/css">
         <link id="bs-css" href="{{ asset('plugins/angular/ui-grid-theme.min.css') }}" rel="stylesheet" type="text/css">
         <link id="bs-css" href="{{ asset('plugins/fontawesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-        <link id="bs-css" href="{{ asset('plugins/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet" type="text/css">
         <link id="bs-css" href="{{ asset('fonts/fftusj/stylesheet.css') }}" rel="stylesheet" type="text/css">
         <link id="bs-css" href="{{ asset('app.css') }}" rel="stylesheet">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -78,13 +78,20 @@
                                         <li><a ui-sref="announcement.new"   data-toggle="tooltip" data-placement="right" title="Create Announcement"><i class="fa fa-angle-double-right"></i> Create</a></li>
                                     </ul>
                                 </li>
-                                <li class="accordion">
-                                    <a href="#"><i class="fa fa-user"></i><span> Admins</span> <span class="accordion-arrow pull-right"><i class='fa fa-chevron-right'></i></span></a>
-                                    <ul class="nav nav-pills nav-stacked">
-                                        <li><a ui-sref="user.browse" data-placement="right" data-toggle="tooltip" title="Browse Admins"><i class="fa fa-angle-double-right"></i> Browse</a></li>
-                                        <li><a ui-sref="user.new" data-placement="right" data-toggle="tooltip" title="Register Admin"><i class="fa fa-angle-double-right"></i> Register</a></li>
-                                    </ul>
-                                </li>
+                                {% if "ROLE_SUPER_ADMIN" in app.user.roles %}
+                                    <li class="accordion">
+                                        <a href="#"><i class="fa fa-user"></i><span> Admins</span> <span class="accordion-arrow pull-right"><i class='fa fa-chevron-right'></i></span></a>
+                                        <ul class="nav nav-pills nav-stacked">
+
+                                            <li>
+                                                <a ui-sref="user.browse" data-placement="right" data-toggle="tooltip" title="Browse Admins">
+                                                    <i class="fa fa-angle-double-right"></i> Browse
+                                                </a>
+                                            </li>
+                                            <li><a ui-sref="user.new" data-placement="right" data-toggle="tooltip" title="Register Admin"><i class="fa fa-angle-double-right"></i> Register</a></li>
+                                        </ul>
+                                    </li>
+                                {% endif %}
                             </ul>
                         </div>
                     </div>
@@ -137,6 +144,7 @@
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
         <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
         <script src="{{ asset('plugins/tinymce/tinymce.min.js') }}"></script>
+        <script src="{{ asset('plugins/icheck/icheck.min.js') }}"></script>
         <script src="{{ asset('plugins/angular/angular.min.js') }}"></script>
         <script src="{{ asset('plugins/angular/angular-ui-router.min.js') }}"></script>
         <script src="{{ asset('plugins/angular/angular-animate.min.js') }}"></script>
@@ -147,12 +155,16 @@
         <script src="{{ asset('plugins/datatables/js/jquery.dataTables.min.js')}}"></script>
         <script src="{{ asset('app.js')}}"></script>
         <script src="{{ asset('directives/compareTo.js')}}"></script>
+        <script src="{{ asset('services/user.js')}}"></script>
+        <script src="{{ asset('services/authorization.js')}}"></script>
+        <script src="{{ asset('services/principal.js')}}"></script>
         <script src="{{ asset('partials/announcement/announcement.js')}}"></script>
         <script src="{{ asset('partials/announcement/new/new.js')}}"></script>
         <script src="{{ asset('partials/user/user.js')}}"></script>
         <script src="{{ asset('partials/user/new/new.js')}}"></script>
         <script src="{{ asset('partials/user/show/show.js')}}"></script>
         <script src="{{ asset('partials/user/browse/browse.js')}}"></script>
+        <script src="{{ asset('partials/user/edit/edit.js')}}"></script>
         <script src="{{ asset('template/js/jquery.noty.packaged.min.js')}}"></script>
         <script src="{{ asset('template/bootstrap-tour/build/js/bootstrap-tour.min.js')}}"></script>
         <script src="{{ asset('js/script.js')}}"></script>

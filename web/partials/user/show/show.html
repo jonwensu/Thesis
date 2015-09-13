@@ -4,16 +4,26 @@
             <a ui-sref="home"><i class="fa fa-home"></i> Home</a>
         </li>
         <li>
-            Admins
+            <a ui-sref="user.browse">
+                Admins
+            </a>
         </li>
         <li>
-            Register
+            View
         </li>
     </ul>
 </div>
 <div class="well row  col-lg-8 center">
     <h1>
-        Show Admin
+        View Admin
     </h1>
-    {{ user }}
+    <h2>
+        {{ user.username }}
+    </h2>
+    <h2>
+        {{ user.email }}
+    </h2>
+    <h2>
+        {{ user.enabled }}
+    </h2>
 </div>

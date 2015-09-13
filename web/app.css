@@ -201,3 +201,10 @@
 #cont{
     height: 55em;
 }
+
+/* when hiding the picture */
+#pwordDiv.ng-hide-add         { animation:0.5s fadeOut ease; }
+
+/* when showing the picture */
+#pwordDiv.ng-hide-remove      { animation:0.5s fadeIn ease; }
+

@@ -10,4 +10,29 @@ namespace Thesis\BulletinBundle\Entity;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+    
+    public function findOtherUsers($id){
+        return $this->getEntityManager()
+                ->createQueryBuilder()
+                ->select('u')
+                ->from('ThesisBulletinBundle:User', 'u')
+                ->where('u.id != :id')
+                ->orderBy('u.username')
+                ->setParameter(':id', $id)
+                ->getQuery()
+                ->getResult();
+    }
+    
+    public function findAdmins(){
+        return $this->getEntityManager()
+                ->createQueryBuilder()
+                ->select('u')
+                ->from('ThesisBulletinBundle:User', 'u')
+                ->where('u.roles NOT LIKE :super')
+                ->orderBy('u.username')
+                ->setParameter(':super', "%ROLE_SUPER_ADMIN%")
+                ->getQuery()
+                ->getResult();
+    }
+    
 }

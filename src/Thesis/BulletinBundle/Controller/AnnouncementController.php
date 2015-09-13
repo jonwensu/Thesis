@@ -78,7 +78,7 @@ class AnnouncementController extends Controller {
         }
 
 
-        $response = ['valid' => false, 'errors' => $errors, 'fields' => $fields, 'aw' => $request->request->get('html_format')];
+        $response = ['valid' => false, 'errors' => $errors, 'fields' => $fields];
 
 
         return new JsonResponse($response);

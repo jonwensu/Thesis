@@ -24,3 +24,15 @@ users:
     resource: Thesis\BulletinBundle\Controller\UserController
     options:
         expose: true
+        
+fos_user_security_login:
+    pattern:  /login
+    defaults: { _controller: ThesisBulletinBundle:Security:login }
+    options:
+        expose: true
+        
+fos_user_security_logout:
+    pattern:  /logout
+    defaults: { _controller: ThesisBulletinBundle:Security:logout }
+    options:
+        expose: true

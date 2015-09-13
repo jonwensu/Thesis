@@ -1,9 +1,16 @@
 FOS\UserBundle\Model\User:
     exclusion_policy: ALL
     properties:
-        id:
+        username:
             expose: true
+            groups: [ edit, authentication ]
         email:
             expose: true
+            groups: [ edit ]
         enabled:
             expose: true
+        lastLogin:
+            expose: true
+        roles:
+            expose: true
+            groups: [ authentication ]
