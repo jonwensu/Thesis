@@ -9,7 +9,7 @@
                                 controller: "EditUserCtrl",
                                 templateUrl: constants.viewPath() + 'user/edit/edit.html',
                                 data: {
-                                    roles: ["SUPER_ADMIN"]
+                                    roles: ["SUPER_ADMIN", "OWNER"]
                                 }
                             });
                 }])

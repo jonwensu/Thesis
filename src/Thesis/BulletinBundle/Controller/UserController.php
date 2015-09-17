@@ -38,10 +38,23 @@ class UserController extends Controller {
         ];
     }
 
+    private function getCurrentUser() {
+        if ($this->getUser() == null) {
+            return null;
+        }
+        $user = clone $this->getUser();
+        $user->addRole("ROLE_OWNER");
+        return $user;
+    }
+
     /**
      * @View(serializerGroups={"authentication"})
      */
     public function getUserCurrentAction() {
+        if ($this->getUser() == null) {
+            return null;
+        }
+        
         return $this->getUser();
     }
 
@@ -70,12 +83,10 @@ class UserController extends Controller {
      */
     public function isAuthorized(Request $request) {
         $required = $request->request->get('roles');
-        $state = $request->request->get('state');
         $id = $request->request->get('id');
-        $roles = $this->getUser()->getRoles();
-        $exemptions = ["user.edit", "user.show"];
+        $roles = $this->getCurrentUser()->getRoles();
 
-        return new JsonResponse(['authorized' => $this->hasRole($required, $roles) || in_array($state, $exemptions) && $this->getUser()->getId() == $id]);
+        return new JsonResponse(['authorized' => $this->hasRole($required, $roles) && $this->getUser()->getId() == $id]);
     }
 
     /**

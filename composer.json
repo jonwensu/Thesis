@@ -25,7 +25,8 @@
         "friendsofsymfony/jsrouting-bundle": "^1.5",
         "jms/serializer-bundle": "^1.0",
         "sensio/generator-bundle": "~2.3",
-        "friendsofsymfony/rest-bundle": "^1.7"
+        "friendsofsymfony/rest-bundle": "^1.7",
+        "adoy/oauth2": "dev-master"
     },
     "require-dev": {
         

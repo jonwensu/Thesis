@@ -6,9 +6,7 @@ angular.module('myApp.announcement', [
                         .state('announcement', {
                             url: "/announcement",
                             abstract: true,
+                            parent: 'index',
                             templateUrl: constants.viewPath() + 'nestedbase.html',
-                            data: {
-                                roles: ["ADMIN"]
-                            }
                         });
             }])

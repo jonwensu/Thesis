@@ -9,9 +9,7 @@ angular.module('myApp.user', [
                         .state('user', {
                             url: "/admin",
                             abstract: true,
+                            parent: 'index',
                             templateUrl: constants.viewPath() + 'nestedbase.html',
-                             data: {
-                                    roles: ["ADMIN"]
-                                }
                         });
             }])
