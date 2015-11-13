@@ -9,10 +9,13 @@
         'myApp.announcement',
         'myApp.user',
         'myApp.directive.compareTo',
+        'myApp.directive.slider',
         'myApp.service.user',
         'myApp.service.authorization',
         'myApp.index',
-        'myApp.service.principal'
+        'myApp.service.principal',
+        'frapontillo.bootstrap-switch',
+        'ngIdle'
     ])
             .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
@@ -30,41 +33,24 @@
             .config(['$httpProvider', function ($httpProvider) {
                     $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
                 }])
-            .run(['$rootScope', '$state', 'authorization', 'principal', function ($rootScope, $state, authorization, principal) {
+            .config(["IdleProvider", "KeepaliveProvider", function (IdleProvider, KeepaliveProvider) {
+                    IdleProvider.idle(180);
+                    IdleProvider.timeout(180);
+                }])
+            .run(['$rootScope', 'authorization', 'principal', 'Idle', function ($rootScope, authorization, principal, Idle) {
 
                     $rootScope.$on('$stateChangeStart', function (e, toState, toParams) {
                         $rootScope.toState = toState;
                         $rootScope.toParams = toParams;
 
+                        Idle.watch();
+
+                        $rootScope.$on('IdleTimeout', function () {
+                            window.location.href = Routing.generate('fos_user_security_logout');
+                        });
+
                         if (principal.isIdentityResolved())
                             authorization.authorize();
-
-//                        var authenSuccess = function (response) {
-//                            var authenticated = response.data.authenticated;
-//                            if (!authenticated) {
-//                                window.location.href = Routing.generate("fos_user_security_login");
-//                            }
-//                        };
-//
-//                        var authenError = function (reason) {
-//                            window.location.href = Routing.generate("fos_user_security_login");
-//                        }
-//
-//                        var authorSuccess = function (response) {
-//                            var authorized = response.data.authorized;
-//                            if (!authorized) {
-//                                $state.go("home");
-//                            }
-//                        };
-//
-//                        var authorError = function (reason) {
-//                            $state.go("home");
-//                        }
-//
-//                        authorization.isAuthenticated().then(authenSuccess, authenError);
-//                        authorization.isAuthorized().then(authorSuccess, authorError);
-
-
                     });
                 }])
             .controller("MainCtrl", ["$scope", function ($scope) {

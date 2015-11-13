@@ -1,5 +1,6 @@
 angular.module('myApp.announcement', [
-    'myApp.announcement.new'
+    'myApp.announcement.new',
+//    'myApp.announcement.browse'
 ])
         .config(['$stateProvider', function ($stateProvider) {
                 $stateProvider

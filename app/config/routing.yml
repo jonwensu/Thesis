@@ -18,6 +18,8 @@ fos_user_registration_register:
 announcements:
     type: rest
     resource: Thesis\BulletinBundle\Controller\AnnouncementController
+    options:
+        expose: true
     
 users:
     type: rest

@@ -7,13 +7,15 @@
         <link href="{{ asset('template/css/bootstrap-cerulean.min.css') }}" rel="stylesheet">
         <link href="{{ asset('template/css/charisma-app.css') }}" rel="stylesheet">
         <link href="{{ asset('template/bootstrap-tour/build/css/bootstrap-tour.min.css') }}" rel="stylesheet">
-        <link id="bs-css" href="{{ asset('template/css/animate.min.css') }}" rel="stylesheet">
-        <link id="bs-css" href="{{ asset('plugins/angular/ui-grid.min.css') }}" rel="stylesheet" type="text/css">
-        <link id="bs-css" href="{{ asset('plugins/icheck/skins/flat/blue.css') }}" rel="stylesheet" type="text/css">
-        <link id="bs-css" href="{{ asset('plugins/angular/ui-grid-theme.min.css') }}" rel="stylesheet" type="text/css">
-        <link id="bs-css" href="{{ asset('plugins/fontawesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-        <link id="bs-css" href="{{ asset('fonts/fftusj/stylesheet.css') }}" rel="stylesheet" type="text/css">
-        <link id="bs-css" href="{{ asset('app.css') }}" rel="stylesheet">
+        <link href="{{ asset('template/css/animate.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('plugins/angular/ui-grid.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('plugins/icheck/skins/flat/blue.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('plugins/angular/ui-grid-theme.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('plugins/fontawesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('plugins/bxslider/bxslider.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('plugins/switch/bootstrap-switch.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('fonts/fftusj/stylesheet.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('app.css') }}" rel="stylesheet">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         {% block stylesheets %}
         {% endblock %}
@@ -67,7 +69,8 @@
                                 </li>
                                 <li><a class="ajax-link" href="#calendar"><i class="fa fa-calendar"></i><span> Calendar</span></a>
                                 </li>
-                                <li><a ui-sref="home"><i class="fa fa-newspaper-o"></i><span> Bulletin Board</span></a>
+                                <li><a href="{{ path("board_view") }}"><i class="fa fa-newspaper-o"></i><span> Bulletin Board</span></a>
+{#                                <li><a ui-sref="bulletinboard"><i class="fa fa-newspaper-o"></i><span> Bulletin Board</span></a>#}
                                 </li>
                                 <li><a class="ajax-link" href="#calendar"><i class="fa fa-map-marker"></i><span> Map</span></a>
                                 </li>
@@ -152,14 +155,19 @@
         <script src="{{ asset('plugins/angular/ui-grid.min.js') }}"></script>
         <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js')}}"></script>
         <script src="{{ asset('plugins/bootstrap/js/ui-bootstrap.min.js')}}"></script>
-        <script src="{{ asset('plugins/datatables/js/jquery.dataTables.min.js')}}"></script>
+        <script src="{{ asset('plugins/bxslider/bxslider.min.js')}}"></script>
+        <script src="{{ asset('plugins/switch/bootstrap-switch.min.js')}}"></script>
+        <script src="{{ asset('plugins/switch/angular-bootstrap-switch.min.js')}}"></script>
+        <script src="{{ asset('plugins/ng-idle/angular-idle.js')}}"></script>
         <script src="{{ asset('app.js')}}"></script>
         <script src="{{ asset('directives/compareTo.js')}}"></script>
+        <script src="{{ asset('directives/slider.js')}}"></script>
         <script src="{{ asset('services/user.js')}}"></script>
         <script src="{{ asset('services/authorization.js')}}"></script>
         <script src="{{ asset('services/principal.js')}}"></script>
         <script src="{{ asset('partials/announcement/announcement.js')}}"></script>
         <script src="{{ asset('partials/announcement/new/new.js')}}"></script>
+        <script src="{{ asset('partials/announcement/browse/browse.js')}}"></script>
         <script src="{{ asset('partials/user/user.js')}}"></script>
         <script src="{{ asset('partials/index.js')}}"></script>
         <script src="{{ asset('partials/user/new/new.js')}}"></script>

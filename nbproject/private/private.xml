@@ -2,34 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/xampp/htdocs/Thesis/app/Resources/FOSUserBundle/serializer/Model.User.yml</file>
-            <file>file:/C:/xampp/htdocs/Thesis/web/partials/user/browse/browse.js</file>
-            <file>file:/C:/xampp/htdocs/Thesis/web/partials/index.js</file>
-            <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Entity/User.php</file>
-            <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Controller/UserController.php</file>
-            <file>file:/C:/xampp/htdocs/Thesis/web/partials/user/browse/browse.html</file>
-            <file>file:/C:/xampp/htdocs/Thesis/web/customTemplates/confirmDisable.html</file>
-            <file>file:/C:/xampp/htdocs/Thesis/app/config/routing.yml</file>
-            <file>file:/C:/xampp/htdocs/Thesis/web/services/principal.js</file>
-            <file>file:/C:/xampp/htdocs/Thesis/web/partials/user/edit/edit.js</file>
-            <file>file:/C:/xampp/htdocs/Thesis/app/Resources/views/base.html.twig</file>
-            <file>file:/C:/xampp/htdocs/Thesis/web/partials/user/new/new.js</file>
-            <file>file:/C:/xampp/htdocs/Thesis/web/partials/user/new/new.html</file>
-            <file>file:/C:/xampp/htdocs/Thesis/web/partials/announcement/new/new.html</file>
-            <file>file:/C:/xampp/htdocs/Thesis/web/partials/user/show/show.js</file>
-            <file>file:/C:/xampp/htdocs/Thesis/web/js/script.js</file>
-            <file>file:/C:/xampp/htdocs/Thesis/web/cellTemplates/browseUser.html</file>
-            <file>file:/C:/xampp/htdocs/Thesis/web/services/authorization.js</file>
-            <file>file:/C:/xampp/htdocs/Thesis/web/partials/user/user.js</file>
-            <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Entity/AnnouncementRepository.php</file>
-            <file>file:/C:/xampp/htdocs/Thesis/web/partials/announcement/announcement.js</file>
-            <file>file:/C:/xampp/htdocs/Thesis/web/services/user.js</file>
-            <file>file:/C:/xampp/htdocs/Thesis/web/partials/announcement/new/new.js</file>
-            <file>file:/C:/xampp/htdocs/Thesis/vendor/friendsofsymfony/user-bundle/Model/User.php</file>
-            <file>file:/C:/xampp/htdocs/Thesis/app/config/routing_dev.yml</file>
-            <file>file:/C:/xampp/htdocs/Thesis/web/app.js</file>
-            <file>file:/C:/xampp/htdocs/Thesis/web/app.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

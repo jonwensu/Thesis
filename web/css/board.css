@@ -1,0 +1,15 @@
+html,body{
+    background: #ffffff;
+}
+
+#footer {
+    bottom:0;
+    position:fixed;
+    z-index:150;
+    /*    _position:absolute;
+        _top:expression(eval(document.documentElement.scrollTop+
+            (document.documentElement.clientHeight-this.offsetHeight)));*/
+    background-color: #99ccff;
+    height: 3em;
+    padding-top: 1em;
+}

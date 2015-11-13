@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Thesis\BulletinBundle\Entity\Announcement;
 use Thesis\BulletinBundle\Form\AnnouncementType;
+use FOS\RestBundle\Controller\Annotations\View;
 
 /**
  * Announcement controller.
@@ -109,6 +110,19 @@ class AnnouncementController extends Controller {
         $form->add('submit', 'submit', array('label' => 'Create'));
 
         return $form;
+    }
+
+    /**
+     * @View()
+     */
+    public function getAnnouncementsAction() {
+
+        return [
+            'announcements' => $this->getDoctrine()
+                    ->getManager()
+                    ->getRepository('ThesisBulletinBundle:Announcement')
+                    ->findAll()
+        ];
     }
 
 }

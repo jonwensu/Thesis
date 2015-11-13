@@ -12,8 +12,8 @@ use Symfony\Component\Validator\ExecutionContextInterface;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AnnouncementRepository")
  */
-class Announcement
-{
+class Announcement {
+
     /**
      * @var integer
      *
@@ -22,6 +22,12 @@ class Announcement
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Board", inversedBy="announcements")
+     * @ORM\JoinColumn(name="board_id", referencedColumnName="id")
+     */
+    private $board;
 
     /**
      * @var string
@@ -44,14 +50,12 @@ class Announcement
      */
     private $datePosted;
 
-
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -62,8 +66,7 @@ class Announcement
      *
      * @return Announcement
      */
-    public function setTitle($title)
-    {
+    public function setTitle($title) {
         $this->title = $title;
 
         return $this;
@@ -74,8 +77,7 @@ class Announcement
      *
      * @return string
      */
-    public function getTitle()
-    {
+    public function getTitle() {
         return $this->title;
     }
 
@@ -86,8 +88,7 @@ class Announcement
      *
      * @return Announcement
      */
-    public function setContent($content)
-    {
+    public function setContent($content) {
         $this->content = $content;
 
         return $this;
@@ -98,8 +99,7 @@ class Announcement
      *
      * @return string
      */
-    public function getContent()
-    {
+    public function getContent() {
         return $this->content;
     }
 
@@ -110,8 +110,7 @@ class Announcement
      *
      * @return Announcement
      */
-    public function setDatePosted($datePosted)
-    {
+    public function setDatePosted($datePosted) {
         $this->datePosted = $datePosted;
 
         return $this;
@@ -122,11 +121,10 @@ class Announcement
      *
      * @return \DateTime
      */
-    public function getDatePosted()
-    {
+    public function getDatePosted() {
         return $this->datePosted;
     }
-    
+
     /**
      * @Assert\Callback
      */
@@ -140,11 +138,34 @@ class Announcement
         if ($this->title === null) {
             $context->addViolationAt('title', null);
         }
-        
+
         if ($this->content === null) {
             $context->addViolationAt('content', null);
         }
     }
 
-    
+
+    /**
+     * Set board
+     *
+     * @param \Thesis\BulletinBundle\Entity\Board $board
+     *
+     * @return Announcement
+     */
+    public function setBoard(\Thesis\BulletinBundle\Entity\Board $board = null)
+    {
+        $this->board = $board;
+
+        return $this;
+    }
+
+    /**
+     * Get board
+     *
+     * @return \Thesis\BulletinBundle\Entity\Board
+     */
+    public function getBoard()
+    {
+        return $this->board;
+    }
 }
