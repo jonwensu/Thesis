@@ -4,18 +4,18 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="stylesheet" href="{{ asset('plugins/bootstrap/css/bootstrap.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.css') }}"/>
         <link href="{{ asset('template/css/bootstrap-cerulean.min.css') }}" rel="stylesheet">
         <link href="{{ asset('template/css/charisma-app.css') }}" rel="stylesheet">
         <link href="{{ asset('template/bootstrap-tour/build/css/bootstrap-tour.min.css') }}" rel="stylesheet">
         <link href="{{ asset('template/css/animate.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('plugins/angular/ui-grid.min.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ asset('plugins/icheck/skins/flat/blue.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ asset('plugins/angular/ui-grid-theme.min.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ asset('plugins/fontawesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ asset('plugins/bxslider/bxslider.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ asset('plugins/switch/bootstrap-switch.min.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ asset('plugins/ninja-slider/ninja-slider.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('bower_components/angular-ui-grid/ui-grid.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('bower_components/iCheck/skins/flat/blue.css') }}" rel="stylesheet" type="text/css">
+        {#        <link href="{{ asset('bower_components/angular-ui-grid/ui-grid-theme.min.css') }}" rel="stylesheet" type="text/css">#}
+        <link href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('bower_components/slick-carousel/slick/slick.css') }}" rel="stylesheet">
+        <link href="{{ asset('bower_components/slick-carousel/slick/slick-theme.css') }}" rel="stylesheet">
+
         <link href="{{ asset('fonts/fftusj/stylesheet.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/board.css') }}" rel="stylesheet">
@@ -23,7 +23,7 @@
         {% block stylesheets %}
         {% endblock %}
 
-        <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+        <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
 
     </head>
     <body>
@@ -35,20 +35,20 @@
 
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
         <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
-        <script src="{{ asset('plugins/tinymce/tinymce.min.js') }}"></script>
-        <script src="{{ asset('plugins/icheck/icheck.min.js') }}"></script>
-        <script src="{{ asset('plugins/angular/angular.min.js') }}"></script>
-        <script src="{{ asset('plugins/angular/angular-ui-router.min.js') }}"></script>
-        <script src="{{ asset('plugins/angular/angular-animate.min.js') }}"></script>
-        <script src="{{ asset('plugins/angular/angular-ui-tinymce.js') }}"></script>
-        <script src="{{ asset('plugins/angular/ui-grid.min.js') }}"></script>
-        <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js')}}"></script>
-        <script src="{{ asset('plugins/bootstrap/js/ui-bootstrap.min.js')}}"></script>
-        <script src="{{ asset('plugins/bxslider/bxslider.min.js')}}"></script>
-        <script src="{{ asset('plugins/switch/bootstrap-switch.min.js')}}"></script>
-        <script src="{{ asset('plugins/switch/angular-bootstrap-switch.min.js')}}"></script>
-        <script src="{{ asset('plugins/ng-idle/angular-idle.js')}}"></script>
-        <script src="{{ asset('plugins/ninja-slider/ninja-slider.js')}}"></script>
+        <script src="{{ asset('bower_components/tinymce-dist/tinymce.js') }}"></script>
+        <script src="{{ asset('bower_components/iCheck/icheck.min.js') }}"></script>
+        <script src="{{ asset('bower_components/angular/angular.min.js') }}"></script>
+        <script src="{{ asset('bower_components/angular-ui-router/release/angular-ui-router.min.js') }}"></script>
+        <script src="{{ asset('bower_components/angular-animate/angular-animate.min.js') }}"></script>
+        <script src="{{ asset('bower_components/angular-ui-tinymce/src/tinymce.js') }}"></script>
+        <script src="{{ asset('bower_components/angular-ui-grid/ui-grid.min.js') }}"></script>
+        <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+        <script src="{{ asset('bower_components/angular-bootstrap/ui-bootstrap.js')}}"></script>
+        <script src="{{ asset('bower_components/angular-touch/angular-touch.js')}}"></script>
+        <script src="{{ asset('bower_components/angular-carousel/dist/angular-carousel.js')}}"></script>
+        <script src="{{ asset('bower_components/slick-carousel/slick/slick.js')}}"></script>
+        <script src="{{ asset('bower_components/angular-slick/dist/slick.js')}}"></script>
+
         <script src="{{ asset('app.js')}}"></script>
         <script src="{{ asset('pub.js')}}"></script>
         <script src="{{ asset('directives/compareTo.js')}}"></script>

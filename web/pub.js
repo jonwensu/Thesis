@@ -2,7 +2,9 @@
 
 (function () {
     angular.module('pub', [
+        'ngAnimate',
         'ui.router',
+        'ui.bootstrap',
         'myApp.announcement.browse',
         'myApp.index',
         'myApp.user',

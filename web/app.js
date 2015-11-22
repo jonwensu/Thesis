@@ -14,7 +14,6 @@
         'myApp.service.authorization',
         'myApp.index',
         'myApp.service.principal',
-        'frapontillo.bootstrap-switch',
         'ngIdle'
     ])
             .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
