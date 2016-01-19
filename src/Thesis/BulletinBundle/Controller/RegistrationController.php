@@ -26,12 +26,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-/**
- * Controller managing the registration
- *
- * @author Thibault Duplessis <thibault.duplessis@gmail.com>
- * @author Christophe Coevoet <stof@notk.org>
- */
 class RegistrationController extends Controller {
 
     public function registerAction(Request $request) {

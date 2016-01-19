@@ -2,7 +2,7 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="stylesheet" href="{{ asset('plugins/bootstrap/css/bootstrap.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.css') }}"/>
         <link id="bs-css" href="{{ asset('template/css/bootstrap-cerulean.min.css') }}" rel="stylesheet">
         <link id="bs-css" href="{{ asset('template/css/charisma-app.css') }}" rel="stylesheet">
         <link id="bs-css" href="{{ asset('template/css/animate.min.css') }}" rel="stylesheet">
@@ -19,9 +19,9 @@
             }
         </style>
 
-        <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-        <script src="{{ asset('plugins/angular/angular.min.js') }}"></script>
-        <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
+        <script src="{{ asset('bower_components/angular/angular.min.js') }}"></script>
+        <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     {% trans_default_domain 'FOSUserBundle' %}

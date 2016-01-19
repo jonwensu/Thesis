@@ -1,26 +1,42 @@
-
-
-<div id="wrap">
-    <div id="main" class="col-lg-12">
-        <div class="col-lg-8">
-            <slick dots=true arrows="true" fade="true" infinite=false speed=300 slides-to-show=2 autoplay="true" center-mode="true" touch-move=false slides-to-scroll=1 init-onload=true data="slides">
-                <div ng-repeat="slide in slides">
-                    <h1>{{ slide.title}}</h1>
-                    <div ng-bind-html="slide.content | to_trusted">
-                    </div>
-                </div>
-            </slick>
+<div id="wrap" class="margin-top-3x">
+    <div class="col-lg-3">
+        <div>
+            <img ng-src="{{ logo}}" />
         </div>
+        <div class="panel panel-danger margin-top-2x">
+            <div class="panel-heading">
+                <div class="text-center text-uppercase" style="color: white; font-size: 4em;">
+                    {{ clock | date:'MMMM'}}
+                </div>
+            </div>
+            <div class="panel-body">
+                <h1 class="text-center" style="font-size: 10em;">
+                    {{ clock | date:'d'}}
+                </h1>
+                <div class="text-center text-uppercase" style="font-size: 5em;">
+                    {{ clock | date:'EEE'}}
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid text-center bg-warning" style="font-size: 5em; border-radius: 0.1em;">
+            {{ clock | date:'h'}}<span class="blink">:</span>{{ clock | date:'mm'}} {{ clock | date:'a'}}
+        </div>
+    </div>
+
+    <div id="main" class="col-lg-6">
+        <slick ng-if="loaded" class="slider-for" settings="slickConfigFor">
+            <div ng-repeat="slide in slides" class="my-slide margin-top-3x">
+                <h1 class="text-center">
+                    {{ slide.title}}
+                </h1>
+                <div ng-bind-html="slide.content | to_trusted" style="padding: 5em;">
+
+                </div>
+            </div>
+        </slick>
 
 
 
-        <!--<input type='text' ng-model="yourModel" ng-virtual-keyboard/>-->
-
-        <!--        <div ng-carousel ng-carousel-name="example-carousel1" ng-carousel-watch="slides">
-                    <slidecontainer>
-                        <slide ng-repeat="slide in slides">{{slide.title}}</slide>
-                    </slidecontainer>
-                </div>-->
         <!--        <div class="col-lg-8" style="margin:2em 0 0 0">
                                 <div bxslider class="slider col-lg-12">
                                     <div class="col-lg-12 sl" style="height: 40em;" ng-repeat="slide in slides" bxsliderItem>
@@ -56,5 +72,31 @@
                         Calendar
                     </div>
                 </div>-->
+    </div>
+    <div class="col-lg-3">
+        <div>
+            <a href="#" class="btn btn-block btn-info">
+                <i class="fa fa-search" style="font-size: 15em;"></i>
+                <div  style="font-size: 5em;">
+                    SEARCH
+                </div>
+            </a>
+        </div>
+        <div class="margin-top-2x">
+            <a href="#" class="btn btn-block btn-primary">
+                <i class="fa fa-map" style="font-size: 15em;"></i>
+                <div style="font-size: 5em;">
+                    MAP
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-10 col-lg-offset-1">
+        <slick ng-if="loaded" class="slider-nav" settings="slickConfigNav">
+            <div ng-repeat="slide in slides" class="nav-slide text-center">
+                {{ slide.title}}
+            </div>
+
+        </slick>
     </div>
 </div>

@@ -3,10 +3,11 @@
 (function () {
     angular.module('myApp.announcement.browse', [
         'ui.router',
-        'slick',
 //        'angular-carousel',
 //        'ng-virtual-keyboard',
 //        'myApp.directive.slider',
+//        'myApp.directive.slick',
+        'slickCarousel',
         'myApp.filter.trustHtml',
     ])
             .config(['$stateProvider', function ($stateProvider) {
@@ -44,41 +45,53 @@
                         }, 5);
                     };
                     $scope.slickCurrentIndex = 0;
-                    $scope.slickConfig = {
-                        dots: true,
-                        autoplay: true,
-                        initialSlide: 3,
+                    $scope.slickConfigFor = {
+                        dots: false,
+                        arrows: false,
+                        fade: true,
+                        cssEase: 'linear',
                         infinite: true,
-                        autoplaySpeed: 1000,
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        centerMode: true,
+                        centerPadding: '60px',
+                        asNavFor: '.slide-nav',
+                        pauseOnHover: true,
                         method: {
                         },
                     };
-                    // Start the timer
+                    $scope.slickConfigNav = {
+                        dots: false,
+                        arrows: true,
+                        autoplay: true,
+                        infinite: true,
+                        autoplaySpeed: 5000,
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        centerMode: true,
+                        centerPadding: '10px',
+                        asNavFor: '.slide-for',
+                        pauseOnHover: true,
+                        focusOnSelect: true,
+                        prevArrow: $('.prev'),
+                        nextArrow: $('.next'),
+                        event: {
+                            afterChange: function (event, slick, currentSlide, nextSlide) {
+                                $scope.slickConfigFor.method.slickGoTo(currentSlide);
+                            }
+                        },
+                        method: {
+                        },
+                    };
+                    // Start the timer  
                     $timeout(tick, $scope.tickInterval);
 
+                    $scope.loaded = false;
                     $http.get(Routing.generate('get_announcements')).success(function (response) {
                         $scope.slides = response.announcements;
+                        $scope.loaded = true;
                     });
 
-
-                    $scope.number = [{label: 1}, {label: 2}, {label: 3}, {label: 4}, {label: 5}, {label: 6}, {label: 7}, {label: 8}];
-                    $scope.numberLoaded = true;
-                    $scope.numberUpdate = function () {
-                        $scope.numberLoaded = false; // disable slick
-
-                        //number update
-
-                        $scope.numberLoaded = true; // enable slick
-                    };
-
-//                    $scope.slides = [
-//                        {
-//                            title: "aw"
-//                        },
-//                        {
-//                            title: "ew"
-//                        }
-//                    ];
                 }]);
 
 

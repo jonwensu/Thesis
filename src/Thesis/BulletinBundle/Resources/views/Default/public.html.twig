@@ -24,8 +24,14 @@
         {% endblock %}
 
         <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     </head>
+    <style>
+        html{
+            background-color: #e5f0f8;
+        }
+    </style>
     <body>
         <div class="span12 ui-view-container">
             <div ui-view></div>        
@@ -47,12 +53,14 @@
         <script src="{{ asset('bower_components/angular-touch/angular-touch.js')}}"></script>
         <script src="{{ asset('bower_components/angular-carousel/dist/angular-carousel.js')}}"></script>
         <script src="{{ asset('bower_components/slick-carousel/slick/slick.js')}}"></script>
-        <script src="{{ asset('bower_components/angular-slick/dist/slick.js')}}"></script>
+        <script src="{{ asset('bower_components/angular-slick-carousel/dist/angular-slick.min.js')}}"></script>
+{#        <script src="{{ asset('bower_components/dist/slick/slick.js')}}"></script>#}
 
         <script src="{{ asset('app.js')}}"></script>
         <script src="{{ asset('pub.js')}}"></script>
         <script src="{{ asset('directives/compareTo.js')}}"></script>
         <script src="{{ asset('directives/slider.js')}}"></script>
+        <script src="{{ asset('directives/slick.js')}}"></script>
         <script src="{{ asset('filters/trustHtml.js')}}"></script>
         <script src="{{ asset('services/user.js')}}"></script>
         <script src="{{ asset('services/authorization.js')}}"></script>
@@ -69,6 +77,11 @@
         <script src="{{ asset('template/js/jquery.noty.packaged.min.js')}}"></script>
         <script src="{{ asset('template/bootstrap-tour/build/js/bootstrap-tour.min.js')}}"></script>
         <script src="{{ asset('js/script.js')}}"></script>
+        <script>
+            $(document).on("contextmenu", function (event) {
+                event.preventDefault();
+            });
+        </script>
 
     </body>
 </html>
