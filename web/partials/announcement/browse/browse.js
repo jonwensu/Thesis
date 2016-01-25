@@ -22,29 +22,40 @@
                                 }
                             });
                 }])
-            .controller('BrowseAnnouncementCtrl', ["$scope", "$http", "$state", "$timeout", function ($scope, $http, $state, $timeout) {
+            .controller('BrowseAnnouncementCtrl', ["$scope", "$http", "$state", "$timeout", "Idle", 'timeAgo', function ($scope, $http, $state, $timeout, Idle, timeAgo) {
 
                     $scope.clock = "loading clock..."; // initialise the time variable
                     $scope.tickInterval = 1000; //ms
                     $scope.slideInterval = 3000;
-                    $scope.noWrapSlides = true;
+                    $scope.logo = constants.webPath() + "pics/coe.png";
+                    $scope.play = true;
+
+                    var colors = ["#f3f2cb", "#eddde1", "#acdafa", "#b9e2cd", "#ceb6fa"];
+                    var count = 0;
+                    $scope.shuffColors = shuffle(colors);
+                    $scope.currentIndex = 0;
+
+                    var oneDay = 60 * 60 * 24;
+                    timeAgo.settings.fullDateAfterSeconds = oneDay;
 
                     var tick = function () {
                         $scope.clock = Date.now(); // get the current time
                         $timeout(tick, $scope.tickInterval); // reset the timer
                     };
 
-                    $scope.number = [1, 2, 3, 4, 5, 6, 7, 8];
-                    $scope.slickConfig1Loaded = true;
-                    $scope.updateNumber1 = function () {
-                        $scope.slickConfig1Loaded = false;
-                        $scope.number1[2] = '123';
-                        $scope.number1.push(Math.floor((Math.random() * 10) + 100));
-                        $timeout(function () {
-                            $scope.slickConfig1Loaded = true;
-                        }, 5);
-                    };
-                    $scope.slickCurrentIndex = 0;
+
+
+                    function shuffle(o) {
+                        for (var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x)
+                            ;
+                        return o;
+                    }
+
+                    function assignColor() {
+                        count++;
+                        count = count > $scope.shuffColors.length - 1 ? 0 : count;
+                    }
+
                     $scope.slickConfigFor = {
                         dots: false,
                         arrows: false,
@@ -53,13 +64,24 @@
                         infinite: true,
                         slidesToShow: 1,
                         slidesToScroll: 1,
-                        centerMode: true,
-                        centerPadding: '60px',
                         asNavFor: '.slide-nav',
-                        pauseOnHover: true,
+//                        autoplay: true,
+//                        autoplaySpeed: 5000,
                         method: {
                         },
+                        event: {
+                            afterChange: function (event, slick, currentSlide, nextSlide) {
+                                $scope.slickConfigNav.method.slickGoTo(currentSlide);
+                                $scope.currentIndex = currentSlide;
+                                assignColor();
+                                $('.slider-for').css('background', $('.slider-nav .slick-current').css('background-color'));
+                            },
+                            init: function (event, slick) {
+                                slick.slickGoTo($scope.currentIndex);
+                            }
+                        },
                     };
+
                     $scope.slickConfigNav = {
                         dots: false,
                         arrows: true,
@@ -67,24 +89,49 @@
                         infinite: true,
                         autoplaySpeed: 5000,
                         slidesToShow: 3,
-                        slidesToScroll: 3,
+                        slidesToScroll: 1,
                         centerMode: true,
-                        centerPadding: '10px',
                         asNavFor: '.slide-for',
                         pauseOnHover: true,
                         focusOnSelect: true,
-                        prevArrow: $('.prev'),
-                        nextArrow: $('.next'),
+                        method: {
+                        },
                         event: {
                             afterChange: function (event, slick, currentSlide, nextSlide) {
                                 $scope.slickConfigFor.method.slickGoTo(currentSlide);
+                                $scope.play = true;
+                                updateAutoplay();
+                            },
+                            init: function (event, slick) {
+                                slick.slickGoTo($scope.currentIndex);
+                                var c = 0;
+                                $('.slider-nav .slick-slide').each(function (i, r) {
+                                    $(r).css('background-color', $scope.shuffColors[c]);
+                                    c++;
+                                    c = c > $scope.shuffColors.length - 1 ? 0 : c;
+                                });
+                                $('.slider-for').css('background', $('.slider-nav .slick-current').css('background-color'));
+
                             }
-                        },
-                        method: {
                         },
                     };
                     // Start the timer  
                     $timeout(tick, $scope.tickInterval);
+
+                    $scope.togglePlay = function () {
+                        $scope.play = !$scope.play;
+
+                        updateAutoplay();
+                    }
+
+                    function updateAutoplay() {
+                        if ($scope.play)
+                        {
+                            $scope.slickConfigNav.method.slickPlay();
+                        } else {
+                            $scope.slickConfigNav.method.slickPause();
+                        }
+                    }
 
                     $scope.loaded = false;
                     $http.get(Routing.generate('get_announcements')).success(function (response) {
@@ -92,6 +139,33 @@
                         $scope.loaded = true;
                     });
 
+                    $scope.$on("IdleTimeout", function () {
+                        $scope.updateSlides();
+                        Idle.watch();
+                    });
+                    $scope.$on("IdleStart", function () {
+                        $scope.play = true;
+                        updateAutoplay();
+                    });
+
+
+
+
+                    $scope.updateSlides = function () {
+
+                        $scope.loaded = false;
+
+                        $('.slide-cont').fadeOut();
+                        $('#spinner').fadeIn();
+
+                        $http.get(Routing.generate('get_announcements')).success(function (response) {
+                            $scope.slides = response.announcements;
+                            $scope.loaded = true;
+                            $('#spinner').fadeOut();
+                            $('.slide-cont').fadeIn();
+                        });
+
+                    };
                 }]);
 
 

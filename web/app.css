@@ -166,7 +166,17 @@
 
 .slider-for{
     height: 50em;
-    border: 0.5em solid #ffffff;
+    padding: 1.5em;
+    border: 0.5em solid #ccd4d7;
+    border-radius: 1em;
+
+    transition: background 200ms linear;
+    -webkit-transition: background 200ms linear;
+    -moz-transition: background 200ms linear;
+}
+
+.slider-for .slick-slide{
+    height: 46em;
 }
 
 .margin-top-1x{
@@ -189,9 +199,6 @@
     margin-top: 5em;
 }
 
-.slider-nav .slick-current{
-    border: 0.2em solid #83c5fa;
-}
 
 .slick-prev:before, .slick-next:before{
     color: #898c8e;
@@ -217,6 +224,64 @@
     }
 }
 
-.slick-slide{
-    outline: none
+.slider-nav .slick-slide {
+    border:  0.2em solid #cfcfcf;
+    height: 16em;
+    padding: 4em;
+    border-radius: 5px;
+    margin: 0 0.2em 0 0.2em;
+
+}
+
+/*.outer {
+    display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inner {
+    margin-left: auto;
+    margin-right: auto; 
+    width: whatever width you want;
+}*/
+
+.slider-nav .slick-current{
+    border-color:  #83c5fa;
+}
+
+.slick-slide {
+    outline: none;
+}
+
+
+.bg-yellow{
+    background-color: #f3f2cb;
+}
+
+.slide-title{
+    word-wrap: normal;
+}
+.time{
+    font-size: 6em;
+    border-radius: 0.1em; 
+    border: 1px solid #cccccc;
+}
+
+
+.foot {
+    position:absolute;
+    bottom:0;
+    width:100%;
+    /*text-align: right;*/
+}
+
+.foot a {
+    outline: none;
+    padding: 0.5em;
 }

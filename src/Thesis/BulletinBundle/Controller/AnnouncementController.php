@@ -50,7 +50,6 @@ class AnnouncementController extends Controller {
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            date_default_timezone_set('Asia/Manila');
             $date = new \DateTime('now');
             $content = $request->request->get('html_format');
             $em = $this->getDoctrine()->getManager();

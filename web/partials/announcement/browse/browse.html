@@ -1,4 +1,5 @@
 <div id="wrap" class="margin-top-3x">
+
     <div class="col-lg-3">
         <div>
             <img ng-src="{{ logo}}" />
@@ -18,60 +19,50 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid text-center bg-warning" style="font-size: 5em; border-radius: 0.1em;">
+        <div class="container-fluid text-center bg-primary time">
             {{ clock | date:'h'}}<span class="blink">:</span>{{ clock | date:'mm'}} {{ clock | date:'a'}}
         </div>
+
+
     </div>
 
     <div id="main" class="col-lg-6">
-        <slick ng-if="loaded" class="slider-for" settings="slickConfigFor">
-            <div ng-repeat="slide in slides" class="my-slide margin-top-3x">
-                <h1 class="text-center">
-                    {{ slide.title}}
-                </h1>
-                <div ng-bind-html="slide.content | to_trusted" style="padding: 5em;">
 
-                </div>
-            </div>
-        </slick>
+        <div class="slide-cont">
 
 
+            <slick ng-if="loaded" class="slider-for" settings="slickConfigFor">
 
-        <!--        <div class="col-lg-8" style="margin:2em 0 0 0">
-                                <div bxslider class="slider col-lg-12">
-                                    <div class="col-lg-12 sl" style="height: 40em;" ng-repeat="slide in slides" bxsliderItem>
-                                        <div style="padding-top: 10em">
-                                            <h1 class="text-center">
-                                                {{ slide.title}}
-                                            </h1>
-                                            <div style="padding: 3em 10em 5em 10em;" ng-bind-html="slide.content | to_trusted"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                   
-                </div>
-        
-                <div class="col-lg-4">
-                    <h1>
-                        <div>
-                            Today is {{ clock | date:'longDate'}}
-                        </div>
-                        <div>
-                            {{ clock | date:'shortTime'}}
-                        </div>
+                <div ng-repeat="slide in slides">
+                    <h1 class="text-center">
+                        {{ slide.title}}
                     </h1>
+                    <div style="padding: 1em 3em 1em 3em;">
+                        <div>
+
+                        </div>
+                        <div class="margin-top-1x" ng-bind-html="slide.content | to_trusted" style="font-size: 2em; text-align: justify;">
+                        </div>
+                    </div>
+                    <div class="foot">
+                        <div class="pull-left">
+                            <i class="fa fa-clock-o"></i> 
+                            {{ slide.date_posted | timeAgo:"mediumDate" }}
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" ng-click="togglePlay()">
+                                <i ng-if="play" class="fa fa-pause"></i>
+                                <i ng-if="!play" class="fa fa-play"></i>
+                            </a>
+                            <a href="#" ng-click="updateSlides()">
+                                <i class="fa fa-refresh"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-lg-3" style="margin:2em 0 0 0;">
-                    <div style="padding:6em; background-color: #99ff99;">
-                        Announcements
-                    </div>
-                    <div style="padding:6em; background-color: #ff6666">
-                        Map
-                    </div>
-                    <div style="padding:6em; background-color: #003333;">
-                        Calendar
-                    </div>
-                </div>-->
+
+            </slick>
+        </div>
     </div>
     <div class="col-lg-3">
         <div>
@@ -91,12 +82,18 @@
             </a>
         </div>
     </div>
-    <div class="col-lg-10 col-lg-offset-1">
-        <slick ng-if="loaded" class="slider-nav" settings="slickConfigNav">
-            <div ng-repeat="slide in slides" class="nav-slide text-center">
-                {{ slide.title}}
+    <div class="col-lg-12 slide-cont">
+        <slick ng-if="loaded" class="slider-nav col-lg-10 col-lg-offset-1" settings="slickConfigNav">
+            <div ng-repeat="slide in slides" class="text-center">
+                <h2 class="slide-title">
+                    {{ slide.title | limitTo:45 }}
+                    <span ng-if="slide.title.length > 45">
+                        . . .
+                    </span>
+                </h2>
             </div>
 
         </slick>
     </div>
+
 </div>

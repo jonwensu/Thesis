@@ -17,6 +17,7 @@
         <link href="{{ asset('bower_components/slick-carousel/slick/slick-theme.css') }}" rel="stylesheet">
 
         <link href="{{ asset('fonts/fftusj/stylesheet.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('fonts/digital7/stylesheet.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/board.css') }}" rel="stylesheet">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -33,6 +34,15 @@
         }
     </style>
     <body>
+        <div id="spinner" hidden>
+            <div id="loading" style="min-height: 241px; margin-top: 140px;">
+                <div class="loader">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
         <div class="span12 ui-view-container">
             <div ui-view></div>        
         </div>
@@ -51,10 +61,10 @@
         <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
         <script src="{{ asset('bower_components/angular-bootstrap/ui-bootstrap.js')}}"></script>
         <script src="{{ asset('bower_components/angular-touch/angular-touch.js')}}"></script>
-        <script src="{{ asset('bower_components/angular-carousel/dist/angular-carousel.js')}}"></script>
+        <script src="{{ asset('bower_components/ng-idle/angular-idle.js')}}"></script>
+        <script src="{{ asset('bower_components/angular-timeago/dist/angular-timeago.js')}}"></script>
         <script src="{{ asset('bower_components/slick-carousel/slick/slick.js')}}"></script>
         <script src="{{ asset('bower_components/angular-slick-carousel/dist/angular-slick.min.js')}}"></script>
-{#        <script src="{{ asset('bower_components/dist/slick/slick.js')}}"></script>#}
 
         <script src="{{ asset('app.js')}}"></script>
         <script src="{{ asset('pub.js')}}"></script>
