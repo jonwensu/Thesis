@@ -15,6 +15,9 @@
         <link href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('bower_components/slick-carousel/slick/slick.css') }}" rel="stylesheet">
         <link href="{{ asset('bower_components/slick-carousel/slick/slick-theme.css') }}" rel="stylesheet">
+{#        <link href="{{ asset('bower_components/openlayers3/build/ol.css') }}" rel="stylesheet">#}
+        <link href="{{ asset('offline_map/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('offline_map/theme/default/style.css') }}" rel="stylesheet">
 
         <link href="{{ asset('fonts/fftusj/stylesheet.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('fonts/digital7/stylesheet.css') }}" rel="stylesheet" type="text/css">
@@ -65,6 +68,12 @@
         <script src="{{ asset('bower_components/angular-timeago/dist/angular-timeago.js')}}"></script>
         <script src="{{ asset('bower_components/slick-carousel/slick/slick.js')}}"></script>
         <script src="{{ asset('bower_components/angular-slick-carousel/dist/angular-slick.min.js')}}"></script>
+       {# <script src="{{ asset('bower_components/openlayers3/build/ol.js')}}"></script>
+        <script src="{{ asset('bower_components/angular-sanitize/angular-sanitize.min.js')}}"></script>
+        <script src="{{ asset('bower_components/angular-openlayers-directive/dist/angular-openlayers-directive.js')}}"></script>#}
+        
+
+
 
         <script src="{{ asset('app.js')}}"></script>
         <script src="{{ asset('pub.js')}}"></script>
@@ -78,6 +87,8 @@
         <script src="{{ asset('partials/announcement/announcement.js')}}"></script>
         <script src="{{ asset('partials/announcement/new/new.js')}}"></script>
         <script src="{{ asset('partials/announcement/browse/browse.js')}}"></script>
+        <script src="{{ asset('partials/map/map.js')}}"></script>
+        <script src="{{ asset('partials/map/show/show.js')}}"></script>
         <script src="{{ asset('partials/user/user.js')}}"></script>
         <script src="{{ asset('partials/index.js')}}"></script>
         <script src="{{ asset('partials/user/new/new.js')}}"></script>
@@ -87,6 +98,11 @@
         <script src="{{ asset('template/js/jquery.noty.packaged.min.js')}}"></script>
         <script src="{{ asset('template/bootstrap-tour/build/js/bootstrap-tour.min.js')}}"></script>
         <script src="{{ asset('js/script.js')}}"></script>
+      {#  <script src="{{ asset('offline_map/OpenLayers.js')}}"></script>
+        <script src="{{ asset('offline_map/event.js')}}"></script>
+        <script src="{{ asset('offline_map/storage.js')}}"></script>
+        <script src="{{ asset('offline_map/map.js')}}"></script>
+        <script src="{{ asset('offline_map/run.js')}}"></script>#}
         <script>
             $(document).on("contextmenu", function (event) {
                 event.preventDefault();

@@ -6,10 +6,11 @@
         'ui.router',
         'ui.bootstrap',
         'myApp.announcement.browse',
+        'myApp.map',
         'myApp.index',
         'myApp.user',
         'ngIdle',
-        'yaru22.angular-timeago'
+        'yaru22.angular-timeago',
     ])
             .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
                     $urlRouterProvider.otherwise("/bulletinboard");
@@ -17,9 +18,6 @@
                             .state('bull', {
                                 url: "/",
                                 abstract: true,
-                                data: {
-                                    roles: []
-                                }
                             });
                 }])
             .config(["IdleProvider", "KeepaliveProvider", function (IdleProvider, KeepaliveProvider) {

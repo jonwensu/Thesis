@@ -1,0 +1,17 @@
+CACHE MANIFEST
+
+NETWORK:
+*
+
+CACHE:
+index.html
+style.css
+event.js
+storage.js
+map.js
+run.js
+script.js
+
+theme/default/style.css
+OpenLayers.js
+img/marker.png

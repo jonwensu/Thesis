@@ -49,6 +49,13 @@ class Announcement {
      * @ORM\Column(name="datePosted", type="datetime")
      */
     private $datePosted;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="priorityLvl", type="integer")
+     */
+    private $priorityLvl;
 
     /**
      * Get id
@@ -144,4 +151,28 @@ class Announcement {
         }
     }
 
+
+    /**
+     * Set board
+     *
+     * @param \Thesis\BulletinBundle\Entity\Board $board
+     *
+     * @return Announcement
+     */
+    public function setBoard(\Thesis\BulletinBundle\Entity\Board $board = null)
+    {
+        $this->board = $board;
+
+        return $this;
+    }
+
+    /**
+     * Get board
+     *
+     * @return \Thesis\BulletinBundle\Entity\Board
+     */
+    public function getBoard()
+    {
+        return $this->board;
+    }
 }

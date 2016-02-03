@@ -120,7 +120,7 @@ class AnnouncementController extends Controller {
             'announcements' => $this->getDoctrine()
                     ->getManager()
                     ->getRepository('ThesisBulletinBundle:Announcement')
-                    ->findAll()
+                    ->findAllSorted()
         ];
     }
 

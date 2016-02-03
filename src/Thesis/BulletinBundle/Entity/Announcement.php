@@ -49,6 +49,13 @@ class Announcement {
      * @ORM\Column(name="datePosted", type="datetime")
      */
     private $datePosted;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="priorityLvl", type="integer")
+     */
+    private $priorityLvl;
 
     /**
      * Get id
@@ -167,5 +174,29 @@ class Announcement {
     public function getBoard()
     {
         return $this->board;
+    }
+
+    /**
+     * Set priorityLvl
+     *
+     * @param integer $priorityLvl
+     *
+     * @return Announcement
+     */
+    public function setPriorityLvl($priorityLvl)
+    {
+        $this->priorityLvl = $priorityLvl;
+
+        return $this;
+    }
+
+    /**
+     * Get priorityLvl
+     *
+     * @return integer
+     */
+    public function getPriorityLvl()
+    {
+        return $this->priorityLvl;
     }
 }

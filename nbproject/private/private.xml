@@ -3,21 +3,37 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/Thesis/web/filters/trustHtml.js</file>
-            <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Controller/AnnouncementController.php</file>
-            <file>file:/C:/xampp/htdocs/Thesis/web/app.css</file>
-            <file>file:/C:/xampp/htdocs/Thesis/web/directives/slick.js</file>
-            <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Resources/views/Security/login.html.twig</file>
-            <file>file:/C:/xampp/htdocs/Thesis/web/partials/announcement/new/new.html</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/announcement/browse/browse.js</file>
-            <file>file:/C:/xampp/htdocs/Thesis/web/directives/slider.js</file>
-            <file>file:/C:/xampp/htdocs/Thesis/app/config/routing.yml</file>
-            <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Entity/Announcement.php</file>
-            <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Resources/views/Default/public.html.twig</file>
-            <file>file:/C:/xampp/htdocs/Thesis/web/js/script.js</file>
-            <file>file:/C:/xampp/htdocs/Thesis/app/Resources/views/base.html.twig</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/announcement/browse/browse.html</file>
+            <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Entity/Board.php</file>
+            <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Controller/AnnouncementController.php</file>
+            <file>file:/C:/xampp/htdocs/Thesis/web/filters/trustHtml.js</file>
+            <file>file:/C:/xampp/htdocs/Thesis/app/config/routing.yml</file>
+            <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Form/AnnouncementType.php</file>
+            <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Controller/BoardController.php</file>
+            <file>file:/C:/xampp/htdocs/Thesis/web/css/board.css</file>
+            <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Entity/Announcement.php</file>
+            <file>file:/C:/xampp/htdocs/Thesis/app/Resources/views/base.html.twig</file>
+            <file>file:/C:/xampp/htdocs/Thesis/web/directives/slick.js</file>
+            <file>file:/C:/xampp/htdocs/Thesis/web/partials/map/map.js</file>
+            <file>file:/C:/xampp/htdocs/Thesis/web/partials/nestedbase.html</file>
+            <file>file:/C:/xampp/htdocs/Thesis/web/offline_map/map.js</file>
+            <file>file:/C:/xampp/htdocs/Thesis/web/fonts/digital7/stylesheet.css</file>
+            <file>file:/C:/xampp/htdocs/Thesis/web/offline_map/index.html</file>
+            <file>file:/C:/xampp/htdocs/Thesis/web/fonts/fftusj/stylesheet.css</file>
+            <file>file:/C:/xampp/htdocs/Thesis/web/js/script.js</file>
+            <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Resources/views/Default/public.html.twig</file>
+            <file>file:/C:/xampp/htdocs/Thesis/web/partials/map/show/show.html</file>
+            <file>file:/C:/xampp/htdocs/Thesis/web/offline_map/script.js</file>
+            <file>file:/C:/xampp/htdocs/Thesis/web/directives/slider.js</file>
+            <file>file:/C:/xampp/htdocs/Thesis/web/partials/user/user.js</file>
+            <file>file:/C:/xampp/htdocs/Thesis/web/offline_map/OpenLayesrs.js</file>
+            <file>file:/C:/xampp/htdocs/Thesis/web/partials/map/show/show.js</file>
+            <file>file:/C:/xampp/htdocs/Thesis/web/app.css</file>
+            <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Resources/views/Security/login.html.twig</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/announcement/new/new.js</file>
+            <file>file:/C:/xampp/htdocs/Thesis/web/pub.js</file>
+            <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Resources/views/Default/map.html.twig</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/app.js</file>
         </group>
     </open-files>

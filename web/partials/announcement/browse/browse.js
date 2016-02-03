@@ -3,10 +3,7 @@
 (function () {
     angular.module('myApp.announcement.browse', [
         'ui.router',
-//        'angular-carousel',
 //        'ng-virtual-keyboard',
-//        'myApp.directive.slider',
-//        'myApp.directive.slick',
         'slickCarousel',
         'myApp.filter.trustHtml',
     ])
@@ -17,9 +14,6 @@
                                 url: "/bulletinboard",
                                 controller: "BrowseAnnouncementCtrl",
                                 templateUrl: constants.viewPath() + 'announcement/browse/browse.html',
-                                data: {
-                                    roles: ["ADMIN"]
-                                }
                             });
                 }])
             .controller('BrowseAnnouncementCtrl', ["$scope", "$http", "$state", "$timeout", "Idle", 'timeAgo', function ($scope, $http, $state, $timeout, Idle, timeAgo) {
@@ -29,6 +23,8 @@
                     $scope.slideInterval = 3000;
                     $scope.logo = constants.webPath() + "pics/coe.png";
                     $scope.play = true;
+                    
+                    $scope.mapUrl = Routing.generate("map_view");
 
                     var colors = ["#f3f2cb", "#eddde1", "#acdafa", "#b9e2cd", "#ceb6fa"];
                     var count = 0;

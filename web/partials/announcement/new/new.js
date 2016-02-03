@@ -16,6 +16,17 @@
 
             .controller('NewAnnouncementCtrl', ["$scope", "$http", "$state", function ($scope, $http, $state) {
 
+                    $scope.priority = {
+                        High : 1,
+                        Normal : 2,
+                        Low : 3,
+                    };
+
+                    $scope.announcement = {
+                        title: "",
+                        content: "",
+                        priorityLvl: 2
+                    };
                     var success = function (response) {
                         $('#spinner').fadeOut(100);
                         var valid = response.data.valid;
@@ -86,6 +97,8 @@
                         })
                                 .then(success, error);
                     };
+
+
                 }]);
 
 

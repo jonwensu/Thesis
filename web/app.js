@@ -14,7 +14,8 @@
         'myApp.service.authorization',
         'myApp.index',
         'myApp.service.principal',
-        'ngIdle'
+        'ngIdle',
+        'nya.bootstrap.select'
     ])
             .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 

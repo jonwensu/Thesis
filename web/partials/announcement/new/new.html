@@ -26,6 +26,19 @@
             {{ announcement.content}}
             </textarea> 
         </div>
-        <input type="submit" value="Create" class="btn btn-primary center-block col-lg-2" />
+        <div class="form-group">
+            <div>
+                <label for="announcement.priority_lvl" class="required">
+                    Priority Level
+                </label>
+            </div>
+            <div class="">
+                <select class="form-control" ng-model="announcement.priorityLvl" ng-options="v as k for (k, v) in priority">
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-12 margin-top-1x">
+            <input type="submit" value="Create" class="btn btn-primary center-block col-lg-2" />
+        </div>
     </form>
 </div>
