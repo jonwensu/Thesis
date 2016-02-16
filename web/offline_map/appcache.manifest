@@ -1,4 +1,5 @@
 CACHE MANIFEST
+# 2015-07-30 3
 
 NETWORK:
 *
@@ -6,12 +7,26 @@ NETWORK:
 CACHE:
 index.html
 style.css
-event.js
-storage.js
 map.js
-run.js
 script.js
 
-theme/default/style.css
-OpenLayers.js
-img/marker.png
+pouchdb-1.1.0.js
+
+
+
+leaflet.css
+leaflet-src.js
+images/layers.png
+images/layers-2x.png
+images/marker-icon.png
+images/marker-icon-2x.png
+images/marker-shadow.png
+Leaflet.awesome-markers/dist/leaflet.awesome-markers.js
+Leaflet.awesome-markers/dist/leaflet.awesome-markers.css
+Leaflet.awesome-markers/dist/images/markers-matte.png
+Leaflet.awesome-markers/dist/images/markers-matte@2x.png
+Leaflet.awesome-markers/dist/images/markers-plain.png
+Leaflet.awesome-markers/dist/images/markers-shadow.png
+Leaflet.awesome-markers/dist/images/markers-shadow@2x.png
+Leaflet.awesome-markers/dist/images/markers-soft.png
+Leaflet.awesome-markers/dist/images/markers-soft@2x.png

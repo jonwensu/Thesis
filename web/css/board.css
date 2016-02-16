@@ -20,3 +20,135 @@ body {
     -ms-user-select: none;
     user-select: none;
 }
+
+.back-control{
+    background: #f25c5c;
+}
+
+.custom-control a{
+    font-size: 3em;
+    width: 100%;
+    height: 50%;
+    padding: 0.3em 0.5em 0.3em 0.5em;
+    border-radius: 2em;
+    border: 1px solid #c5c5c5;
+    opacity: 0.85;
+    cursor: pointer;
+    color: white;
+}
+
+.leaflet-bottom .leaflet-control{
+    margin-bottom: 2em;
+}
+
+.loc-control{
+    background: #83c3fc;
+}
+
+.leaflet-control-zoom{
+    display: none;
+}
+
+.leaflet-container .leaflet-control-search {
+    height: 6.7em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-bottom: 0.3em;
+    padding-top: 0.3em;
+    /*background-color: ;*/
+}
+
+.leaflet-control-search .search-button{
+    width: 5em;
+    height: 5.5em;
+    padding-bottom: 5px;
+}
+
+.leaflet-control-search .search-input{
+    font-size: 4em;
+    height: 1.4em;
+    margin-right: 0.1em;
+    min-width: 10em;
+}
+
+.leaflet-control-search .search-cancel {
+    background: url('../pics/search-icon.png') no-repeat 0 -140px;
+    right: 6em;
+    width: 5em;
+    height: 5.5em;
+    margin-top: 0;
+}
+.leaflet-control-search .search-button {
+    background: url('../pics/search-icon.png') no-repeat 2px 2px;
+}
+
+.leaflet-control-search .search-button:hover {
+    background: url('../pics/search-icon.png') no-repeat 2px -70px;
+}
+
+.leaflet-control-search .search-tooltip {
+    min-width: 23.3em;
+    min-height: 17.5em;
+    font-size: 2em;
+}
+
+.ui-keyboard {
+    border-radius: 0;
+    left: 0;
+    top: auto;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    background: #e1f0ff;
+}
+
+.ui-keyboard-button{
+    font-size: 2.5em;
+    border-radius: 0.2em;
+    margin: 0.2em;
+    background-color: #88c5f6;
+    color: #606061;
+    border: 0.1em solid #a9aeb2;
+}
+
+.ui-keyboard-bksp:before{
+    content: "\f060";
+    font-family: FontAwesome;
+}
+
+.ui-keyboard-clear:before{
+    content: "\f05c";
+    font-family: FontAwesome;
+}
+
+.ui-keyboard-shift:before{
+    content: "\f077";
+    font-family: FontAwesome;
+}
+
+.ui-keyboard-accept:before{
+    content: "\f00c";
+    font-family: FontAwesome;
+}
+
+.ui-keyboard-accept{
+    background: #6eebb0;
+    color: #656565;
+}
+
+/*.ui-keyboard-shift{
+    background: #1a92f1;
+    color: white;
+}
+
+.ui-keyboard-clear, .ui-keyboard-bksp{
+    background: #ff8989;
+}*/
+
+/*
+.leaflet-control-search .search-button,.leaflet-control-search .search-button:hover, .leaflet-control-search .search-cancel {
+    background: none;
+}
+.leaflet-control-search:before{
+content: "GO";
+}*/

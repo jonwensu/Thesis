@@ -6,11 +6,12 @@
         'ui.router',
         'ui.bootstrap',
         'myApp.announcement.browse',
-        'myApp.map',
+        'myApp.map.show',
         'myApp.index',
         'myApp.user',
         'ngIdle',
         'yaru22.angular-timeago',
+        'leaflet-directive'
     ])
             .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
                     $urlRouterProvider.otherwise("/bulletinboard");
@@ -22,15 +23,13 @@
                 }])
             .config(["IdleProvider", "KeepaliveProvider", function (IdleProvider, KeepaliveProvider) {
                     // 3 mins idle
-                    IdleProvider.idle(180);
+                    IdleProvider.idle(60);
                     // 2 mins to refresh
-                    IdleProvider.timeout(120);
+                    IdleProvider.timeout(240);
                 }])
             .run(['$rootScope', '$state', 'Idle', function ($rootScope, $state, Idle) {
                     $rootScope.$on('$stateChangeStart', function (e, toState, toParams) {
-                        if (toState.name == "bulletinboard") {
-                            Idle.watch();
-                        }
+                        Idle.watch();
                     });
                 }])
 }());

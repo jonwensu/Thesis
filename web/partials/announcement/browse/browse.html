@@ -11,7 +11,7 @@
                 </div>
             </div>
             <div class="panel-body">
-                <h1 class="text-center" style="font-size: 10em;">
+                <h1 class="text-center" style="font-size: 11em;">
                     {{ clock | date:'d'}}
                 </h1>
                 <div class="text-center text-uppercase" style="font-size: 5em;">
@@ -29,7 +29,6 @@
     <div id="main" class="col-lg-6">
 
         <div class="slide-cont">
-
 
             <slick ng-if="loaded" class="slider-for" settings="slickConfigFor">
 
@@ -74,7 +73,7 @@
             </a>
         </div>
         <div class="margin-top-2x">
-            <a href="{{ mapUrl }}" class="btn btn-block btn-primary">
+            <a ui-sref="show" class="btn btn-block btn-primary">
                 <i class="fa fa-map" style="font-size: 15em;"></i>
                 <div style="font-size: 5em;">
                     MAP

@@ -25,6 +25,21 @@ class User extends BaseUser
      * @Groups({"authentication"})
      */
     protected $id;
+    
+    
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="firstName", type="string", length=255)
+     */
+    private $firstName;
+    
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="lastName", type="string", length=255)
+     */
+    private $lastName;
 
     public function __construct()
     {

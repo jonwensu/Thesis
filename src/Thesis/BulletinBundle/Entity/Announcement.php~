@@ -175,4 +175,28 @@ class Announcement {
     {
         return $this->board;
     }
+
+    /**
+     * Set priorityLvl
+     *
+     * @param integer $priorityLvl
+     *
+     * @return Announcement
+     */
+    public function setPriorityLvl($priorityLvl)
+    {
+        $this->priorityLvl = $priorityLvl;
+
+        return $this;
+    }
+
+    /**
+     * Get priorityLvl
+     *
+     * @return integer
+     */
+    public function getPriorityLvl()
+    {
+        return $this->priorityLvl;
+    }
 }

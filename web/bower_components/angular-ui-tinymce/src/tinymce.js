@@ -13,6 +13,7 @@ angular.module('ui.tinymce', [])
 
     return {
       require: ['ngModel', '^?form'],
+      priority: 999,
       link: function(scope, element, attrs, ctrls) {
         if (!$window.tinymce) {
           return;
@@ -28,7 +29,7 @@ angular.module('ui.tinymce', [])
 
             ngModel.$setViewValue(content);
             if (!$rootScope.$$phase) {
-              scope.$apply();
+              scope.$digest();
             }
           };
 
@@ -62,6 +63,7 @@ angular.module('ui.tinymce', [])
             ed.on('init', function() {
               ngModel.$render();
               ngModel.$setPristine();
+              ngModel.$setUntouched();
               if (form) {
                 form.$setPristine();
               }
@@ -74,13 +76,15 @@ angular.module('ui.tinymce', [])
             });
 
             // Update model on change
-            ed.on('change', function() {
+            ed.on('change NodeChange', function() {
               ed.save();
               updateView(ed);
             });
 
             ed.on('blur', function() {
               element[0].blur();
+              ngModel.$setTouched();
+              scope.$digest();
             });
 
             // Update model when an object has been resized (table, image)
@@ -109,6 +113,9 @@ angular.module('ui.tinymce', [])
         // element to be present in DOM before instantiating editor when
         // re-rendering directive
         $timeout(function() {
+          if (options.baseURL){
+            tinymce.baseURL = options.baseURL;            
+          }
           tinymce.init(options);
           toggleDisable(scope.$eval(attrs.ngDisabled));
         });

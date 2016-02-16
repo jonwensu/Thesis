@@ -1,96 +1,246 @@
 'use strict';
-
 (function () {
     angular.module('myApp.map.show', [])
             .config(['$stateProvider', function ($stateProvider) {
                     $stateProvider
-                            .state('mapshow', {
+                            .state('show', {
                                 url: "/show",
-                                controller: "MapShowCtrl",
+                                controller: "ShowMapCtrl",
                                 templateUrl: constants.viewPath() + 'map/show/show.html',
                             });
                 }])
 
-            .controller('MapShowCtrl', ["$scope", "$http", "$state", function ($scope, $http, $state) {
+            .controller('ShowMapCtrl', ["$scope", "$http", "$state", "Idle", "leafletData", function ($scope, $http, $state, Idle, leafletData) {
 
-//                    angular.extend($scope, {
-//                        cpu: {
-//                            lat: 10.73034,
-//                            lon: 122.54882,
-//                            zoom: 17,
-//                            centerUrlHash: true
-//                        }
-//                    });
-//
-//                    var promise;
-//                    $scope.$on("centerUrlHash", function (event, centerHash) {
-//                        $location.search({c: centerHash});
-//                    });
+                    var Control = L.Control.extend({
+                        onAdd: function (map) {
+                            var container = L.DomUtil.create('div', 'custom-control');
+                            container.innerHTML = '<a href="#" class="' + this.options.containerClass + '">' + this.options.innerHTML + '</a>';
+                            L.DomEvent
+                                    .on(container, 'click', L.DomEvent.stopPropagation)
+                                    .on(container, 'click', L.DomEvent.preventDefault)
+                                    .on(container, 'click', this.options.handler, map)
+                                    .on(container, 'dblclick', L.DomEvent.stopPropagation);
+                            return container;
+                        }
+                    });
 
-//                    var layer = new OpenLayers.Layer.Vector("Polygon", {
-//                        strategies: [new OpenLayers.Strategy.Fixed()],
-//                        protocol: new OpenLayers.Protocol.HTTP({
-//                            url: constants.webPath() + "maps/map.osm",
-//                            format: new OpenLayers.Format.OSM()
-//                        }),
-//                        projection: new OpenLayers.Projection("EPSG:4326")
-//                    });
-//                    alert(constants.webPath());
-//                    var map = new OpenLayers.Map("map", {
-//                        controls: [
-//                            new OpenLayers.Control.Navigation(),
-//                            new OpenLayers.Control.PanZoomBar(),
-//                            new OpenLayers.Control.Permalink(),
-//                            new OpenLayers.Control.ScaleLine({geodesic: true}),
-//                            new OpenLayers.Control.Permalink('permalink'),
-//                            new OpenLayers.Control.MousePosition(),
-//                            new OpenLayers.Control.Attribution()],
-//                        maxExtent: new OpenLayers.Bounds(-20037508.34, -20037508.34, 20037508.34, 20037508.34),
-//                        maxResolution: 156543.0339,
-//                        numZoomLevels: 19,
-//                        units: 'm',
-//                        projection: new OpenLayers.Projection("EPSG:900913"),
-//                        displayProjection: new OpenLayers.Projection("EPSG:4326")
-//                    });
-//                    $scope.layers = {
-//                        main: {
-//                            type: "tile",
-//                            source: {
-//                                type: "OSM",
-//                                url: "C:/Maperitive/Tiles/{z}/{x}/{y}.png",
-////                                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+
+                    var geojsonMarkerOptions = {
+                        radius: 15,
+                    };
+
+                    $scope.$on("IdleTimeout", function () {
+                        $state.go("bulletinboard");
+                        $('input.search-input').getkeyboard().close();
+                    });
+                    var center = {
+                        lat: 10.730873,
+                        lng: 122.547767,
+                    };
+
+
+                    angular.extend($scope, {
+                        campus: {
+                            lat: center.lat,
+                            lng: center.lng,
+                            zoom: 20,
+                        },
+                        tiles: {
+                            url: "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                            options: {
+                                attribution: "",
+                                minZoom: 17,
+                                maxZoom: 21,
+                                maxNativeZoom: 19
+                            }},
+                        layers: {
+                            baselayers: {
+                                osm: {
+                                    name: 'OpenStreetMap',
+                                    url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                    type: 'xyz',
+                                    layerParams: {
+                                        showOnSelector: false
+                                    }
+                                }
+                            },
+                            overlays: {
+                            }
+                        },
+                        maxbounds: {
+                            southWest: {
+                                lat: 10.72725,
+                                lng: 122.54493
+                            },
+                            northEast: {
+                                lat: 10.73423,
+                                lng: 122.55335
+                            }
+                        },
+                        markers: {
+                            currLocation: {
+                                lat: center.lat,
+                                lng: center.lng,
+                                message: "You are here",
+                                focus: true,
+                                type: 'awesomeMarker',
+                                icon: {
+                                    type: 'awesomeMarker',
+                                    icon: 'star',
+                                    markerColor: 'red'
+
+                                }
+                            }
+                        },
+                        geojson: {
+                            campus: {
+                                data: campus,
+                                pointToLayer: function (feature, latlng) {
+                                    return L.circleMarker(latlng, geojsonMarkerOptions);
+                                },
+                                onEachFeature: function (feature, marker) {
+                                    marker.bindPopup('<h4>' + feature.properties.name + '</h4>', {closeButton: true, closeOnClick: true, });
+                                },
+                                style: {
+                                    fillOpacity: 0,
+                                    opacity: 0
+                                }
+                            }
+                        },
+                        controls: {
+                            custom: []
+                        },
+                    });
+
+
+                    var backControl = new Control({
+                        position: 'bottomleft',
+                        innerHTML: '<i title="Back" data-toggle="tooltip" class="fa fa-arrow-left"></i>',
+                        containerClass: "back-control",
+                        handler: function () {
+                            $state.go("bulletinboard");
+                        }
+                    });
+                    var locControl = new Control({
+                        position: 'bottomleft',
+                        innerHTML: '<i title="Locate" data-toggle="tooltip" class="fa fa-crosshairs"></i>',
+                        containerClass: "loc-control",
+                        handler: function () {
+                            leafletData.getMap().then(function (map) {
+                                map.panTo(center);
+                            });
+                        }
+                    });
+
+                    $scope.controls.custom.push(backControl);
+                    $scope.controls.custom.push(locControl);
+                    leafletData.getGeoJSON().then(function (geojson) {
+                        leafletData.getMap().then(function (map) {
+
+
+                            L.control.search({
+                                layer: geojson.campus,
+                                propertyName: "name",
+                                initial: false,
+                                autoType: true,
+                                zoom: 20,
+                                circleLocation: false,
+                                markerLocation: true,
+                                markerIcon: new L.AwesomeMarkers.icon({icon: "arrow-down", prefix: "fa", markerColor: "blue"}),
+                            })
+                                    .on('search_expanded', function (e) {
+                                        var searchControl = this;
+                                        $('input.search-input').keyboard({
+                                            layout: 'custom',
+                                            customLayout: {
+                                                'default': [
+                                                    '1 2 3 4 5 6 7 8 9 0 {b}',
+                                                    'Q W E R T Y U I O P',
+                                                    'A S D F G H J K L',
+                                                    '{s} Z X C V B N M {clear}',
+                                                    '{space} {a}'
+                                                ],
+                                                'shift': [
+                                                    '1 2 3 4 5 6 7 8 9 0 {b}',
+                                                    '! @ # $ % & * ( ) - + = ^',
+                                                    '{s} , . ? _ / \\ \' Ñ {clear}',
+                                                    '{space} {a}'
+                                                ]
+                                            },
+                                            display: {
+                                                's': ' ',
+                                                'clear': ' ',
+                                                'b': ' ',
+                                                'a': ' '
+                                            },
+                                            accepted: function (event, keyboard, el) {
+                                                searchControl.collapse();
+                                            },
+                                            usePreview: false,
+                                        });
+                                        $('input.search-input').getkeyboard().reveal();
+
+                                        $('input.search-input').on('keyboardChange', function (e) {
+                                            searchControl.searchText($(e.target).val());
+                                        });
+
+                                    })
+                                    .on('search_collapsed', function (e) {
+                                        $('input.search-input').getkeyboard().close();
+                                    })
+                                    .on('search_locationfound', function (e) {
+                                        this.collapse();
+                                    })
+                                    .addTo(map);
+
+                            //                        L.Routing.control({
+//                            // [...] See MapzenTurn-by-Turn API documentation for other options
+//                            waypoints: [
+//                                L.latLng(10.730873, 122.547767),
+//                                L.latLng(10.730778, 122.548657)
+//                            ],
+//                            router: L.Routing.valhalla('valhalla-M5kvvS0', 'bicycle'),
+//                            formatter: new L.Routing.Valhalla.Formatter(),
+//                            summaryTemplate: '<div class="start">{name}</div><div class="info pedestrian">{distance}, {time}</div>',
+//                            routeWhileDragging: false,
+//                            geocoder: L.Control.Geocoder.nominatim()
+//                        }).addTo(map);
+                        });
+
+
+                    });
+//                    var expanded = false;
+//                    $scope.$on('leafletDirectiveMap.layeradd', function () {
+//                        $('input.search-input').focus(function (e) {
+//                            expanded = !expanded
+//                            if (expanded) {
+//                                console.log("search control expanded");
 //                            }
+//                        });
+//                    });
+
+
+
+
+
+
+//                    var backControl = L.control.extend({
+//                        options: {
+//                            position: 'topLeft',
+//                            innerHTML: '<i title="Back" data-toggle="tooltip" class="fa fa-arrow-left"></i>',
+//                            handler: function () {
+//                                $state.go('bulletinboard');
+//                            },
+//                        },
+//                        onAdd: function (map) {
+//                            var className = 'leaflet-control-back',
+//                                    container = L.DomUtil.create('div', className + ' leaflet-bar');
+//
+//                            return container;
 //                        }
-//                    };
-
-
-//                    var openCycleMapLayer = new ol.layer.Tile({
-//                        source: new ol.source.OSM({
-//                            attributions: [
-//                                new ol.Attribution({
-//                                    html: 'All maps &copy; ' +
-//                                            '<a href="http://www.opencyclemap.org/">OpenCycleMap</a>'
-//                                }),
-//                                ol.source.OSM.ATTRIBUTION
-//                            ],
-//                            url: 'http://localhost/Thesis/web/Tiles/{z}/{x}/{y}.png'
-//                        })
 //                    });
-//
-//                    var openSeaMapLayer = new ol.layer.Tile({
-//                        source: new ol.source.OSM({
-//                            attributions: [
-//                                new ol.Attribution({
-//                                    html: 'All maps &copy; ' +
-//                                            '<a href="http://www.openseamap.org/">OpenSeaMap</a>'
-//                                }),
-//                                ol.source.OSM.ATTRIBUTION
-//                            ],
-//                            crossOrigin: null,
-//                            url: 'http://localhost/Thesis/web/Tiles/{z}/{x}/{y}.png'
-//                        })
-//                    });
-//
+
 //
 //                    var map = new ol.Map({
 //                        layers: [
@@ -136,7 +286,7 @@
 //                            view.setCenter(centre);
 //                        }
 //                    };
-                    
+
 
 
 
@@ -149,7 +299,46 @@
 //                    map.setView(new ol.LatLng(59.55, 30.09), 13);
 //                    map.addLayer(osm);
 
+//                    uiGmapGoogleMapApi.then(function (maps) {
+//
+//                        var center = {
+//                            latitude: 10.73034,
+//                            longitude: 122.54882
+//                        };
+//
+//
+//                        var allowedBounds = new maps.LatLngBounds(
+//                                new maps.LatLng(10.73436, 122.55541),
+//                                new maps.LatLng(10.72685, 122.54443)
+//                                );
+//
+//                        var lastValidCenter = new maps.LatLng(center.latitude, center.longitude);
+//
+//                        $scope.map = {
+//                            center: center,
+//                            zoom: 18,
+//                            options: {
+//                                maxZoom: 20,
+//                                minZoom: 17
+//                            },
+//                            events: {
+//                                center_changed: function (map) {
+//
+//                                    if (allowedBounds.contains(map.getCenter())) {
+//                                        lastValidCenter = map.getCenter();
+//
+//                                        return;
+//                                    }
+//// console.log('aw');
+//                                    map.panTo(lastValidCenter);
+//                                },
+//                            }
+//                        };
+//                    });
+
+//                    window.onload =
+//                    $('input').click(function (e) {
+//                        alert('aw');
+//                    });
                 }]);
-
-
 }());

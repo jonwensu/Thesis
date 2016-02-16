@@ -28,8 +28,7 @@ $(document).ready(function () {
         if ($ul.is(':visible')) {
             $li.removeClass('active');
             arrow.html("<i class='fa fa-chevron-right'></i>");
-        }
-        else {
+        } else {
             $li.addClass('active');
             arrow.html("<i class='fa fa-chevron-down'></i>");
         }

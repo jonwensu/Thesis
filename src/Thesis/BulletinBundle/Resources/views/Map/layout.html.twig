@@ -1,0 +1,60 @@
+{#<!DOCTYPE html>
+<html manifest="{{ asset("offline_map/appcache.manifest") }}" oncontextmenu="return false;">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>
+            Campus Map
+        </title>
+        <link href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.css') }}"/>
+        <link type="text/css" rel="stylesheet" href="{{ asset("offline_map/Leaflet.awesome-markers/dist/leaflet.awesome-markers.css") }}" />
+        <link type="text/css" rel="stylesheet" href="{{ asset("offline_map/style.css") }}" />
+        <link type="text/css" rel="stylesheet" href="{{ asset("offline_map/leaflet.css") }}" />
+        <link type="text/css" rel="stylesheet" href="{{ asset("bower_components/leaflet-routing-machine/dist/leaflet-routing-machine.css") }}" />
+    </head>
+    <body>
+        {% block body %}
+            <div id="map"></div>
+        {% endblock %}
+        <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+        <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+        <script src="{{ asset("offline_map/script.js") }}"></script>
+        <script src="{{ asset("offline_map/pouchdb-1.1.0.js") }}"></script>
+
+        <script src="{{ asset("offline_map/leaflet-src.js") }}"></script>
+
+        <script src="{{ asset("bower_components/leaflet-routing-machine/dist/leaflet-routing-machine.js") }}"></script>
+        <script src="{{ asset("offline_map/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js") }}"></script>
+        <script src="{{ asset("offline_map/map.js") }}"></script>
+    </body>
+</html>
+
+#}
+
+<html>
+    <head>
+        <style type="text/css">
+            html, body { height: 100%; margin: 0; padding: 0; }
+            #map { height: 100%; }
+        </style>
+    </head>
+    <body>
+        <div id="map"></div>
+        <script type="text/javascript">
+
+            var map;
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: -34.397, lng: 150.644},
+                    zoom: 8
+                });
+            }
+
+        </script>
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2n_7p8GcGK8pVy8GB7ZJiCjtlZACq1PY&callback=initMap">
+        </script>
+    </body>
+</html>

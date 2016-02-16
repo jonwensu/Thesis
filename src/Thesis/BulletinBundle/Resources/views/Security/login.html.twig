@@ -6,6 +6,7 @@
         <link id="bs-css" href="{{ asset('template/css/bootstrap-cerulean.min.css') }}" rel="stylesheet">
         <link id="bs-css" href="{{ asset('template/css/charisma-app.css') }}" rel="stylesheet">
         <link id="bs-css" href="{{ asset('template/css/animate.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
         <style>
             input.invalid{
                 border: 2px solid red;
@@ -62,6 +63,7 @@
                                     </p>
                                 </fieldset>
                             </form>
+                            <a href="{{ path('board_view') }}">Go to Bulletin Board <i class="fa fa-angle-double-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -79,8 +81,6 @@
         <script>
 
             $(document).ready(function () {
-
-                $('[data-toggle="tooltip"]').tooltip()
                 if ($('#errors').html() != null) {
                     var n = noty({
                         text: $('#errors').html(),
@@ -100,9 +100,9 @@
                     } else {
                         $(this).removeClass("invalid");
                     }
-                    
-                    $('#_submit').attr('disabled', $('#username').val() === "" || $('#password').val() === "" )
-                    
+
+                    $('#_submit').attr('disabled', $('#username').val() === "" || $('#password').val() === "")
+
                 });
 
             });
