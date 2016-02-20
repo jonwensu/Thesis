@@ -6,16 +6,16 @@
         'ui.tinymce',
         'ui.bootstrap',
         'ui.grid',
+        'ui.checkbox',
         'myApp.announcement',
         'myApp.user',
-        'myApp.directive.compareTo',
-        'myApp.directive.slider',
         'myApp.service.user',
         'myApp.service.authorization',
         'myApp.index',
         'myApp.service.principal',
         'ngIdle',
-        'nya.bootstrap.select'
+        'nya.bootstrap.select',
+        'ngFileUpload'
     ])
             .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
@@ -53,7 +53,9 @@
                             authorization.authorize();
                     });
                 }])
-            .controller("MainCtrl", ["$scope", function ($scope) {
+            .controller("MainCtrl", ["$scope", "$rootScope", function ($scope, $rootScope) {
+                    
+                    $scope.id = $rootScope.id;
 
                     $('.btn-minimize').click(function (e) {
                         e.preventDefault();

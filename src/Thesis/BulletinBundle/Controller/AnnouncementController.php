@@ -2,6 +2,7 @@
 
 namespace Thesis\BulletinBundle\Controller;
 
+use FOS\RestBundle\Controller\Annotations\View;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -11,8 +12,8 @@ use Symfony\Component\Form\FormErrorIterator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Thesis\BulletinBundle\Entity\Announcement;
+use Thesis\BulletinBundle\Entity\PlainAnnouncement;
 use Thesis\BulletinBundle\Form\AnnouncementType;
-use FOS\RestBundle\Controller\Annotations\View;
 
 /**
  * Announcement controller.
@@ -45,7 +46,7 @@ class AnnouncementController extends Controller {
      * @Method("POST")
      */
     public function createAction(Request $request) {
-        $entity = new Announcement();
+        $entity = new PlainAnnouncement();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -53,6 +54,7 @@ class AnnouncementController extends Controller {
             $date = new \DateTime('now');
             $content = $request->request->get('html_format');
             $em = $this->getDoctrine()->getManager();
+            $boards = $em->getRepository("ThesisBulletinBundle:Board")->findAll();
             $entity->setDatePosted($date)
                     ->setContent($content);
             $em->persist($entity);
@@ -114,13 +116,37 @@ class AnnouncementController extends Controller {
     /**
      * @View()
      */
-    public function getAnnouncementsAction() {
+    public function getAnnouncementsAllAction() {
 
         return [
             'announcements' => $this->getDoctrine()
                     ->getManager()
                     ->getRepository('ThesisBulletinBundle:Announcement')
                     ->findAllSorted()
+        ];
+    }
+    /**
+     * @View()
+     */
+    public function getAnnouncementsVisibleAction($id) {
+
+        return [
+            'announcements' => $this->getDoctrine()
+                    ->getManager()
+                    ->getRepository('ThesisBulletinBundle:Announcement')
+                    ->findByVisible($id)
+        ];
+    }
+    /**
+     * @View()
+     */
+    public function getAnnouncementsAction($id) {
+
+        return [
+            'announcements' => $this->getDoctrine()
+                    ->getManager()
+                    ->getRepository('ThesisBulletinBundle:Announcement')
+                    ->findSorted($id)
         ];
     }
 

@@ -20,26 +20,4 @@ class BoardController extends Controller {
                 // ...
         );
     }
-    
-   
-    
-    /**
-     * @Route("/map", name="map_view", options={"expose"=true})
-     * @Template("ThesisBulletinBundle:Default:map.html.twig")
-     */
-    public function editMapAction() {
-        return array(
-        );
-    }
-
-    /**
-     * @Route("/edit")
-     * @Template()
-     */
-    public function editAction() {
-        return array(
-                // ...
-        );
-    }
-
 }

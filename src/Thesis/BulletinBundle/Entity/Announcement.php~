@@ -3,6 +3,9 @@
 namespace Thesis\BulletinBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\DiscriminatorMap;
+use Doctrine\ORM\Mapping\DiscriminatorColumn;
+use Doctrine\ORM\Mapping\InheritanceType;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ExecutionContextInterface;
 
@@ -11,8 +14,15 @@ use Symfony\Component\Validator\ExecutionContextInterface;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AnnouncementRepository")
+ * @InheritanceType("SINGLE_TABLE")
+ * @DiscriminatorColumn(name="discriminator", type="string")
+ * @DiscriminatorMap({"image" = "ImageAnnouncement", "plain" = "PlainAnnouncement"})
  */
-class Announcement {
+abstract class Announcement {
+    
+    public function __construct() {
+        
+    }
 
     /**
      * @var integer
@@ -34,28 +44,35 @@ class Announcement {
      *
      * @ORM\Column(name="title", type="string", length=255)
      */
-    private $title;
-
+    protected $title;
+    
     /**
      * @var string
      *
-     * @ORM\Column(name="content", type="text")
+     * @ORM\Column(name="type", type="string", length=255)
      */
-    private $content;
-
+    protected $type;
+    
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="datePosted", type="datetime")
      */
-    private $datePosted;
+    protected $datePosted;
     
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="visible", type="boolean")
+     */
+    protected $visible;
+
     /**
      * @var integer
      *
      * @ORM\Column(name="priorityLvl", type="integer")
      */
-    private $priorityLvl;
+    protected $priorityLvl;
 
     /**
      * Get id
@@ -89,28 +106,6 @@ class Announcement {
     }
 
     /**
-     * Set content
-     *
-     * @param string $content
-     *
-     * @return Announcement
-     */
-    public function setContent($content) {
-        $this->content = $content;
-
-        return $this;
-    }
-
-    /**
-     * Get content
-     *
-     * @return string
-     */
-    public function getContent() {
-        return $this->content;
-    }
-
-    /**
      * Set datePosted
      *
      * @param \DateTime $datePosted
@@ -131,26 +126,19 @@ class Announcement {
     public function getDatePosted() {
         return $this->datePosted;
     }
-
-    /**
-     * @Assert\Callback
-     */
-    public function validate(ExecutionContextInterface $context) {
-        $blank = false;
-        if ($this->title === null ||
-                $this->content === null) {
-            $context->addViolation("Please fill in all fields");
-        }
-
-        if ($this->title === null) {
-            $context->addViolationAt('title', null);
-        }
-
-        if ($this->content === null) {
-            $context->addViolationAt('content', null);
-        }
-    }
-
+//
+//    /**
+//     * @Assert\Callback
+//     */
+//    public function validate(ExecutionContextInterface $context) {
+//        if ($this->title === null) {
+//            $context->addViolation("Please fill in all required(*) fields");
+//        }
+//
+//        if ($this->title === null) {
+//            $context->addViolationAt('title', null);
+//        }
+//    }
 
     /**
      * Set board
@@ -159,9 +147,12 @@ class Announcement {
      *
      * @return Announcement
      */
-    public function setBoard(\Thesis\BulletinBundle\Entity\Board $board = null)
-    {
+    public function setBoard(\Thesis\BulletinBundle\Entity\Board $board = null) {
         $this->board = $board;
+
+        if (!$board->getAnnouncements()->contains($this)) {
+            $board->addAnnouncement($this);
+        }
 
         return $this;
     }
@@ -171,8 +162,7 @@ class Announcement {
      *
      * @return \Thesis\BulletinBundle\Entity\Board
      */
-    public function getBoard()
-    {
+    public function getBoard() {
         return $this->board;
     }
 
@@ -183,8 +173,7 @@ class Announcement {
      *
      * @return Announcement
      */
-    public function setPriorityLvl($priorityLvl)
-    {
+    public function setPriorityLvl($priorityLvl) {
         $this->priorityLvl = $priorityLvl;
 
         return $this;
@@ -195,8 +184,56 @@ class Announcement {
      *
      * @return integer
      */
-    public function getPriorityLvl()
-    {
+    public function getPriorityLvl() {
         return $this->priorityLvl;
+    }
+
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Announcement
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set visible
+     *
+     * @param boolean $visible
+     *
+     * @return Announcement
+     */
+    public function setVisible($visible)
+    {
+        $this->visible = $visible;
+
+        return $this;
+    }
+
+    /**
+     * Get visible
+     *
+     * @return boolean
+     */
+    public function getVisible()
+    {
+        return $this->visible;
     }
 }

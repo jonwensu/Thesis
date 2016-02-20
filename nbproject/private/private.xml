@@ -7,18 +7,24 @@
             <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Entity/Board.php</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/announcement/browse/browse.js</file>
             <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Controller/AnnouncementController.php</file>
+            <file>file:/C:/xampp/htdocs/Thesis/web/partials/announcement/new/new_img.html</file>
+            <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Entity/Document.php</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/filters/trustHtml.js</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/js/campus.geojson.js</file>
+            <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Controller/DefaultController.php</file>
             <file>file:/C:/xampp/htdocs/Thesis/app/config/routing.yml</file>
             <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Form/AnnouncementType.php</file>
             <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Controller/BoardController.php</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/css/board.css</file>
             <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Entity/Announcement.php</file>
             <file>file:/C:/xampp/htdocs/Thesis/app/Resources/views/base.html.twig</file>
+            <file>file:/C:/xampp/htdocs/Thesis/web/partials/announcement/new/new_img.js</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/directives/slick.js</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/offline_map/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/map/map.js</file>
+            <file>file:/C:/xampp/htdocs/Thesis/web/partials/announcement/new/new_plain.js</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/robots.txt</file>
+            <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Entity/ImageAnnouncement.php</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/nestedbase.html</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/offline_map/map.js</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/fonts/digital7/stylesheet.css</file>
@@ -27,13 +33,17 @@
             <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Resources/views/Default/public.html.twig</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/map/show/show.html</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/offline_map/appcache.manifest</file>
+            <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Controller/ImageAnnouncementController.php</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/offline_map/leaflet-src.js</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/directives/slider.js</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/user/user.js</file>
             <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Resources/views/Map/layout.html.twig</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/map/show/show.js</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/app.css</file>
+            <file>file:/C:/xampp/htdocs/Thesis/web/partials/announcement/new/new_plain.html</file>
+            <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Form/ImageAnnouncementType.php</file>
             <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Resources/views/Security/login.html.twig</file>
+            <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Controller/DocumentController.php</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/pub.js</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/app.js</file>
             <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Controller/MapController.php</file>

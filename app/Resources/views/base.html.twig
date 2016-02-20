@@ -12,6 +12,8 @@
         <link href="{{ asset('bower_components/iCheck/skins/flat/blue.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('bower_components/nya-bootstrap-select/dist/css/nya-bs-select.css') }}" rel="stylesheet">
+        <link href="{{ asset('bower_components/dropzone/dist/basic.css') }}" rel="stylesheet">
+        <link href="{{ asset('bower_components/dropzone/dist/dropzone.css') }}" rel="stylesheet">
         <link href="{{ asset('fonts/fftusj/stylesheet.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('app.css') }}" rel="stylesheet">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -41,7 +43,7 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a ui-sref="usser.show({id: row.entity.id})">Profile</a></li>
+                        <li><a ui-sref="user.show({id: id})">Profile</a></li>
                         <li class="divider"></li>
                         <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
                     </ul>
@@ -66,14 +68,7 @@
                                 <li>
                                     <a ui-sref="home"><i class="glyphicon glyphicon-home"></i><span> Dashboard</span></a>
                                 </li>
-                                <li>
-                                    <a class="ajax-link" href="#calendar"><i class="fa fa-users"></i><span> Faculty</span></a>
-                                </li>
                                 <li><a href="{{ path("board_view") }}"><i class="fa fa-newspaper-o"></i><span> Bulletin Board</span></a>
-                                            {#                                <li><a ui-sref="bulletinboard"><i class="fa fa-newspaper-o"></i><span> Bulletin Board</span></a>#}
-                                </li>
-                                <li>
-                                    <a class="ajax-link" href="#calendar" ui-sref="show"><i class="fa fa-map-marker"></i><span> Map</span></a>
                                 </li>
                                 <li class="accordion">
                                     <a href="#"><i class="fa fa-bullhorn"></i><span> Anouncements</span> <span class="accordion-arrow pull-right"><i class='fa fa-chevron-right'></i></span></a>
@@ -83,6 +78,13 @@
                                     </ul>
                                 </li>
                                 {% if "ROLE_SUPER_ADMIN" in app.user.roles %}
+                                    <li class="accordion">
+                                        <a class="ajax-link" href="#calendar"><i class="fa fa-users"></i><span> Faculty</span> <span class="accordion-arrow pull-right"><i class='fa fa-chevron-right'></i></span></a>
+                                        <ul class="nav nav-pills nav-stacked">
+                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Browse Faculty"><i class="fa fa-angle-double-right"></i> Browse</a></li>
+                                            <li><a ui-sref="announcement.choose"   data-toggle="tooltip" data-placement="right" title="Add Faculty Member"><i class="fa fa-angle-double-right"></i> Add</a></li>
+                                        </ul>
+                                    </li>
                                     <li class="accordion">
                                         <a href="#"><i class="fa fa-user"></i><span> Admins</span> <span class="accordion-arrow pull-right"><i class='fa fa-chevron-right'></i></span></a>
                                         <ul class="nav nav-pills nav-stacked">
@@ -159,9 +161,13 @@
         <script src="{{ asset('bower_components/angular-ui-tinymce/src/tinymce.js') }}"></script>
         <script src="{{ asset('bower_components/nya-bootstrap-select/dist/js/nya-bs-select.min.js')}}"></script>
         <script src="{{ asset('bower_components/ng-idle/angular-idle.js')}}"></script>
+        <script src="{{ asset('bower_components/ng-file-upload/ng-file-upload.min.js')}}"></script>
+        <script src="{{ asset('bower_components/image-scale/image-scale.min.js')}}"></script>
+        <script src="{{ asset('bower_components/dropzone/dist/dropzone.js')}}"></script>
+        <script src="{{ asset('bower_components/angular-bootstrap-checkbox/angular-bootstrap-checkbox.js')}}"></script>
         <script src="{{ asset('app.js')}}"></script>
-        <script src="{{ asset('directives/compareTo.js')}}"></script>
         <script src="{{ asset('directives/slider.js')}}"></script>
+        <script src="{{ asset('directives/dropzone.js')}}"></script>
         <script src="{{ asset('services/user.js')}}"></script>
         <script src="{{ asset('services/authorization.js')}}"></script>
         <script src="{{ asset('services/principal.js')}}"></script>
@@ -170,8 +176,6 @@
         <script src="{{ asset('partials/announcement/new/new_img.js')}}"></script>
         <script src="{{ asset('partials/announcement/choose/choose.js')}}"></script>
         <script src="{{ asset('partials/announcement/browse/browse.js')}}"></script>
-        <script src="{{ asset('partials/map/show/show.js')}}"></script>
-        <script src="{{ asset('partials/map/map.js')}}"></script>
         <script src="{{ asset('partials/user/user.js')}}"></script>
         <script src="{{ asset('partials/index.js')}}"></script>
         <script src="{{ asset('partials/user/new/new.js')}}"></script>

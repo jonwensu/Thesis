@@ -2403,6 +2403,7 @@ L.TileLayer = L.Class.extend({
 		tileSize: 256,
 		subdomains: 'abc',
 		errorTileUrl: '',
+                prefix: '',
 		attribution: '',
 		zoomOffset: 0,
 		opacity: 1,

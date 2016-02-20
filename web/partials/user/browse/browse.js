@@ -47,6 +47,8 @@
                         enableVerticalScrollbar: 0,
                         columnDefs: [
                             {field: "username"},
+                            {field: "last_name"},
+                            {field: "first_name"},
                             {field: "email"},
                             {field: "enabled", enableFiltering: false, cellTemplate: '<div class="ui-grid-cell-contents"><span ng-if="row.entity.enabled">Yes</span><span ng-if="!row.entity.enabled">No</span></div>'},
                             {name: "Action", enableSorting: false, enableFiltering: false, enableColumnHiding: false, cellTemplate: actionTemplate},

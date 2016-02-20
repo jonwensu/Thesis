@@ -10,23 +10,39 @@ namespace Thesis\BulletinBundle\Entity;
  */
 class AnnouncementRepository extends \Doctrine\ORM\EntityRepository {
 
-    public function findOtherUsers($id) {
-        return $this->getEntityManager()
-                        ->createQueryBuilder()
-                        ->select('u')
-                        ->from('ThesisBulletinBundle:User', 'u')
-                        ->where('u.id != :id')
-                        ->orderBy('u.username')
-                        ->setParameter(':id', $id)
-                        ->getQuery()
-                        ->getResult();
-    }
-
     public function findAllSorted() {
         return $this->getEntityManager()
                         ->createQueryBuilder()
                         ->select('a')
                         ->from('ThesisBulletinBundle:Announcement', 'a')
+                        ->orderBy('a.priorityLvl', 'asc')
+                        ->addOrderBy('a.datePosted', 'desc')
+                        ->addOrderBy('a.title', 'asc')
+                        ->getQuery()
+                        ->getResult()
+        ;
+    }
+
+    public function findVisible($id) {
+        return $this->getEntityManager()
+                        ->createQueryBuilder()
+                        ->select('a')
+                        ->from('ThesisBulletinBundle:Announcement', 'a')
+                        ->where('a.id = :id')
+                        ->andWhere('a.visible = true')
+                        ->orderBy('a.priorityLvl', 'asc')
+                        ->addOrderBy('a.datePosted', 'desc')
+                        ->addOrderBy('a.title', 'asc')
+                        ->getQuery()
+                        ->getResult()
+        ;
+    }
+    public function findSorted($id) {
+        return $this->getEntityManager()
+                        ->createQueryBuilder()
+                        ->select('a')
+                        ->from('ThesisBulletinBundle:Announcement', 'a')
+                        ->where('a.id = :id')
                         ->orderBy('a.priorityLvl', 'asc')
                         ->addOrderBy('a.datePosted', 'desc')
                         ->addOrderBy('a.title', 'asc')

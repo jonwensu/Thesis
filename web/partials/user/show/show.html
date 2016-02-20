@@ -13,17 +13,34 @@
         </li>
     </ul>
 </div>
-<div class="well row  col-lg-8 center">
-    <h1>
+<div class="well row col-lg-8 col-lg-offset-2">
+    <h1 class="text-center">
         View Admin
     </h1>
-    <h2>
-        {{ user.username }}
-    </h2>
-    <h2>
-        {{ user.email }}
-    </h2>
-    <h2>
-        {{ user.enabled }}
-    </h2>
+    <div class="text-center margin-top-2x">
+        <div>
+            <div class="user-label">
+                Name
+            </div>
+            <div class="user-info">
+                {{ user.first_name }} {{ user.last_name }}
+            </div>
+        </div>
+        <div>
+            <div class="user-label">
+                Username
+            </div>
+            <div class="user-info">
+                {{ user.username }}
+            </div>
+        </div>
+        <div>
+            <div class="user-label">
+                Email
+            </div>
+            <div class="user-info">
+                {{ user.email }}
+            </div>
+        </div>
+    </div>
 </div>

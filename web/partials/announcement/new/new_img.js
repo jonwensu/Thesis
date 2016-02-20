@@ -1,7 +1,9 @@
 'use strict';
 
 (function () {
-    angular.module('myApp.announcement.new_img', [])
+    angular.module('myApp.announcement.new_img', [
+        'myApp.directive.dropzone'
+    ])
             .config(['$stateProvider', function ($stateProvider) {
                     $stateProvider
                             .state('announcement.new_img', {
@@ -14,7 +16,7 @@
                             });
                 }])
 
-            .controller('NewImgAnnouncementCtrl', ["$scope", "$http", "$state", function ($scope, $http, $state) {
+            .controller('NewImgAnnouncementCtrl', ["$scope", "$http", "$state", "Upload", "$timeout", function ($scope, $http, $state, Upload, $timeout) {
 
                     $scope.priority = {
                         High: 1,
@@ -24,63 +26,28 @@
 
                     $scope.announcement = {
                         title: "",
-                        content: "",
-                        priorityLvl: 2
-                    };
-                    var success = function (response) {
-                        $('#spinner').fadeOut(100);
-                        var valid = response.data.valid;
-                        if (valid) {
-                            $state.go('home');
-                        } else {
-                            var errors = response.data.errors;
-                            var fields = response.data.fields;
-                            $('.invalid').removeClass('invalid');
-                            $.each(fields, function (i, r) {
-                                $("label[for='announcement." + r + "']").addClass('invalid');
-                            });
-
-                            $.each(errors, function (i, v) {
-                                if (v != "") {
-                                    var n = noty({
-                                        text: v,
-                                        type: 'error',
-                                        layout: 'topRight',
-                                        animation: {
-                                            open: 'animated tada', // Animate.css class names
-                                            close: 'animated bounceOut', // Animate.css class names
-                                        },
-                                        timeout: 10000
-                                    });
-                                }
-                            });
-                        }
+                        description: "",
+                        priorityLvl: 2,
+                        visible: true
                     };
 
-                    var error = function (reason) {
-                        $('#spinner').fadeOut(100);
-                        var n = noty({
-                            text: "Failed to create announcement",
-                            type: 'error',
-                            layout: 'topRight',
-                            animation: {
-                                open: 'animated tada', // Animate.css class names
-                                close: 'animated bounceOut', // Animate.css class names
-                            },
-                            timeout: 10000
-                        });
+                    $scope.visibleMsg = $scope.announcement.visible ? "Visible" : "Hidden";
+                    $scope.changeMsg = function () {
+                        $scope.visibleMsg = $scope.announcement.visible ? "Visible" : "Hidden";
                     };
+
+                    $("img.scale").imageScale();
 
                     $scope.tinyConfig = {
                         selector: "textarea",
                         plugins: [
                             "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker",
                             "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-                            "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern imagetools jbimages"
+                            "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
                         ],
-                        toolbar1: "newdocument | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
-                        toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink jbimages | insertdatetime preview | forecolor backcolor",
-                        toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | ltr rtl | spellchecker | fullscreen  imagetools_cors_hosts: ['www.tinymce.com', 'codepen.io']",
+                        toolbar1: "bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+                        toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink | insertdatetime preview | forecolor backcolor",
+                        toolbar3: "hr removeformat | subscript superscript | charmap emoticons | ltr rtl | spellchecker | fullscreen ",
                         menubar: false,
                         toolbar_items_size: 'small',
                         relative_urls: false,
@@ -128,18 +95,96 @@
 //                        ]
                     };
 
-                    $scope.submit = function () {
-                        var formData = {
-                            thesis_bulletinbundle_announcement: $scope.announcement,
-                            html_format: tinymce.activeEditor.getContent({format: 'html'})
-                        };
-                        $('#spinner').show();
+                    var success = function (response) {
+                        $('#spinner').fadeOut(100);
+                        var valid = response.data.valid;
+                        if (valid) {
+                            $scope.processDropzone();
+                        } else {
+                            var errors = response.data.errors;
+                            var fields = response.data.fields;
+                            $('.invalid').removeClass('invalid');
+                            $.each(fields, function (i, r) {
+                                $("label[for='announcement." + r + "']").addClass('invalid');
+                            });
 
-                        $http.post(Routing.generate('announcement_create'), $.param(formData), {
-                            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                        })
-                                .then(success, error);
+                            $.each(errors, function (i, v) {
+                                if (v != "") {
+                                    var n = noty({
+                                        text: v,
+                                        type: 'error',
+                                        layout: 'topRight',
+                                        animation: {
+                                            open: 'animated tada', // Animate.css class names
+                                            close: 'animated bounceOut', // Animate.css class names
+                                        },
+                                        timeout: 10000
+                                    });
+                                }
+                            });
+                        }
                     };
+
+                    var error = function (reason) {
+                        $('#spinner').fadeOut(100);
+                        var n = noty({
+                            text: "Failed to create announcement",
+                            type: 'error',
+                            layout: 'topRight',
+                            animation: {
+                                open: 'animated tada', // Animate.css class names
+                                close: 'animated bounceOut', // Animate.css class names
+                            },
+                            timeout: 10000
+                        });
+                    };
+
+
+
+                    $('form').submit(function (e) {
+                        e.preventDefault();
+
+                        if (!$scope.hasFile()) {
+                            var n = noty({
+                                text: "Please upload an image",
+                                type: 'error',
+                                layout: 'topRight',
+                                animation: {
+                                    open: 'animated tada', // Animate.css class names
+                                    close: 'animated bounceOut', // Animate.css class names
+                                },
+                                timeout: 10000
+                            });
+                        } else {
+
+                            var formData = {
+                                thesis_bulletinbundle_imageannouncement: $scope.announcement,
+//                                html_format: tinymce.activeEditor.getContent({format: 'html'})
+                            };
+
+                            $('#spinner').show();
+                            $http.post(Routing.generate('announcement_image_create'), $.param(formData), {
+                                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                            })
+                                    .then(success, error);
+
+                            $scope.dropzoneEvent('success', function (file, response) {
+                                var n = noty({
+                                    text: "Announcement successfully uploaded",
+                                    type: 'success',
+                                    layout: 'topRight',
+                                    animation: {
+                                        open: 'animated tada', // Animate.css class names
+                                        close: 'animated bounceOut', // Animate.css class names
+                                    },
+                                    timeout: 1000
+                                });
+                                $timeout(function () {
+                                    $state.go('home');
+                                }, 1000);
+                            });
+                        }
+                    });
 
 
                 }]);

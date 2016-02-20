@@ -23,7 +23,7 @@
                     $scope.slideInterval = 3000;
                     $scope.logo = constants.webPath() + "pics/coe.png";
                     $scope.play = true;
-                    
+
                     $scope.mapUrl = Routing.generate("map_view");
 
                     var colors = ["#f3f2cb", "#eddde1", "#acdafa", "#b9e2cd", "#ceb6fa"];
@@ -130,7 +130,7 @@
                     }
 
                     $scope.loaded = false;
-                    $http.get(Routing.generate('get_announcements')).success(function (response) {
+                    $http.get(Routing.generate('get_announcements', {id: 1})).success(function (response) {
                         $scope.slides = response.announcements;
                         $scope.loaded = true;
                     });

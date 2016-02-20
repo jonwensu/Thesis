@@ -137,7 +137,8 @@
                     $scope.controls.custom.push(locControl);
                     leafletData.getGeoJSON().then(function (geojson) {
                         leafletData.getMap().then(function (map) {
-
+                            var attribution = map.attributionControl;
+                            attribution.setPrefix("&copy; Leaflet");
 
                             L.control.search({
                                 layer: geojson.campus,

@@ -11,6 +11,7 @@ FOS\UserBundle\Model\User:
             expose: true
         lastLogin:
             expose: true
+            groups: [ authentication ]
         roles:
             expose: true
             groups: [ authentication ]

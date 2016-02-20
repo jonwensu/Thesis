@@ -51,6 +51,10 @@ class Board {
      */
     public function addAnnouncement(\Thesis\BulletinBundle\Entity\Announcement $announcement) {
         $this->announcements[] = $announcement;
+        
+        if($announcement->getBoard() != $this){
+            $announcement->setBoard($this);
+        }
 
         return $this;
     }

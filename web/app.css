@@ -155,7 +155,8 @@
 }
 
 #cont{
-    height: 55em;
+    height: 100vh;
+    overflow-y: scroll;
 }
 
 .nav-slide{
@@ -284,4 +285,32 @@
 .foot a {
     outline: none;
     padding: 0.5em;
+}
+
+.user-info{
+    font-size: 3em;
+    color: #38a7ff
+}
+
+.user-label{
+    font-size: 2em;
+    margin-top: 1em;
+}
+
+.drop-box {
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    width: 100%;
+    height: 5em;
+    text-align: center;
+    padding-top: 25px;
+    margin: 10px;
+}
+
+.dropzone {
+    border: 2px dashed blue;
+}
+
+textarea {
+    resize: none;
 }

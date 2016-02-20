@@ -8,15 +8,14 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
 
-
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
  * @ORM\Entity(repositoryClass="UserRepository")
  * @ExclusionPolicy("all")
  */
-class User extends BaseUser
-{
+class User extends BaseUser {
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -25,24 +24,24 @@ class User extends BaseUser
      * @Groups({"authentication"})
      */
     protected $id;
-    
-    
-     /**
+
+    /**
      * @var string
-     *
+     * @Expose()
+     * @Groups({"authentication"})
      * @ORM\Column(name="firstName", type="string", length=255)
      */
     private $firstName;
-    
-     /**
+
+    /**
      * @var string
-     *
+     * @Expose()
+     * @Groups({"authentication"})
      * @ORM\Column(name="lastName", type="string", length=255)
      */
     private $lastName;
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
         // your own logic
     }
@@ -54,8 +53,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function setFirstName($firstName)
-    {
+    public function setFirstName($firstName) {
         $this->firstName = $firstName;
 
         return $this;
@@ -66,8 +64,7 @@ class User extends BaseUser
      *
      * @return string
      */
-    public function getFirstName()
-    {
+    public function getFirstName() {
         return $this->firstName;
     }
 
@@ -78,8 +75,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function setLastName($lastName)
-    {
+    public function setLastName($lastName) {
         $this->lastName = $lastName;
 
         return $this;
@@ -90,8 +86,8 @@ class User extends BaseUser
      *
      * @return string
      */
-    public function getLastName()
-    {
+    public function getLastName() {
         return $this->lastName;
     }
+
 }

@@ -54,8 +54,8 @@ class RegistrationController extends Controller {
         $emailErrors = $this->getErrorMsgs($e);
         $usernameErrors = $this->getErrorMsgs($u);
         $passwordErrors = $this->getErrorMsgs($p);
-        $formErrors = $this->getErrorMsgs($form->getErrors(true));
-        $errors = array_unique(array_merge([$emailErrors, $usernameErrors, $passwordErrors, $formErrors]), SORT_REGULAR);
+//        $formErrors = $this->getErrorMsgs($form->getErrors(true));
+        $errors = array_unique(array_merge([$emailErrors, $usernameErrors, $passwordErrors]), SORT_REGULAR);
 
         $fields = [];
 

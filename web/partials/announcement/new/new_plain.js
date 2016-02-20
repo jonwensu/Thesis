@@ -14,7 +14,7 @@
                             });
                 }])
 
-            .controller('NewPlainAnnouncementCtrl', ["$scope", "$http", "$state", function ($scope, $http, $state) {
+            .controller('NewPlainAnnouncementCtrl', ["$scope", "$http", "$state", "$timeout", function ($scope, $http, $state, $timeout) {
 
                     $scope.priority = {
                         High: 1,
@@ -25,13 +25,22 @@
                     $scope.announcement = {
                         title: "",
                         content: "",
-                        priorityLvl: 2
+                        htmlContent: "",
+                        priorityLvl: 2,
+                        visible: true
                     };
+                    $scope.visibleMsg = $scope.announcement.visible ? "Visible" : "Hidden";
+                    $scope.changeMsg = function () {
+                        $scope.visibleMsg = $scope.announcement.visible ? "Visible" : "Hidden";
+                    };
+
                     var success = function (response) {
                         $('#spinner').fadeOut(100);
                         var valid = response.data.valid;
                         if (valid) {
-                            $state.go('home');
+                            $timeout(function () {
+                                $state.go('home');
+                            }, 1000);
                         } else {
                             var errors = response.data.errors;
                             var fields = response.data.fields;
@@ -76,9 +85,9 @@
                         plugins: [
                             "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker",
                             "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-                            "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern imagetools jbimages"
+                            "table contextmenu directionality emoticons template textcolor paste textcolor colorpicker textpattern imagetools jbimages"
                         ],
-                        toolbar1: "newdocument | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+                        toolbar1: "bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
                         toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink jbimages | insertdatetime preview | forecolor backcolor",
                         toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | ltr rtl | spellchecker | fullscreen  imagetools_cors_hosts: ['www.tinymce.com', 'codepen.io']",
                         menubar: false,
@@ -129,13 +138,14 @@
                     };
 
                     $scope.submit = function () {
+                        $scope.announcement.content = tinymce.activeEditor.getContent({format: 'text'});
                         var formData = {
-                            thesis_bulletinbundle_announcement: $scope.announcement,
+                            thesis_bulletinbundle_plainannouncement: $scope.announcement,
                             html_format: tinymce.activeEditor.getContent({format: 'html'})
                         };
                         $('#spinner').show();
 
-                        $http.post(Routing.generate('announcement_create'), $.param(formData), {
+                        $http.post(Routing.generate('announcement_plain_create'), $.param(formData), {
                             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                         })
                                 .then(success, error);
