@@ -5,16 +5,18 @@
         'ngAnimate',
         'ui.router',
         'ui.bootstrap',
-        'myApp.announcement.browse',
-        'myApp.map.show',
+        'myApp.map',
         'myApp.index',
+        'myApp.board',
         'myApp.user',
+        'myApp.announcement',
         'ngIdle',
         'yaru22.angular-timeago',
-        'leaflet-directive'
+        'leaflet-directive',
+        'myApp.directive.imgscale'
     ])
             .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-                    $urlRouterProvider.otherwise("/bulletinboard");
+                    $urlRouterProvider.otherwise("/board/show");
                     $stateProvider
                             .state('bull', {
                                 url: "/",
@@ -31,7 +33,13 @@
                     $rootScope.$on('$stateChangeStart', function (e, toState, toParams) {
                         Idle.watch();
                     });
-                }])
+
+                    $rootScope.$on('$stateChangeSuccess', function (event, to, toParams, from, fromParams) {
+                        //save the previous state in a rootScope variable so that it's accessible from everywhere
+                        $rootScope.previousState = from;
+                    });
+                }]);
+
 }());
 
 

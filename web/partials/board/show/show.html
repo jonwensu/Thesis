@@ -1,0 +1,116 @@
+<div id="wrap" class="margin-top-3x">
+
+    <div class="col-lg-3">
+        <div>
+            <img ng-src="{{ logo}}" />
+        </div>
+        <div class="panel panel-danger margin-top-2x">
+            <div class="panel-heading">
+                <div class="text-center text-uppercase" style="color: white; font-size: 4em;">
+                    {{ clock | date:'MMMM'}}
+                </div>
+            </div>
+            <div class="panel-body">
+                <h1 class="text-center" style="font-size: 11em;">
+                    {{ clock | date:'d'}}
+                </h1>
+                <div class="text-center text-uppercase" style="font-size: 5em;">
+                    {{ clock | date:'EEE'}}
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid text-center bg-primary time">
+            {{ clock | date:'h'}}<span class="blink">:</span>{{ clock | date:'mm'}} {{ clock | date:'a'}}
+        </div>
+
+
+    </div>
+
+    <div id="main" class="col-lg-6">
+
+        <div class="slide-cont">
+
+            <slick ng-if="loaded" class="slider-for" settings="slickConfigFor">
+
+                <div ng-repeat="slide in slides">
+                    <a class="pull-right" ui-sref="announcement.show({id: slide.id})" style="font-size: 2em;  outline: none; color: #6699ff;"><i class="fa fa-expand"></i></a>
+                    <h1 class="text-center">
+                        {{ slide.title | limitTo:80 }}
+                        <span ng-if="slide.title.length > 80">
+                            . . .
+                        </span>
+                    </h1>
+                    <div style="padding: 1em 3em 1em 3em;">
+                        <div ng-if="slide.type == 'image'" class="col-lg-12">
+                            <div>
+                                <div id="image-container" class="" style="height: 35em; width: 56em;">
+                                    <img class="scale" scale ng-src="{{webPath + slide.document.wpath}}" data-scale="best-fit-down" data-align="center">
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="slide.type == 'plain'">
+                            <div class="margin-top-1x" ng-bind-html="slide.html_content | to_trusted" style="font-size: 2em; text-align: justify;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="foot">
+                        <div class="pull-left">
+                            <i class="fa fa-clock-o"></i> 
+                            {{ slide.date_posted | timeAgo:"mediumDate" }}
+                        </div>
+                        <div class="pull-right">
+                            <a href="#" ng-click="togglePlay()" style="text-decoration: none;">
+                                <i ng-if="play" class="fa fa-pause"></i>
+                                <i ng-if="!play" class="fa fa-play"></i>
+                            </a>
+                            <a href="#" ng-click="updateSlides()" style="text-decoration: none;">
+                                <i class="fa fa-refresh"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </slick>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div>
+            <a ui-sref="announcement.search" class="btn btn-block btn-info">
+                <i class="fa fa-search" style="font-size: 7.5em;"></i>
+                <div  style="font-size: 5em;">
+                    SEARCH
+                </div>
+            </a>
+        </div>
+        <div class="margin-top-1x">
+            <a href="#" class="btn btn-block btn-primary">
+                <i class="fa fa-users" style="font-size: 7.5em;"></i>
+                <div  style="font-size: 5em;">
+                    FACULTY
+                </div>
+            </a>
+        </div>
+        <div class="margin-top-1x">
+            <a ui-sref="map.show" class="btn btn-block btn-success">
+                <i class="fa fa-map" style="font-size: 7.5em;"></i>
+                <div style="font-size: 5em;">
+                    MAP
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-12 slide-cont">
+        <slick ng-if="loaded" class="slider-nav col-lg-10 col-lg-offset-1" settings="slickConfigNav">
+            <div ng-repeat="slide in slides" class="text-center">
+                <h2 class="slide-title">
+                    {{ slide.title | limitTo:40 }}
+                    <span ng-if="slide.title.length > 40">
+                        . . .
+                    </span>
+                </h2>
+            </div>
+
+        </slick>
+    </div>
+
+</div>

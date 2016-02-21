@@ -126,19 +126,19 @@ abstract class Announcement {
     public function getDatePosted() {
         return $this->datePosted;
     }
-//
-//    /**
-//     * @Assert\Callback
-//     */
-//    public function validate(ExecutionContextInterface $context) {
-//        if ($this->title === null) {
-//            $context->addViolation("Please fill in all required(*) fields");
-//        }
-//
-//        if ($this->title === null) {
-//            $context->addViolationAt('title', null);
-//        }
-//    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context) {
+        if ($this->title === null) {
+            $context->addViolation("Please fill in all required(*) fields");
+        }
+
+        if ($this->title === null) {
+            $context->addViolationAt('title', null);
+        }
+    }
 
     /**
      * Set board

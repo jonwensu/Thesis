@@ -1,10 +1,10 @@
-angular.module('myApp.map', [
-    'myApp.map.show',
+angular.module('myApp.board', [
+    'myApp.board.show',
 ])
         .config(['$stateProvider', function ($stateProvider) {
                 $stateProvider
-                        .state('map', {
-                            url: "/map",
+                        .state('board', {
+                            url: "/board",
                             abstract: true,
                             templateUrl: constants.viewPath() + 'nestedbase.html',
                         });

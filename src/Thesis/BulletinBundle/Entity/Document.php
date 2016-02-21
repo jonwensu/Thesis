@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use JMS\Serializer\Annotation\VirtualProperty;
 use JMS\Serializer\Annotation\SerializedName;
 
+
 /**
  * Document
  *
@@ -64,6 +65,10 @@ class Document {
         return null === $this->path ? null : $this->getUploadRootDir() . '/' . $this->path;
     }
 
+    /**
+     * @VirtualProperty
+     * @SerializedName("wpath")
+     */
     public function getWebPath() {
         return null === $this->path ? null : $this->getUploadDir() . '/' . $this->path;
     }
@@ -224,7 +229,7 @@ class Document {
     public function getName() {
         return $this->name;
     }
-    
+
     /**
      * Set path
      *
@@ -286,70 +291,6 @@ class Document {
      */
     public function getDateUploaded() {
         return $this->dateUploaded;
-    }
-
-    /**
-     * @VirtualProperty
-     * @SerializedName("icon")
-     */
-    public function getIcon() {
-        $filename = "";
-
-        switch ($this->extension) {
-            case "avi":
-                $filename = "avi.png";
-                break;
-            case "dwg":
-                $filename = "dwg.png";
-                break;
-            case "xlsx":
-            case "xls":
-                $filename = "excel.png";
-                break;
-            case "mp3":
-            case "mpga":
-                $filename = "mp3.png";
-                break;
-            case "flac":
-            case "aac":
-            case "wma":
-                $filename = "audio.png";
-                break;
-            case "mp4":
-                $filename = "mp4.png";
-                break;
-            case "pdf":
-                $filename = "pdf.png";
-                break;
-            case "pptx":
-            case "ppt":
-                $filename = "powerpoint.png";
-                break;
-            case "rar":
-                $filename = "rar.png";
-                break;
-            case "txt":
-                $filename = "txt.png";
-                break;
-            case "zip":
-            case "7z":
-                $filename = "zip.png";
-                break;
-            case "docx":
-            case "doc":
-                $filename = "word.png";
-                break;
-            case "wmv":
-            case "flv":
-            case "mov":
-            case "3gp":
-                $filename = "video.png";
-                break;
-            default :
-                $filename = "default.png";
-                break;
-        }
-        return $filename;
     }
 
     public function isImage() {

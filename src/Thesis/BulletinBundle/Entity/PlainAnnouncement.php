@@ -5,6 +5,7 @@ namespace Thesis\BulletinBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ExecutionContextInterface;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * PlainAnnouncement
@@ -14,14 +15,11 @@ use Symfony\Component\Validator\ExecutionContextInterface;
  */
 class PlainAnnouncement extends Announcement {
 
-    public function __construct() {
-        $this->type = "plain";
-    }
-
     /**
      * @var string
      *
      * @ORM\Column(name="content", type="text")
+     * @Groups({"search"})
      */
     private $content;
     

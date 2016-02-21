@@ -1,4 +1,4 @@
-<div id="wrap" class="margin-top-3x">
+<!--<div id="wrap" class="margin-top-3x">
 
     <div class="col-lg-3">
         <div>
@@ -33,14 +33,21 @@
             <slick ng-if="loaded" class="slider-for" settings="slickConfigFor">
 
                 <div ng-repeat="slide in slides">
+                    <a class="pull-right" style="font-size: 2em;  outline: none; color: #6699ff;"><i class="fa fa-expand"></i></a>
                     <h1 class="text-center">
                         {{ slide.title}}
                     </h1>
                     <div style="padding: 1em 3em 1em 3em;">
-                        <div>
-
+                        <div ng-if="slide.type == 'image'" class="col-lg-12">
+                            <div>
+                                <div id="image-container" class="" style="height: 35em; width: 56em;">
+                                    <img class="scale"  ng-src="{{webPath + slide.document.wpath}}" data-scale="best-fit-down" data-align="center">
+                                </div>
+                            </div>
                         </div>
-                        <div class="margin-top-1x" ng-bind-html="slide.content | to_trusted" style="font-size: 2em; text-align: justify;">
+                        <div ng-if="slide.type == 'plain'">
+                            <div class="margin-top-1x" ng-bind-html="slide.htmlContent | to_trusted" style="font-size: 2em; text-align: justify;">
+                            </div>
                         </div>
                     </div>
                     <div class="foot">
@@ -53,7 +60,7 @@
                                 <i ng-if="play" class="fa fa-pause"></i>
                                 <i ng-if="!play" class="fa fa-play"></i>
                             </a>
-                            <a href="#" ng-click="updateSlides()">
+                            <a href="#" ng-click="updateSlides()" style="text-decoration: none;">
                                 <i class="fa fa-refresh"></i>
                             </a>
                         </div>
@@ -66,15 +73,23 @@
     <div class="col-lg-3">
         <div>
             <a href="#" class="btn btn-block btn-info">
-                <i class="fa fa-search" style="font-size: 15em;"></i>
+                <i class="fa fa-search" style="font-size: 7.5em;"></i>
                 <div  style="font-size: 5em;">
                     SEARCH
                 </div>
             </a>
         </div>
-        <div class="margin-top-2x">
-            <a ui-sref="show" class="btn btn-block btn-primary">
-                <i class="fa fa-map" style="font-size: 15em;"></i>
+        <div class="margin-top-1x">
+            <a href="#" class="btn btn-block btn-primary">
+                <i class="fa fa-users" style="font-size: 7.5em;"></i>
+                <div  style="font-size: 5em;">
+                    FACULTY
+                </div>
+            </a>
+        </div>
+        <div class="margin-top-1x">
+            <a ui-sref="show" class="btn btn-block btn-success">
+                <i class="fa fa-map" style="font-size: 7.5em;"></i>
                 <div style="font-size: 5em;">
                     MAP
                 </div>
@@ -95,4 +110,4 @@
         </slick>
     </div>
 
-</div>
+</div>-->

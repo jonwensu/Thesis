@@ -2,13 +2,16 @@
 
 namespace Thesis\BulletinBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Board
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Thesis\BulletinBundle\Entity\BoardRepository")
+ * @ORM\Entity(repositoryClass="BoardRepository")
  */
 class Board {
 
@@ -39,20 +42,20 @@ class Board {
      * Constructor
      */
     public function __construct() {
-        $this->announcements = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->announcements = new ArrayCollection();
     }
 
     /**
      * Add announcement
      *
-     * @param \Thesis\BulletinBundle\Entity\Announcement $announcement
+     * @param Announcement $announcement
      *
      * @return Board
      */
-    public function addAnnouncement(\Thesis\BulletinBundle\Entity\Announcement $announcement) {
+    public function addAnnouncement(Announcement $announcement) {
         $this->announcements[] = $announcement;
-        
-        if($announcement->getBoard() != $this){
+
+        if ($announcement->getBoard() != $this) {
             $announcement->setBoard($this);
         }
 
@@ -62,19 +65,31 @@ class Board {
     /**
      * Remove announcement
      *
-     * @param \Thesis\BulletinBundle\Entity\Announcement $announcement
+     * @param Announcement $announcement
      */
-    public function removeAnnouncement(\Thesis\BulletinBundle\Entity\Announcement $announcement) {
+    public function removeAnnouncement(Announcement $announcement) {
         $this->announcements->removeElement($announcement);
     }
 
     /**
      * Get announcements
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getAnnouncements() {
-        return $this->announcements;
+        $criteria = Criteria::create()
+                ->orderBy(["priorityLvl" => Criteria::ASC, "datePosted" => Criteria::DESC, "title" => Criteria::ASC])
+        ;
+        return $this->announcements->matching($criteria);
+    }
+
+    public function getVisibleAnnouncements() {
+        $criteria = Criteria::create()
+                ->where(Criteria::expr()->eq("visible", true))
+                ->orderBy(["priorityLvl" => Criteria::ASC, "datePosted" => Criteria::DESC, "title" => Criteria::ASC])
+        ;
+        
+        return $this->announcements->matching($criteria);
     }
 
 }

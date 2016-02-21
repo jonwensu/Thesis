@@ -3,7 +3,7 @@
     angular.module('myApp.map.show', [])
             .config(['$stateProvider', function ($stateProvider) {
                     $stateProvider
-                            .state('show', {
+                            .state('map.show', {
                                 url: "/show",
                                 controller: "ShowMapCtrl",
                                 templateUrl: constants.viewPath() + 'map/show/show.html',
@@ -31,7 +31,7 @@
                     };
 
                     $scope.$on("IdleTimeout", function () {
-                        $state.go("bulletinboard");
+                        $state.go("board.show");
                         $('input.search-input').getkeyboard().close();
                     });
                     var center = {
@@ -119,7 +119,7 @@
                         innerHTML: '<i title="Back" data-toggle="tooltip" class="fa fa-arrow-left"></i>',
                         containerClass: "back-control",
                         handler: function () {
-                            $state.go("bulletinboard");
+                            $state.go("board.show");
                         }
                     });
                     var locControl = new Control({

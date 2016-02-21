@@ -36,7 +36,6 @@
                         $scope.visibleMsg = $scope.announcement.visible ? "Visible" : "Hidden";
                     };
 
-                    $("img.scale").imageScale();
 
                     $scope.tinyConfig = {
                         selector: "textarea",
@@ -98,7 +97,13 @@
                     var success = function (response) {
                         $('#spinner').fadeOut(100);
                         var valid = response.data.valid;
+
                         if (valid) {
+                            var id = response.data.id;
+                            $scope.dropzoneEvent("sending", function (file, xhr, data) {
+                                data.append("id", id);
+                            });
+
                             $scope.processDropzone();
                         } else {
                             var errors = response.data.errors;

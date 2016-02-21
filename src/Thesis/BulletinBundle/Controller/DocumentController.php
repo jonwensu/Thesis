@@ -65,6 +65,7 @@ class DocumentController extends Controller {
                 $ids[] = $document;
             }
             $announcement->setDocument($ids[0]);
+            $em->persist($announcement);
             $em->flush();
 
             return new JsonResponse(['id' => $ids[0]->getId()]);

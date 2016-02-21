@@ -125,6 +125,7 @@ class AnnouncementController extends Controller {
                     ->findAllSorted()
         ];
     }
+
     /**
      * @View()
      */
@@ -133,20 +134,50 @@ class AnnouncementController extends Controller {
         return [
             'announcements' => $this->getDoctrine()
                     ->getManager()
-                    ->getRepository('ThesisBulletinBundle:Announcement')
-                    ->findByVisible($id)
+                    ->getRepository('ThesisBulletinBundle:Board')
+                    ->find($id)
+                    ->getVisibleAnnouncements()
         ];
     }
+    
     /**
-     * @View()
+     * @View(serializerGroups={"search"},)
      */
-    public function getAnnouncementsAction($id) {
+    public function getAnnouncementsSearchAction($id) {
 
         return [
             'announcements' => $this->getDoctrine()
                     ->getManager()
+                    ->getRepository('ThesisBulletinBundle:Board')
+                    ->find($id)
+                    ->getVisibleAnnouncements()
+        ];
+    }
+
+    /**
+     * @View()
+     */
+    public function getAnnouncementsForAction($id) {
+
+        return [
+            'announcements' => $this->getDoctrine()
+                    ->getManager()
+                    ->getRepository('ThesisBulletinBundle:Board')
+                    ->find($id)
+                    ->getAnnouncements()
+        ];
+    }
+    
+    /**
+     * @View()
+     */
+    public function getAnnouncementAction($id) {
+
+        return [
+            'announcement' => $this->getDoctrine()
+                    ->getManager()
                     ->getRepository('ThesisBulletinBundle:Announcement')
-                    ->findSorted($id)
+                    ->find($id)
         ];
     }
 

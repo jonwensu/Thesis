@@ -10,8 +10,8 @@
             .config(['$stateProvider', function ($stateProvider) {
 
                     $stateProvider
-                            .state('bulletinboard', {
-                                url: "/bulletinboard",
+                            .state('announcement.browse', {
+                                url: "/browse",
                                 controller: "BrowseAnnouncementCtrl",
                                 templateUrl: constants.viewPath() + 'announcement/browse/browse.html',
                             });
@@ -23,6 +23,7 @@
                     $scope.slideInterval = 3000;
                     $scope.logo = constants.webPath() + "pics/coe.png";
                     $scope.play = true;
+                    $scope.webPath = constants.webPath();
 
                     $scope.mapUrl = Routing.generate("map_view");
 
@@ -107,7 +108,10 @@
                                     c = c > $scope.shuffColors.length - 1 ? 0 : c;
                                 });
                                 $('.slider-for').css('background', $('.slider-nav .slick-current').css('background-color'));
-
+                                 $("img.scale").imageScale({
+                                     parent: $('#image-container'),
+                                     rescaleOnResize: true
+                                 });
                             }
                         },
                     };
@@ -130,7 +134,7 @@
                     }
 
                     $scope.loaded = false;
-                    $http.get(Routing.generate('get_announcements', {id: 1})).success(function (response) {
+                    $http.get(Routing.generate('get_announcements_visible', {id: 1})).success(function (response) {
                         $scope.slides = response.announcements;
                         $scope.loaded = true;
                     });
@@ -154,7 +158,7 @@
                         $('.slide-cont').fadeOut();
                         $('#spinner').fadeIn();
 
-                        $http.get(Routing.generate('get_announcements')).success(function (response) {
+                        $http.get(Routing.generate('get_announcements_visible', {id: 1})).success(function (response) {
                             $scope.slides = response.announcements;
                             $scope.loaded = true;
                             $('#spinner').fadeOut();

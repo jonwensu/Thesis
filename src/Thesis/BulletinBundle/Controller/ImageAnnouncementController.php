@@ -68,7 +68,7 @@ class ImageAnnouncementController extends Controller {
             $em->persist($board);
 
             $em->flush();
-            $response = ['valid' => true];
+            $response = ['valid' => true, 'id' => $entity->getId()];
             return new JsonResponse($response);
         }
 

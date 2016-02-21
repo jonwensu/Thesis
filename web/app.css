@@ -314,3 +314,16 @@
 textarea {
     resize: none;
 }
+
+.search-item{
+    border: 0.2em solid #aaafaa;
+    border-radius: 5px; 
+    padding: 1em;
+}
+
+.search-even{
+    background: #fbfbc9;
+}
+.search-odd{
+    background: #bff3c0;
+}

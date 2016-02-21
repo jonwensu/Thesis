@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping\DiscriminatorColumn;
 use Doctrine\ORM\Mapping\InheritanceType;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ExecutionContextInterface;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * Announcement
@@ -15,11 +16,11 @@ use Symfony\Component\Validator\ExecutionContextInterface;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AnnouncementRepository")
  * @InheritanceType("SINGLE_TABLE")
- * @DiscriminatorColumn(name="discriminator", type="string")
+ * @DiscriminatorColumn(name="type", type="string")
  * @DiscriminatorMap({"image" = "ImageAnnouncement", "plain" = "PlainAnnouncement"})
  */
 abstract class Announcement {
-    
+
     public function __construct() {
         
     }
@@ -30,6 +31,7 @@ abstract class Announcement {
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups({"search"})
      */
     private $id;
 
@@ -43,23 +45,18 @@ abstract class Announcement {
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @Groups({"search"})
      */
     protected $title;
-    
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=255)
-     */
-    protected $type;
-    
+
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="datePosted", type="datetime")
+     * @Groups({"search"})
      */
     protected $datePosted;
-    
+
     /**
      * @var boolean
      *
@@ -71,6 +68,7 @@ abstract class Announcement {
      * @var integer
      *
      * @ORM\Column(name="priorityLvl", type="integer")
+     * @Groups({"search"})
      */
     protected $priorityLvl;
 
@@ -188,31 +186,6 @@ abstract class Announcement {
         return $this->priorityLvl;
     }
 
-
-    /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return Announcement
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
     /**
      * Set visible
      *
@@ -220,8 +193,7 @@ abstract class Announcement {
      *
      * @return Announcement
      */
-    public function setVisible($visible)
-    {
+    public function setVisible($visible) {
         $this->visible = $visible;
 
         return $this;
@@ -232,8 +204,8 @@ abstract class Announcement {
      *
      * @return boolean
      */
-    public function getVisible()
-    {
+    public function getVisible() {
         return $this->visible;
     }
+
 }

@@ -28,24 +28,29 @@ class AnnouncementRepository extends \Doctrine\ORM\EntityRepository {
                         ->createQueryBuilder()
                         ->select('a')
                         ->from('ThesisBulletinBundle:Announcement', 'a')
-                        ->where('a.id = :id')
+                        ->where('board_id = 1')
                         ->andWhere('a.visible = true')
                         ->orderBy('a.priorityLvl', 'asc')
                         ->addOrderBy('a.datePosted', 'desc')
                         ->addOrderBy('a.title', 'asc')
+//                        ->setParameter('id', 1)
                         ->getQuery()
                         ->getResult()
         ;
     }
+
     public function findSorted($id) {
         return $this->getEntityManager()
                         ->createQueryBuilder()
                         ->select('a')
                         ->from('ThesisBulletinBundle:Announcement', 'a')
                         ->where('a.id = :id')
+                        ->andWhere('a.visible = true')
+                        ->orWhere('a.visible = false')
                         ->orderBy('a.priorityLvl', 'asc')
                         ->addOrderBy('a.datePosted', 'desc')
                         ->addOrderBy('a.title', 'asc')
+                        ->setParameter('id', $id)
                         ->getQuery()
                         ->getResult()
         ;

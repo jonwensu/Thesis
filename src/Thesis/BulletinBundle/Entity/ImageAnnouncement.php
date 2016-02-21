@@ -3,8 +3,11 @@
 namespace Thesis\BulletinBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\OneToOne;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ExecutionContextInterface;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * ImageAnnouncement
@@ -13,17 +16,20 @@ use Symfony\Component\Validator\ExecutionContextInterface;
  * @ORM\Entity(repositoryClass="ImageAnnouncementRepository")
  */
 class ImageAnnouncement extends Announcement {
-    
-    public function __construct() {
-        $this->type = "image";
-    }
 
     /**
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
+     * @Groups({"search"})
      */
     private $description;
+    
+      /**
+     * @OneToOne(targetEntity="Document")
+     * @JoinColumn(name="document_id", referencedColumnName="id")
+     */
+    private $document;
     
     /**
      * Set description
@@ -84,5 +90,29 @@ class ImageAnnouncement extends Announcement {
     public function getVisible()
     {
         return $this->visible;
+    }
+
+    /**
+     * Set document
+     *
+     * @param \Thesis\BulletinBundle\Entity\Document $document
+     *
+     * @return ImageAnnouncement
+     */
+    public function setDocument(\Thesis\BulletinBundle\Entity\Document $document = null)
+    {
+        $this->document = $document;
+
+        return $this;
+    }
+
+    /**
+     * Get document
+     *
+     * @return \Thesis\BulletinBundle\Entity\Document
+     */
+    public function getDocument()
+    {
+        return $this->document;
     }
 }

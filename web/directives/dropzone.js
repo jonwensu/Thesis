@@ -7,7 +7,7 @@
                         restrict: 'C',
                         link: function (scope, element, attrs) {
                             var config = {
-                                url: Routing.generate("upload"),
+                                url: Routing.generate("upload_image"),
                                 maxFilesize: 100,
                                 paramName: 'uploadFile',
                                 maxThumbnailFilesize: 10,

@@ -1,0 +1,28 @@
+<div class="well col-lg-10 col-lg-offset-1 margin-top-3x" style="min-height: 80vh;">
+    <div>
+        <a ui-sref="board.show" class="btn btn-success"><i class="fa fa-arrow-left"></i></a>
+    </div>
+    <div class="text-center text-primary" style="font-size: 5em;">
+        Search Announcement
+    </div>
+    <div class="col-lg-12 margin-top-2x">   
+        <div class="col-lg-6 col-lg-offset-3">
+            <input type="text" class="form-control search" style="font-size: 5em; height: 1.5em;" ng-model="query" placeholder="Enter keyword...">
+        </div>
+        <div class="col-lg-12 margin-top-3x">
+            <a ui-sref="announcement.show({id: a.id})" class="search-link" style="text-decoration: none; color: black;" ng-repeat="a in announcements| filter:query">
+                <div ng-class-odd="'search-odd'"  ng-class-even="'search-even'" class="col-lg-4 search-item" >
+                    <div style="font-size: 2em;">
+                        {{ a.title | limitTo:25 }}
+                        <span ng-if="a.title.length > 25">
+                            . . .
+                        </span>
+                    </div>
+                    <div style="color: #838583;">
+                        Posted {{ a.date_posted |  timeAgo:"mediumDate" }}
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
