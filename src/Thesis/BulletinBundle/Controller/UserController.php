@@ -54,7 +54,7 @@ class UserController extends Controller {
         if ($this->getUser() == null) {
             return null;
         }
-        
+
         return $this->getUser();
     }
 
@@ -68,13 +68,6 @@ class UserController extends Controller {
                     ->getRepository('ThesisBulletinBundle:User')
                     ->find($id)
         ];
-    }
-
-    /**
-     * @View(serializerGroups={"edit"})
-     */
-    public function getUserEditAction($id) {
-        return $this->getUserAction($id);
     }
 
     /**
@@ -195,6 +188,34 @@ class UserController extends Controller {
             $errors->next();
         }
         return $e;
+    }
+
+    /**
+     * @Method("POST")
+     * @Route("/user_changepass", name="user_changepass", options={"expose"=true})
+     */
+    public function changePass(Request $request) {
+//        if (!$this->getUser()->getRoles()->contains("ROLE_SUPER_ADMIN")) {
+//            return new JsonResponse(["changed" => false]);
+//        } else {
+        $em = $this->getDoctrine()->getManager();
+
+        $pass = $request->request->get('pass');
+        $conPass = $request->request->get('conPass');
+        if ($pass != $conPass) {
+            return new JsonResponse(["changed" => false]);
+        } else {
+            $id = $request->request->get('id');
+            $user = $em->getRepository('ThesisBulletinBundle:User')->find($id);
+            $factory = $this->get('security.encoder_factory');
+            $encoder = $factory->getEncoder($user);
+            $password = $encoder->encodePassword($pass, $user->getSalt());
+            $user->setPassword($password);
+            $em->persist($user);
+            $em->flush();
+            return new JsonResponse(["changed" => true]);
+//            }
+        }
     }
 
 }

@@ -4,6 +4,8 @@ namespace Thesis\BulletinBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OneToMany;
+use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * College
@@ -11,14 +13,15 @@ use Doctrine\ORM\Mapping\OneToMany;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="CollegeRepository")
  */
-class College
-{
+class College {
+
     /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups({"select"})
      */
     private $id;
 
@@ -26,22 +29,22 @@ class College
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\NotBlank(message="Please enter the college name")
+     * @Groups({"select"})
      */
     private $name;
-    
-     /**
+
+    /**
      * @OneToMany(targetEntity="Department", mappedBy="college")
      */
     private $departments;
-
 
     /**
      * Get id
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -52,8 +55,7 @@ class College
      *
      * @return College
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
 
         return $this;
@@ -64,15 +66,14 @@ class College
      *
      * @return string
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
+
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->departments = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -83,8 +84,7 @@ class College
      *
      * @return College
      */
-    public function addDepartment(\Thesis\BulletinBundle\Entity\Department $department)
-    {
+    public function addDepartment(\Thesis\BulletinBundle\Entity\Department $department) {
         $this->departments[] = $department;
 
         return $this;
@@ -95,8 +95,7 @@ class College
      *
      * @param \Thesis\BulletinBundle\Entity\Department $department
      */
-    public function removeDepartment(\Thesis\BulletinBundle\Entity\Department $department)
-    {
+    public function removeDepartment(\Thesis\BulletinBundle\Entity\Department $department) {
         $this->departments->removeElement($department);
     }
 
@@ -105,8 +104,8 @@ class College
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getDepartments()
-    {
+    public function getDepartments() {
         return $this->departments;
     }
+
 }

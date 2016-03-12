@@ -68,31 +68,6 @@ class PlainAnnouncement extends Announcement {
         }
     }
 
-
-    /**
-     * Set visible
-     *
-     * @param boolean $visible
-     *
-     * @return PlainAnnouncement
-     */
-    public function setVisible($visible)
-    {
-        $this->visible = $visible;
-
-        return $this;
-    }
-
-    /**
-     * Get visible
-     *
-     * @return boolean
-     */
-    public function getVisible()
-    {
-        return $this->visible;
-    }
-
     /**
      * Set htmlContent
      *

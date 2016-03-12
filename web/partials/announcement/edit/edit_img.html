@@ -1,0 +1,70 @@
+<div>
+    <ul class="breadcrumb">
+        <li>
+            <a ui-sref="home"><i class="fa fa-home"></i> Home</a>
+        </li>
+        <li>
+            Announcements
+        </li>
+        <li>
+            Edit
+        </li>
+    </ul>
+</div>
+<div class="well row  col-lg-8 col-lg-offset-2">
+    <a class="btn btn-success pull-left" ng-click="previous()">
+        <i class="fa fa-arrow-left"></i>
+    </a>
+    <h1 class="text-center">
+        Edit Announcement
+    </h1>
+    <form class="form-group text-left" novalidate name="announcementFrm">
+        <div class="form-group">
+            <label for="announcement.title" class="required">Title</label>
+            <input id="announcement.title" name="announcement.title" class="form-control" type="text" ng-model="announcement.title" />
+        </div>
+        <div class="form-group">
+            <label for="announcement.description">Brief description<span></span></label>
+            <textarea maxlength="140" name="announcement.description" class="form-control" rows="10" cols="80" ng-model="announcement.description">
+            {{ announcement.description}}
+            </textarea> 
+            <span class="pull-right">{{ 140 - announcement.description.length}}/140</span>
+
+
+        </div>
+        <div class="form-group">
+            <div>
+                <label for="dropzone" class="required">
+                    Image
+                </label>
+                <a href=""  uib-tooltip="Reset Image" ng-click="resetImage()">
+                    <i class="fa fa-refresh"></i>
+                </a>
+            </div>
+            <div action="" ng-model="image" class="dropzone" dropzone="" id="dropzone">
+                <div class="fallback">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div>
+                <label for="announcement.priority_lvl" class="required">
+                    Priority Level
+                </label>
+            </div>
+            <div class="">
+                <select class="form-control" ng-model="announcement.priorityLvl" ng-options="v as k for (k, v) in priority">
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div>
+                <checkbox style="margin-top: -0.9em;" id="visible" large class="btn-warning" ng-model="visible" ng-change="changeMsg()"></checkbox>
+                <label style="font-size: 1.8em;" for="visible" id="visMsg">{{ visibleMsg }}</label>
+            </div>
+        </div>
+        <div class="col-lg-12 margin-top-1x">
+            <input type="submit" value="Update" class="btn btn-primary center-block col-lg-2" />
+        </div>
+    </form>
+</div>

@@ -3,9 +3,14 @@
 namespace Thesis\BulletinBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\DiscriminatorMap;
 use Doctrine\ORM\Mapping\DiscriminatorColumn;
+use Doctrine\ORM\Mapping\DiscriminatorMap;
 use Doctrine\ORM\Mapping\InheritanceType;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\VirtualProperty;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ExecutionContextInterface;
 
@@ -15,11 +20,11 @@ use Symfony\Component\Validator\ExecutionContextInterface;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AnnouncementRepository")
  * @InheritanceType("SINGLE_TABLE")
- * @DiscriminatorColumn(name="discriminator", type="string")
+ * @DiscriminatorColumn(name="type", type="string")
  * @DiscriminatorMap({"image" = "ImageAnnouncement", "plain" = "PlainAnnouncement"})
  */
 abstract class Announcement {
-    
+
     public function __construct() {
         
     }
@@ -30,6 +35,7 @@ abstract class Announcement {
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups({"search"})
      */
     private $id;
 
@@ -43,27 +49,23 @@ abstract class Announcement {
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @Groups({"search"})
      */
     protected $title;
-    
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=255)
-     */
-    protected $type;
-    
+
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="datePosted", type="datetime")
+     * @Groups({"search"})
      */
     protected $datePosted;
-    
+
     /**
      * @var boolean
      *
      * @ORM\Column(name="visible", type="boolean")
+     * @Groups({"search"})
      */
     protected $visible;
 
@@ -71,6 +73,7 @@ abstract class Announcement {
      * @var integer
      *
      * @ORM\Column(name="priorityLvl", type="integer")
+     * @Groups({"search"})
      */
     protected $priorityLvl;
 
@@ -82,6 +85,12 @@ abstract class Announcement {
     public function getId() {
         return $this->id;
     }
+
+    /**
+     * @ManyToOne(targetEntity="User", inversedBy="announcements")
+     * @JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $encoder;
 
     /**
      * Set title
@@ -143,11 +152,11 @@ abstract class Announcement {
     /**
      * Set board
      *
-     * @param \Thesis\BulletinBundle\Entity\Board $board
+     * @param Board $board
      *
      * @return Announcement
      */
-    public function setBoard(\Thesis\BulletinBundle\Entity\Board $board = null) {
+    public function setBoard(Board $board = null) {
         $this->board = $board;
 
         if (!$board->getAnnouncements()->contains($this)) {
@@ -160,7 +169,7 @@ abstract class Announcement {
     /**
      * Get board
      *
-     * @return \Thesis\BulletinBundle\Entity\Board
+     * @return Board
      */
     public function getBoard() {
         return $this->board;
@@ -188,31 +197,6 @@ abstract class Announcement {
         return $this->priorityLvl;
     }
 
-
-    /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return Announcement
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
     /**
      * Set visible
      *
@@ -220,8 +204,7 @@ abstract class Announcement {
      *
      * @return Announcement
      */
-    public function setVisible($visible)
-    {
+    public function setVisible($visible) {
         $this->visible = $visible;
 
         return $this;
@@ -232,8 +215,48 @@ abstract class Announcement {
      *
      * @return boolean
      */
-    public function getVisible()
-    {
+    public function getVisible() {
         return $this->visible;
     }
+
+    /**
+     * @VirtualProperty
+     * @SerializedName("formatted_date")
+     * @Groups({"search"})
+     */
+    public function formattedDate() {
+        return $this->datePosted->format("F j, Y");
+    }
+    
+    /**
+     * @VirtualProperty
+     * @SerializedName("encoder_name")
+     * @Groups({"search"})
+     */
+    public function getEncoderName() {
+        return $this->encoder->getFullName();
+    }
+
+    /**
+     * Set encoder
+     *
+     * @param \Thesis\BulletinBundle\Entity\User $encoder
+     *
+     * @return Announcement
+     */
+    public function setEncoder(\Thesis\BulletinBundle\Entity\User $encoder = null) {
+        $this->encoder = $encoder;
+
+        return $this;
+    }
+
+    /**
+     * Get encoder
+     *
+     * @return \Thesis\BulletinBundle\Entity\User
+     */
+    public function getEncoder() {
+        return $this->encoder;
+    }
+
 }

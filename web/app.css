@@ -22,6 +22,7 @@
     font-family: FontAwesome;
     content: " \f06a";
     font-size: 1em;
+    color: red;
 }
 
 .ui-view-container {
@@ -326,4 +327,20 @@ textarea {
 }
 .search-odd{
     background: #bff3c0;
+}
+
+.profile-field{
+    font-size: 2.5em;
+}
+
+.profile-field .panel-body{
+    min-height: 5em;
+    display: table;
+    width: 100%;
+}
+
+.panel-body-child{
+    display: table-cell; 
+    vertical-align: middle; 
+    text-align: center;
 }

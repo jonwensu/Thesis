@@ -28,19 +28,21 @@
 
     <div id="main" class="col-lg-6">
 
-        <div class="slide-cont">
+        <div class="slide-cont sl-show">
 
             <slick ng-if="loaded" class="slider-for" settings="slickConfigFor">
 
-                <div ng-repeat="slide in slides">
+                <div class="sl" ng-repeat="slide in slides">
                     <a class="pull-right" ui-sref="announcement.show({id: slide.id})" style="font-size: 2em;  outline: none; color: #6699ff;"><i class="fa fa-expand"></i></a>
-                    <h1 class="text-center">
-                        {{ slide.title | limitTo:80 }}
-                        <span ng-if="slide.title.length > 80">
-                            . . .
-                        </span>
-                    </h1>
-                    <div style="padding: 1em 3em 1em 3em;">
+                    <a ui-sref="announcement.show({id: slide.id})" style="text-decoration: none; outline: none;">
+                        <h1 class="text-center">
+                            {{ slide.title | limitTo:80 }}
+                            <span ng-if="slide.title.length > 80">
+                                . . .
+                            </span>
+                        </h1>
+                    </a>
+                    <div style="padding: 1em 3em 1em 3em; height: 38em; overflow-y: auto; overflow-x: hidden;">
                         <div ng-if="slide.type == 'image'" class="col-lg-12">
                             <div>
                                 <div id="image-container" class="" style="height: 35em; width: 56em;">
@@ -56,7 +58,7 @@
                     <div class="foot">
                         <div class="pull-left">
                             <i class="fa fa-clock-o"></i> 
-                            {{ slide.date_posted | timeAgo:"mediumDate" }}
+                            {{ slide.date_posted | timeAgo:"longDate" }}
                         </div>
                         <div class="pull-right">
                             <a href="#" ng-click="togglePlay()" style="text-decoration: none;">
@@ -83,7 +85,7 @@
             </a>
         </div>
         <div class="margin-top-1x">
-            <a href="#" class="btn btn-block btn-primary">
+            <a ui-sref="faculty.search" class="btn btn-block btn-primary">
                 <i class="fa fa-users" style="font-size: 7.5em;"></i>
                 <div  style="font-size: 5em;">
                     FACULTY

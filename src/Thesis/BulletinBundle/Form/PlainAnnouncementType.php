@@ -28,9 +28,8 @@ class PlainAnnouncementType extends AbstractType {
                 ->add('title')
                 ->add('content')
                 ->add('htmlContent')
-                ->add('datePosted')
                 ->add('priorityLvl')
-                ->add('visible')
+//                ->add('visible', 'checkbox')
         ;
     }
 

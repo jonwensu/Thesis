@@ -10,4 +10,14 @@ namespace Thesis\BulletinBundle\Entity;
  */
 class FacultyRepository extends \Doctrine\ORM\EntityRepository
 {
+     public function findAllSorted() {
+        return $this->getEntityManager()
+                        ->createQueryBuilder()
+                        ->select('f')
+                        ->from('ThesisBulletinBundle:Faculty', 'f')
+                        ->orderBy('f.lastName', 'asc')
+                        ->getQuery()
+                        ->getResult()
+        ;
+    }
 }

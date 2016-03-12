@@ -2,10 +2,12 @@
 
 namespace Thesis\BulletinBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * Department
@@ -13,8 +15,8 @@ use Doctrine\ORM\Mapping\ManyToOne;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="DepartmentRepository")
  */
-class Department
-{
+class Department {
+
     /**
      * @var integer
      *
@@ -30,12 +32,12 @@ class Department
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
-    
-     /**
-     * @ManyToMany(targetEntity="Faculty", mappedBy="departments")
+
+    /**
+     * @OneToMany(targetEntity="Faculty", mappedBy="department")
      */
     private $faculty;
-    
+
     /**
      * @ManyToOne(targetEntity="College", inversedBy="department")
      * @JoinColumn(name="college_id", referencedColumnName="id")
@@ -47,8 +49,7 @@ class Department
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -59,8 +60,7 @@ class Department
      *
      * @return Department
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
 
         return $this;
@@ -71,15 +71,37 @@ class Department
      *
      * @return string
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
+
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
+        
+    }
+
+    /**
+     * Set college
+     *
+     * @param College $college
+     *
+     * @return Department
+     */
+    public function setCollege(College $college = null) {
+        $this->college = $college;
+
+        return $this;
+    }
+
+    /**
+     * Get college
+     *
+     * @return College
+     */
+    public function getCollege() {
+        return $this->college;
     }
 
     /**
@@ -89,9 +111,12 @@ class Department
      *
      * @return Department
      */
-    public function addFaculty(\Thesis\BulletinBundle\Entity\Faculty $faculty)
-    {
+    public function addFaculty(\Thesis\BulletinBundle\Entity\Faculty $faculty) {
         $this->faculty[] = $faculty;
+
+        if ($faculty->getDepartment() !== $this) {
+            $faculty->setDepartment($this);
+        }
 
         return $this;
     }
@@ -101,9 +126,9 @@ class Department
      *
      * @param \Thesis\BulletinBundle\Entity\Faculty $faculty
      */
-    public function removeFaculty(\Thesis\BulletinBundle\Entity\Faculty $faculty)
-    {
+    public function removeFaculty(\Thesis\BulletinBundle\Entity\Faculty $faculty) {
         $this->faculty->removeElement($faculty);
+        $faculty->setDepartment(null);
     }
 
     /**
@@ -111,32 +136,8 @@ class Department
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getFaculty()
-    {
+    public function getFaculty() {
         return $this->faculty;
     }
 
-    /**
-     * Set college
-     *
-     * @param \Thesis\BulletinBundle\Entity\College $college
-     *
-     * @return Department
-     */
-    public function setCollege(\Thesis\BulletinBundle\Entity\College $college = null)
-    {
-        $this->college = $college;
-
-        return $this;
-    }
-
-    /**
-     * Get college
-     *
-     * @return \Thesis\BulletinBundle\Entity\College
-     */
-    public function getCollege()
-    {
-        return $this->college;
-    }
 }

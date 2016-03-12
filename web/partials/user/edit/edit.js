@@ -15,17 +15,25 @@
                 }])
 
             .controller('EditUserCtrl', ["$scope", "$http", "$state", "$stateParams", function ($scope, $http, $state, $stateParams) {
-                    $http.get(Routing.generate('get_user_edit', {id: $stateParams.id}))
+                    $http.get(Routing.generate('get_user', {id: $stateParams.id}))
                             .then(function (response) {
                                 var user = response.data.user;
                                 $scope.user = user;
+                                 $('#spinner').fadeOut(100);
                             });
 
+                    $('#spinner').show();
+
                     $scope.submit = function () {
-                        var user = $scope.user;
+                        var user = {
+                            email: $scope.user.email,
+                            username: $scope.user.username,
+                            first_name: $scope.user.first_name,
+                            last_name: $scope.user.last_name
+                        };
 
                         var formData = {
-                            fos_user_profile_form: $scope.user,
+                            fos_user_profile_form: user,
                             id: $stateParams.id
                         };
 

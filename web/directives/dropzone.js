@@ -53,6 +53,26 @@
                             scope.setDropzoneUrl = function (url) {
                                 dropzone.options.url = url;
                             };
+
+                            scope.getDropzone = function () {
+                                return dropzone;
+                            }
+
+                            scope.loadImage = function (file) {
+                                scope.currFile = {
+                                    name: file.name + "." + file.extension,
+                                    size: file.size
+                                };
+                                dropzone.options.addedfile.call(dropzone,  scope.currFile);
+                                dropzone.options.thumbnail.call(dropzone,  scope.currFile, constants.webPath() + file.wpath);
+                                dropzone.options.complete.call(dropzone,  scope.currFile);
+                                var existingFileCount = 1;
+                                dropzone.options.maxFiles = dropzone.options.maxFiles - existingFileCount;
+                            };
+                            
+                            scope.setCurrFile = function(file){
+                                scope.currFile = file;
+                            };
                         }
                     };
                 }]);

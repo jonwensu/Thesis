@@ -23,23 +23,6 @@ use Thesis\BulletinBundle\Form\AnnouncementType;
 class AnnouncementController extends Controller {
 
     /**
-     * Lists all Announcement entities.
-     *
-     * @Route("/", name="announcement")
-     * @Method("GET")
-     * @Template()
-     */
-    public function indexAction() {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('ThesisBulletinBundle:Announcement')->findAll();
-
-        return array(
-            'entities' => $entities,
-        );
-    }
-
-    /**
      * Creates a new Announcement entity.
      *
      * @Route("/create", name="announcement_create", options={"expose"=true})
@@ -139,7 +122,7 @@ class AnnouncementController extends Controller {
                     ->getVisibleAnnouncements()
         ];
     }
-    
+
     /**
      * @View(serializerGroups={"search"},)
      */
@@ -167,7 +150,25 @@ class AnnouncementController extends Controller {
                     ->getAnnouncements()
         ];
     }
-    
+
+    /**
+     * @View()
+     */
+    public function getAnnouncementsOverviewAction() {
+
+        $em = $this->getDoctrine()->getManager();
+
+        return [
+            'encoded' => $em
+                    ->getRepository('ThesisBulletinBundle:User')
+                    ->find($this->getUser()->getId())
+                    ->getAnnouncements(),
+            'all' => $em
+                    ->getRepository('ThesisBulletinBundle:Announcement')
+                    ->findAll()
+        ];
+    }
+
     /**
      * @View()
      */
@@ -179,6 +180,63 @@ class AnnouncementController extends Controller {
                     ->getRepository('ThesisBulletinBundle:Announcement')
                     ->find($id)
         ];
+    }
+
+    /**
+     * @Route("/toggle/visibility", name="toggle_visibility", options={"expose"=true})
+     * @Method("POST")
+     */
+    public function setAnnouncementVisibilityAction(Request $request) {
+        if ($request->isXmlHttpRequest()) {
+            $id = $request->request->get('id');
+
+            if (!$id) {
+                return new JsonResponse(['valid' => false]);
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $entity = $em->getRepository("ThesisBulletinBundle:Announcement")->find($id);
+            $visible = $entity->getVisible();
+            $entity->setVisible(!$visible);
+
+            if (!$visible) {
+                $date = new \DateTime('now');
+                $entity->setDatePosted($date);
+            }
+
+            $em->persist($entity);
+            $em->flush();
+
+            return new JsonResponse(['valid' => true]);
+        }
+        return new JsonResponse(['valid' => false]);
+    }
+
+    /**
+     * @Method("POST")
+     * @Route("/delete", name="announcement_delete", options={"expose"=true})
+     */
+    public function deleteAction(Request $request) {
+        $password = $request->request->get('password');
+        $id = $request->request->get('id');
+        $user = $this->getUser();
+        $encoder_service = $this->get('security.encoder_factory');
+        $encoder = $encoder_service->getEncoder($user);
+        $encoded_pass = $encoder->encodePassword($password, $user->getSalt());
+
+        $match = $encoded_pass == $user->getPassword();
+
+        if ($match) {
+            $target = $this->getDoctrine()
+                    ->getManager()
+                    ->getRepository('ThesisBulletinBundle:Announcement')
+                    ->find($id);
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($target);
+            $em->flush();
+            return new JsonResponse(['match' => $match]);
+        }
+        return new JsonResponse(['match' => $match]);
     }
 
 }

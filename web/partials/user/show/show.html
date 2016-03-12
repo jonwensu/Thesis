@@ -5,7 +5,7 @@
         </li>
         <li>
             <a ui-sref="user.browse">
-                Admins
+                Encoders
             </a>
         </li>
         <li>
@@ -14,8 +14,11 @@
     </ul>
 </div>
 <div class="well row col-lg-8 col-lg-offset-2">
+    <a class="btn btn-success pull-left" ng-click="previous()">
+        <i class="fa fa-arrow-left"></i>
+    </a>
     <h1 class="text-center">
-        View Admin
+        View Encoder
     </h1>
     <div class="text-center margin-top-2x">
         <div>
@@ -23,7 +26,7 @@
                 Name
             </div>
             <div class="user-info">
-                {{ user.first_name }} {{ user.last_name }}
+                {{ user.first_name}} {{ user.last_name}}
             </div>
         </div>
         <div>
@@ -31,7 +34,7 @@
                 Username
             </div>
             <div class="user-info">
-                {{ user.username }}
+                {{ user.username}}
             </div>
         </div>
         <div>
@@ -39,8 +42,30 @@
                 Email
             </div>
             <div class="user-info">
-                {{ user.email }}
+                {{ user.email}}
             </div>
         </div>
     </div>
 </div>
+
+<div id="changePassModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Change Password</h4>
+            </div>
+            <form name="passFrm" novalidate ng-submit="changePass()">
+                <div class="modal-body col-lg-12">
+                    <input type="password" class="form-control" placeholder="Old Password" required ng-model="oldPassword">
+                    <input type="password" class="form-control" placeholder="New Password" required ng-model="newPassword">
+                    <input type="password" class="form-control margin-top-1x" placeholder="Confirm Password" required ng-model="confirmPassword">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" ng-disabled="passFrm.$invalid" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

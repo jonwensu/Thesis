@@ -1,0 +1,40 @@
+<div class="well col-lg-10 col-lg-offset-1 margin-top-3x" style="min-height: 80vh;">
+    <div>
+        <a ui-sref="board.show" class="btn btn-success"><i class="fa fa-arrow-left" style="font-size: 2em;"></i></a>
+    </div>
+    <div class="text-center text-primary" style="font-size: 5em;">
+        Search Faculty
+    </div>
+    <div class="col-lg-12 margin-top-2x">   
+        <div class="col-lg-6 col-lg-offset-3">
+            <div class="input-group">
+                <input type="text" class="form-control search" style="font-size: 5em; height: 1.5em;" ng-model="query" placeholder="Enter keyword...">
+            </div>
+        </div>
+
+
+        <div class="col-lg-12 margin-top-3x">
+            <a ui-sref="faculty.show({id: f.id})" class="search-link" style="text-decoration: none; color: black;" ng-repeat="f in faculty|filter:query">
+                <div style="min-height: 10em;" ng-class-odd="'search-odd'" ng-class-even="'search-even'" class="col-lg-4 search-item" >  
+                    <div class="col-lg-3">
+                        <div>
+                            <img style="width: 6.5em; height: 6.5em;" ng-if="f.picture" scale ng-src="{{webPath + f.picture}}" data-scale="best-fit"/>
+                            <img style="width: 6.5em; height: 6.5em;" ng-if="!f.picture" scale ng-src="{{webPath + 'uploads/default/profile.png'}}" data-scale="best-fit"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div style="font-size: 2em;">
+                            {{ f.first_name}} {{ f.last_name}}
+                        </div>
+                        <div>
+                            College: {{ f.college }}
+                        </div>
+                        <div>
+                            Department: {{ f.department}}
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

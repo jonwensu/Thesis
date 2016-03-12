@@ -24,13 +24,13 @@ class ImageAnnouncement extends Announcement {
      * @Groups({"search"})
      */
     private $description;
-    
-      /**
+
+    /**
      * @OneToOne(targetEntity="Document")
      * @JoinColumn(name="document_id", referencedColumnName="id")
      */
     private $document;
-    
+
     /**
      * Set description
      *
@@ -38,8 +38,7 @@ class ImageAnnouncement extends Announcement {
      *
      * @return ImageAnnouncement
      */
-    public function setDescription($description)
-    {
+    public function setDescription($description) {
         $this->description = $description;
 
         return $this;
@@ -50,12 +49,11 @@ class ImageAnnouncement extends Announcement {
      *
      * @return string
      */
-    public function getDescription()
-    {
+    public function getDescription() {
         return $this->description;
     }
-    
-     /**
+
+    /**
      * @Assert\Callback
      */
     public function validate(ExecutionContextInterface $context) {
@@ -69,38 +67,13 @@ class ImageAnnouncement extends Announcement {
     }
 
     /**
-     * Set visible
-     *
-     * @param boolean $visible
-     *
-     * @return ImageAnnouncement
-     */
-    public function setVisible($visible)
-    {
-        $this->visible = $visible;
-
-        return $this;
-    }
-
-    /**
-     * Get visible
-     *
-     * @return boolean
-     */
-    public function getVisible()
-    {
-        return $this->visible;
-    }
-
-    /**
      * Set document
      *
      * @param \Thesis\BulletinBundle\Entity\Document $document
      *
      * @return ImageAnnouncement
      */
-    public function setDocument(\Thesis\BulletinBundle\Entity\Document $document = null)
-    {
+    public function setDocument(\Thesis\BulletinBundle\Entity\Document $document = null) {
         $this->document = $document;
 
         return $this;
@@ -111,8 +84,8 @@ class ImageAnnouncement extends Announcement {
      *
      * @return \Thesis\BulletinBundle\Entity\Document
      */
-    public function getDocument()
-    {
+    public function getDocument() {
         return $this->document;
     }
+
 }

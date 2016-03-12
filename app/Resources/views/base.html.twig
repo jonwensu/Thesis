@@ -9,7 +9,6 @@
         <link href="{{ asset('template/bootstrap-tour/build/css/bootstrap-tour.min.css') }}" rel="stylesheet">
         <link href="{{ asset('template/css/animate.min.css') }}" rel="stylesheet">
         <link href="{{ asset('bower_components/angular-ui-grid/ui-grid.min.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ asset('bower_components/iCheck/skins/flat/blue.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('bower_components/nya-bootstrap-select/dist/css/nya-bs-select.css') }}" rel="stylesheet">
         <link href="{{ asset('bower_components/dropzone/dist/basic.css') }}" rel="stylesheet">
@@ -30,12 +29,6 @@
                 <a class="navbar-brand text-center" ui-sref="home">
                     CPU COE
                 </a>
-                <div class="col-md-4">
-                    <form class="navbar-search pull-left col-md-12">
-                        <input placeholder="Search" class="search-query form-control" name="query"
-                               type="text">
-                    </form>
-                </div>
                 <!-- user dropdown starts -->
                 <div class="btn-group pull-right">
                     <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -73,28 +66,42 @@
                                 <li class="accordion">
                                     <a href="#"><i class="fa fa-bullhorn"></i><span> Anouncements</span> <span class="accordion-arrow pull-right"><i class='fa fa-chevron-right'></i></span></a>
                                     <ul class="nav nav-pills nav-stacked">
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Browse Announcements"><i class="fa fa-angle-double-right"></i> Browse</a></li>
+                                        <li><a ui-sref="announcement.browse" data-toggle="tooltip" data-placement="right" title="Browse Announcements"><i class="fa fa-angle-double-right"></i> Browse</a></li>
                                         <li><a ui-sref="announcement.choose"   data-toggle="tooltip" data-placement="right" title="Create Announcement"><i class="fa fa-angle-double-right"></i> Create</a></li>
                                     </ul>
                                 </li>
                                 {% if "ROLE_SUPER_ADMIN" in app.user.roles %}
                                     <li class="accordion">
-                                        <a class="ajax-link" href="#calendar"><i class="fa fa-users"></i><span> Faculty</span> <span class="accordion-arrow pull-right"><i class='fa fa-chevron-right'></i></span></a>
-                                        <ul class="nav nav-pills nav-stacked">
-                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Browse Faculty"><i class="fa fa-angle-double-right"></i> Browse</a></li>
-                                            <li><a ui-sref="announcement.choose"   data-toggle="tooltip" data-placement="right" title="Add Faculty Member"><i class="fa fa-angle-double-right"></i> Add</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="accordion">
-                                        <a href="#"><i class="fa fa-user"></i><span> Admins</span> <span class="accordion-arrow pull-right"><i class='fa fa-chevron-right'></i></span></a>
+                                        <a href="#"><i class="fa fa-user"></i><span> Encoders</span> <span class="accordion-arrow pull-right"><i class='fa fa-chevron-right'></i></span></a>
                                         <ul class="nav nav-pills nav-stacked">
 
                                             <li>
-                                                <a ui-sref="user.browse" data-placement="right" data-toggle="tooltip" title="Browse Admins">
+                                                <a ui-sref="user.browse" data-placement="right" data-toggle="tooltip" title="Browse Encoders">
                                                     <i class="fa fa-angle-double-right"></i> Browse
                                                 </a>
                                             </li>
-                                            <li><a ui-sref="user.new" data-placement="right" data-toggle="tooltip" title="Register Admin"><i class="fa fa-angle-double-right"></i> Register</a></li>
+                                            <li><a ui-sref="user.new" data-placement="right" data-toggle="tooltip" title="Register Encoders"><i class="fa fa-angle-double-right"></i> Register</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="accordion">
+                                        <a class="ajax-link" href="#"><i class="fa fa-users"></i><span> Faculty</span> <span class="accordion-arrow pull-right"><i class='fa fa-chevron-right'></i></span></a>
+                                        <ul class="nav nav-pills nav-stacked">
+                                            <li><a ui-sref="faculty.browse" data-toggle="tooltip" data-placement="right" title="Browse Faculty"><i class="fa fa-angle-double-right"></i> Browse</a></li>
+                                            <li><a ui-sref="faculty.new"   data-toggle="tooltip" data-placement="right" title="Add Faculty Member"><i class="fa fa-angle-double-right"></i> Add</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="accordion">
+                                        <a class="ajax-link" href="#"><i class="fa fa-university"></i><span> College</span> <span class="accordion-arrow pull-right"><i class='fa fa-chevron-right'></i></span></a>
+                                        <ul class="nav nav-pills nav-stacked">
+                                            <li><a ui-sref="college.browse" data-toggle="tooltip" data-placement="right" title="Browse College"><i class="fa fa-angle-double-right"></i> Browse</a></li>
+                                            <li><a ui-sref="college.new"   data-toggle="tooltip" data-placement="right" title="Add College"><i class="fa fa-angle-double-right"></i> Add</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="accordion">
+                                        <a class="ajax-link" href="#"><i class="fa fa-building"></i><span> Department</span> <span class="accordion-arrow pull-right"><i class='fa fa-chevron-right'></i></span></a>
+                                        <ul class="nav nav-pills nav-stacked">
+                                            <li><a ui-sref="department.browse" data-toggle="tooltip" data-placement="right" title="Browse Departments"><i class="fa fa-angle-double-right"></i> Browse</a></li>
+                                            <li><a ui-sref="department.new"   data-toggle="tooltip" data-placement="right" title="Add Department"><i class="fa fa-angle-double-right"></i> Add</a></li>
                                         </ul>
                                     </li>
                                 {% endif %}
@@ -150,7 +157,6 @@
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
         <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
         <script src="{{ asset('bower_components/tinymce-dist/tinymce.js') }}"></script>
-        <script src="{{ asset('bower_components/iCheck/icheck.min.js') }}"></script>
         <script src="{{ asset('bower_components/angular/angular.min.js') }}"></script>
         <script src="{{ asset('bower_components/angular-ui-router/release/angular-ui-router.min.js') }}"></script>
         <script src="{{ asset('bower_components/angular-animate/angular-animate.min.js') }}"></script>
@@ -158,16 +164,18 @@
         <script src="{{ asset('bower_components/angular-ui-grid/ui-grid.min.js') }}"></script>
         <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
         <script src="{{ asset('bower_components/angular-bootstrap/ui-bootstrap.js')}}"></script>
+        <script src="{{ asset('bower_components/angular-bootstrap/ui-bootstrap-tpls.js')}}"></script>
         <script src="{{ asset('bower_components/angular-ui-tinymce/src/tinymce.js') }}"></script>
-        <script src="{{ asset('bower_components/nya-bootstrap-select/dist/js/nya-bs-select.min.js')}}"></script>
         <script src="{{ asset('bower_components/ng-idle/angular-idle.js')}}"></script>
-        <script src="{{ asset('bower_components/ng-file-upload/ng-file-upload.min.js')}}"></script>
+        <script src="{{ asset('bower_components/angular-timeago/dist/angular-timeago.js')}}"></script>
         <script src="{{ asset('bower_components/image-scale/image-scale.min.js')}}"></script>
         <script src="{{ asset('bower_components/dropzone/dist/dropzone.js')}}"></script>
+        <script src="{{ asset('bower_components/underscore/underscore.js')}}"></script>
         <script src="{{ asset('bower_components/angular-bootstrap-checkbox/angular-bootstrap-checkbox.js')}}"></script>
         <script src="{{ asset('app.js')}}"></script>
-        <script src="{{ asset('directives/slider.js')}}"></script>
         <script src="{{ asset('directives/dropzone.js')}}"></script>
+        <script src="{{ asset('directives/imgscale.js')}}"></script>
+        <script src="{{ asset('filters/trustHtml.js')}}"></script>
         <script src="{{ asset('services/user.js')}}"></script>
         <script src="{{ asset('services/authorization.js')}}"></script>
         <script src="{{ asset('services/principal.js')}}"></script>
@@ -176,8 +184,26 @@
         <script src="{{ asset('partials/announcement/new/new_img.js')}}"></script>
         <script src="{{ asset('partials/announcement/choose/choose.js')}}"></script>
         <script src="{{ asset('partials/announcement/browse/browse.js')}}"></script>
+        <script src="{{ asset('partials/announcement/show/show.js')}}"></script>
+        <script src="{{ asset('partials/announcement/edit/edit_plain.js')}}"></script>
+        <script src="{{ asset('partials/announcement/edit/edit_img.js')}}"></script>
+        <script src="{{ asset('partials/college/college.js')}}"></script>
+        <script src="{{ asset('partials/college/new/new.js')}}"></script>
+        <script src="{{ asset('partials/college/browse/browse.js')}}"></script>
+        <script src="{{ asset('partials/college/edit/edit.js')}}"></script>
+        <script src="{{ asset('partials/department/department.js')}}"></script>
+        <script src="{{ asset('partials/department/new/new.js')}}"></script>
+        <script src="{{ asset('partials/department/browse/browse.js')}}"></script>
+        <script src="{{ asset('partials/department/edit/edit.js')}}"></script>
+        <script src="{{ asset('partials/faculty/faculty.js')}}"></script>
+        <script src="{{ asset('partials/faculty/new/new.js')}}"></script>
+        <script src="{{ asset('partials/faculty/browse/browse.js')}}"></script>
+        <script src="{{ asset('partials/faculty/show/show.js')}}"></script>
+        <script src="{{ asset('partials/faculty/edit/edit.js')}}"></script>
         <script src="{{ asset('partials/user/user.js')}}"></script>
         <script src="{{ asset('partials/index.js')}}"></script>
+        <script src="{{ asset('partials/faculty/faculty.js')}}"></script>
+        <script src="{{ asset('partials/faculty/new/new.js')}}"></script>
         <script src="{{ asset('partials/user/new/new.js')}}"></script>
         <script src="{{ asset('partials/user/show/show.js')}}"></script>
         <script src="{{ asset('partials/user/browse/browse.js')}}"></script>

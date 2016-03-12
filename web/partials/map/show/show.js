@@ -30,7 +30,7 @@
                         radius: 15,
                     };
 
-                    $scope.$on("IdleTimeout", function () {
+                    $scope.$on("IdleStart", function () {
                         $state.go("board.show");
                         $('input.search-input').getkeyboard().close();
                     });
@@ -195,151 +195,20 @@
                                     })
                                     .addTo(map);
 
-                            //                        L.Routing.control({
-//                            // [...] See MapzenTurn-by-Turn API documentation for other options
-//                            waypoints: [
-//                                L.latLng(10.730873, 122.547767),
-//                                L.latLng(10.730778, 122.548657)
-//                            ],
-//                            router: L.Routing.valhalla('valhalla-M5kvvS0', 'bicycle'),
-//                            formatter: new L.Routing.Valhalla.Formatter(),
-//                            summaryTemplate: '<div class="start">{name}</div><div class="info pedestrian">{distance}, {time}</div>',
-//                            routeWhileDragging: false,
-//                            geocoder: L.Control.Geocoder.nominatim()
-//                        }).addTo(map);
+//                            L.Routing.control({
+//                                waypoints: [
+//                                    L.latLng(10.730873, 122.547767),
+//                                    L.latLng(10.730778, 122.548657)
+//                                ],
+//                                router: L.Routing.valhalla('valhalla-M5kvvS0', 'bicycle'),
+//                                formatter: new L.Routing.Valhalla.Formatter(),
+//                                summaryTemplate: '<div class="start">{name}</div><div class="info pedestrian">{distance}, {time}</div>',
+//                                routeWhileDragging: false,
+//                                geocoder: L.Control.Geocoder.nominatim()
+//                            }).addTo(map);
                         });
 
 
                     });
-//                    var expanded = false;
-//                    $scope.$on('leafletDirectiveMap.layeradd', function () {
-//                        $('input.search-input').focus(function (e) {
-//                            expanded = !expanded
-//                            if (expanded) {
-//                                console.log("search control expanded");
-//                            }
-//                        });
-//                    });
-
-
-
-
-
-
-//                    var backControl = L.control.extend({
-//                        options: {
-//                            position: 'topLeft',
-//                            innerHTML: '<i title="Back" data-toggle="tooltip" class="fa fa-arrow-left"></i>',
-//                            handler: function () {
-//                                $state.go('bulletinboard');
-//                            },
-//                        },
-//                        onAdd: function (map) {
-//                            var className = 'leaflet-control-back',
-//                                    container = L.DomUtil.create('div', className + ' leaflet-bar');
-//
-//                            return container;
-//                        }
-//                    });
-
-//
-//                    var map = new ol.Map({
-//                        layers: [
-//                            openCycleMapLayer,
-//                            openSeaMapLayer
-//                        ],
-//                        target: 'map',
-//                        controls: ol.control.defaults({
-//                            attributionOptions: /** @type {olx.control.AttributionOptions} */ ({
-//                                collapsible: false
-//                            })
-//                        }),
-//                        view: new ol.View({
-//                            maxZoom: 17,
-//                            center: [122.54882, 10.73034],
-//                            zoom: 17,
-//                            extent: [122.54174, 10.72552, 122.55590, 10.73486]
-//                        })
-//                    });
-
-//                    var view = map.view;
-
-//                    var constrainPan = function () {
-//                        var visible = view.calculateExtent(map.getSize());
-//                        var centre = view.getCenter();
-//                        var delta;
-//                        var adjust = false;
-//                        if ((delta = extent[0] - visible[0]) > 0) {
-//                            adjust = true;
-//                            centre[0] += delta;
-//                        } else if ((delta = extent[2] - visible[2]) < 0) {
-//                            adjust = true;
-//                            centre[0] += delta;
-//                        }
-//                        if ((delta = extent[1] - visible[1]) > 0) {
-//                            adjust = true;
-//                            centre[1] += delta;
-//                        } else if ((delta = extent[3] - visible[3]) < 0) {
-//                            adjust = true;
-//                            centre[1] += delta;
-//                        }
-//                        if (adjust) {
-//                            view.setCenter(centre);
-//                        }
-//                    };
-
-
-
-
-//
-//                    var map = new ol.Map('map');
-//
-//                    var osmUrl = 'file:///C:/Maperitive/Tiles/{z}/{x}/{y}.png';
-//                    var osmAttrib = 'Map data © OpenStreetMap contributors';
-//                    var osm = new ol.layer(osmUrl, {minZoom: 13, maxZoom: 16, attribution: osmAttrib});
-//                    map.setView(new ol.LatLng(59.55, 30.09), 13);
-//                    map.addLayer(osm);
-
-//                    uiGmapGoogleMapApi.then(function (maps) {
-//
-//                        var center = {
-//                            latitude: 10.73034,
-//                            longitude: 122.54882
-//                        };
-//
-//
-//                        var allowedBounds = new maps.LatLngBounds(
-//                                new maps.LatLng(10.73436, 122.55541),
-//                                new maps.LatLng(10.72685, 122.54443)
-//                                );
-//
-//                        var lastValidCenter = new maps.LatLng(center.latitude, center.longitude);
-//
-//                        $scope.map = {
-//                            center: center,
-//                            zoom: 18,
-//                            options: {
-//                                maxZoom: 20,
-//                                minZoom: 17
-//                            },
-//                            events: {
-//                                center_changed: function (map) {
-//
-//                                    if (allowedBounds.contains(map.getCenter())) {
-//                                        lastValidCenter = map.getCenter();
-//
-//                                        return;
-//                                    }
-//// console.log('aw');
-//                                    map.panTo(lastValidCenter);
-//                                },
-//                            }
-//                        };
-//                    });
-
-//                    window.onload =
-//                    $('input').click(function (e) {
-//                        alert('aw');
-//                    });
                 }]);
 }());

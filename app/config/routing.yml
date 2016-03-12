@@ -20,6 +20,24 @@ announcements:
     resource: Thesis\BulletinBundle\Controller\AnnouncementController
     options:
         expose: true
+        
+colleges:
+    type: rest
+    resource: Thesis\BulletinBundle\Controller\CollegeController
+    options:
+        expose: true
+        
+departments:
+    type: rest
+    resource: Thesis\BulletinBundle\Controller\DepartmentController
+    options:
+        expose: true
+        
+faculty:
+    type: rest
+    resource: Thesis\BulletinBundle\Controller\FacultyController
+    options:
+        expose: true
     
 users:
     type: rest

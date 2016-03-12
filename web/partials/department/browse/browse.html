@@ -1,0 +1,62 @@
+<div>
+    <ul class="breadcrumb">
+        <li>
+            <a ui-sref="home"><i class="fa fa-home"></i> Home</a>
+        </li>
+        <li>
+            Department
+        </li>
+        <li>
+            Browse
+        </li>
+    </ul>
+</div>
+
+<div class="well row  col-lg-10 center">
+    <a class="btn btn-success pull-left" ng-click="previous()">
+        <i class="fa fa-arrow-left"></i>
+    </a>
+    <h1>
+        Browse Departments
+    </h1>
+    <div ng-if="!ready" class="text-center" style="font-size:5em;">
+        Retrieving Departments...
+    </div>
+    <div class="text-left form-group" ng-if="ready">
+        <button type="button" id='toggleFiltering' ng-model="filterToggle" ng-click="toggleFiltering()" class="btn btn-success" uib-btn-checkbox uib-btn-checkbox-true="1" uib-btn-checkbox-false="0">
+            <i class="fa fa-filter"></i> Filter
+        </button>
+        <a type="button" ui-sref="department.new" class="btn btn-primary">
+            <i class="fa fa-plus"></i> Add Department
+        </a>
+    </div>
+    <div ui-grid="gridOptions">
+    </div>
+
+</div>
+
+<div id="deleteModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title">Please enter your password to confirm delete</h3>
+            </div>
+            <form name="conFrm" novalidate ng-submit="confirm()">
+                <div class="modal-body col-lg-12">
+                    <input type="password" class="form-control" placeholder="Password" required ng-model="password">
+                </div>
+                <div class="modal-footer">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="col-lg-6">
+                            <button type="submit" ng-disabled="conFrm.$invalid" class="btn btn-success btn-block">Submit</button>
+                        </div>
+                        <div class="col-lg-6">
+                            <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

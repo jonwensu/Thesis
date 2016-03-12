@@ -5,15 +5,18 @@
         'ngAnimate',
         'ui.router',
         'ui.bootstrap',
+        'ui.bootstrap.tpls',
         'myApp.map',
         'myApp.index',
         'myApp.board',
         'myApp.user',
         'myApp.announcement',
+        'myApp.faculty',
         'ngIdle',
         'yaru22.angular-timeago',
         'leaflet-directive',
-        'myApp.directive.imgscale'
+        'myApp.directive.imgscale',
+        'ng.group'
     ])
             .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
                     $urlRouterProvider.otherwise("/board/show");

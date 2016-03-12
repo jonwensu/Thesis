@@ -72,4 +72,32 @@ class DocumentController extends Controller {
         }
     }
 
+  
+
+    /**
+     * @Route("/upload_profpic", name="upload_profpic", options={"expose"=true})
+     * @Method("POST")
+     */
+    public function uploadProfPicAction(Request $request) {
+        if ($request->isXmlHttpRequest()) {
+            $files = $request->files;
+            $id = $request->request->get('id');
+            $em = $this->getDoctrine()->getManager();
+            $faculty = $em->getRepository("ThesisBulletinBundle:Faculty")->find($id);
+            $ids = [];
+
+            foreach ($files as $file) {
+                $document = new Document();
+                $document->setFile($file);
+                $em->persist($document);
+                $ids[] = $document;
+            }
+            $faculty->setPicture($ids[0]);
+            $em->persist($faculty);
+            $em->flush();
+
+            return new JsonResponse(['id' => $ids[0]->getId()]);
+        }
+    }
+
 }

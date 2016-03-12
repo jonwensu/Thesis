@@ -9,19 +9,75 @@
 </div>
 
 <div class="row">
-    <div class="box col-md-12">
-        <div class="box-inner">
-            <div class="box-header well" data-original-title="">
-                <h2><i class="glyphicon glyphicon-star-empty"></i> Blank</h2>
-
-                <div class="box-icon">
-                    <a class="btn btn-setting btn-round btn-default"><i class="glyphicon glyphicon-cog"></i></a>
-                    <a class="btn btn-minimize btn-round btn-default"><i class="glyphicon glyphicon-chevron-up"></i></a>
+    <div class="col-lg-3 col-lg-offset-1">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <div class="text-center text-uppercase" style="color: white; font-size: 4em;">
+                    {{ clock | date:'MMMM'}}
                 </div>
             </div>
-            <div class="box-content" style="display: block;">
-                <!-- put your content here -->
+            <div class="panel-body">
+                <h1 class="text-center" style="font-size: 11em;">
+                    {{ clock | date:'d'}}
+                </h1>
+                <div class="text-center text-uppercase" style="font-size: 5em;">
+                    {{ clock | date:'EEE'}}
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid text-center bg-primary time" style="font-size: 5em;">
+            {{ clock | date:'h'}}<span class="blink">:</span>{{ clock | date:'mm'}} {{ clock | date:'a'}}
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="text-center text-uppercase" style="color: white; font-size: 2em;">
+                        Total Announcements Encoded
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <h1 class="text-center" style="font-size: 11em;">
+                        {{ all.length }} 
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <div class="text-center text-uppercase" style="color: white; font-size: 2em;">
+                        Announcements You Encoded
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <h1 class="text-center" style="font-size: 11em;">
+                        {{ encoded.length }} 
+                    </h1>
+                </div>
             </div>
         </div>
     </div>
+    <div class="col-lg-7">
+        <div class="col-lg-6">
+            <a class="btn btn-info btn-block" ui-sref="announcement.choose">
+                <i class="fa fa-plus" style="font-size: 7em;"></i>
+                <div style="font-size: 2em;">
+                    <div>Create</div>
+                    <div>Announcement</div>
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-6">
+            <a class="btn btn-warning btn-block" ui-sref="announcement.browse">
+                <i class="fa fa-list" style="font-size: 7em;"></i>
+                <div style="font-size: 2em;">
+                    <div>Browse</div>
+                    <div>Announcements</div>
+                </div>
+            </a>
+        </div>
+    </div>
+
 </div>

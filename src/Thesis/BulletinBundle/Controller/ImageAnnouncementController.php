@@ -47,6 +47,7 @@ class ImageAnnouncementController extends Controller {
      */
     public function createAction(Request $request) {
         $entity = new ImageAnnouncement();
+        $visible = $request->request->get('visible');
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -54,7 +55,10 @@ class ImageAnnouncementController extends Controller {
             $date = new \DateTime('now');
             $em = $this->getDoctrine()->getManager();
             $boards = $em->getRepository("ThesisBulletinBundle:Board")->findAll();
-            $entity->setDatePosted($date);
+            $entity->setDatePosted($date)
+                    ->setEncoder($this->getUser())
+                    ->setVisible($visible == "true")
+            ;
             $em->persist($entity);
 
             $board = null;
@@ -123,175 +127,74 @@ class ImageAnnouncementController extends Controller {
     }
 
     /**
-     * Displays a form to create a new ImageAnnouncement entity.
      *
-     * @Route("/new", name="announcement_image_new")
-     * @Method("GET")
-     * @Template()
+     * @Route("/edit", name="announcement_image_edit", options={"expose"=true})
+     * @Method("POST")
      */
-    public function newAction() {
-        $entity = new ImageAnnouncement();
+    public function updateAction(Request $request) {
+
+        $visible = $request->request->get('visible');
+        $id = $request->request->get('id');
+        $changed = $request->request->get('changed');
+        $docId = $request->request->get('docId');
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('ThesisBulletinBundle:Announcement')->find($id);
         $form = $this->createCreateForm($entity);
-
-        $files = $request->files;
-        $em = $this->getDoctrine()->getManager();
-        $ids = [];
-
-        foreach ($files as $file) {
-            $document = new Document();
-            $document
-                    ->setFile($file);
-            $em->persist($document);
-            $ids[] = $document;
-        }
-        $em->flush();
-
-        return array(
-            'entity' => $entity,
-            'form' => $form->createView(),
-        );
-    }
-
-    /**
-     * Finds and displays a ImageAnnouncement entity.
-     *
-     * @Route("/{id}", name="announcement_image_show")
-     * @Method("GET")
-     * @Template()
-     */
-    public function showAction($id) {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('ThesisBulletinBundle:ImageAnnouncement')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find ImageAnnouncement entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity' => $entity,
-            'delete_form' => $deleteForm->createView(),
-        );
-    }
-
-    /**
-     * Displays a form to edit an existing ImageAnnouncement entity.
-     *
-     * @Route("/{id}/edit", name="announcement_image_edit")
-     * @Method("GET")
-     * @Template()
-     */
-    public function editAction($id) {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('ThesisBulletinBundle:ImageAnnouncement')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find ImageAnnouncement entity.');
-        }
-
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity' => $entity,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
-    }
-
-    /**
-     * Creates a form to edit a ImageAnnouncement entity.
-     *
-     * @param ImageAnnouncement $entity The entity
-     *
-     * @return Form The form
-     */
-    private function createEditForm(ImageAnnouncement $entity) {
-        $form = $this->createForm(new ImageAnnouncementType(), $entity, array(
-            'action' => $this->generateUrl('announcement_image_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Update'));
-
-        return $form;
-    }
-
-    /**
-     * Edits an existing ImageAnnouncement entity.
-     *
-     * @Route("/{id}", name="announcement_image_update")
-     * @Method("PUT")
-     * @Template("ThesisBulletinBundle:ImageAnnouncement:edit.html.twig")
-     */
-    public function updateAction(Request $request, $id) {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('ThesisBulletinBundle:ImageAnnouncement')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find ImageAnnouncement entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isValid()) {
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('announcement_image_edit', array('id' => $id)));
-        }
-
-        return array(
-            'entity' => $entity,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
-    }
-
-    /**
-     * Deletes a ImageAnnouncement entity.
-     *
-     * @Route("/{id}", name="announcement_image_delete")
-     * @Method("DELETE")
-     */
-    public function deleteAction(Request $request, $id) {
-        $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('ThesisBulletinBundle:ImageAnnouncement')->find($id);
+            $date = new \DateTime('now');
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find ImageAnnouncement entity.');
+            $boards = $em->getRepository("ThesisBulletinBundle:Board")->findAll();
+            $entity->setDatePosted($date)
+                    ->setEncoder($this->getUser())
+                    ->setVisible($visible == "true")
+            ;
+
+//            if ($changed == 'true') {
+//                $entity->setDocument(null);
+//                $em->persist($entity);
+//                $doc = $em->getRepository('ThesisBulletinBundle:Document')->find($docId);
+//                $em->remove($doc);
+//            }
+            
+
+            $board = null;
+            if (count($boards) < 1) {
+                $board = new Board();
+            } else {
+                $board = $boards[0];
             }
 
-            $em->remove($entity);
+            $board->addAnnouncement($entity);
+            $em->persist($board);
+            
             $em->flush();
+            $response = ['valid' => true, 'id' => $entity->getId()];
+            return new JsonResponse($response);
         }
 
-        return $this->redirect($this->generateUrl('announcement_image'));
-    }
+        $t = $form['title']->getErrors(true);
+        $c = $form['description']->getErrors(true);
+        $titleErrors = $this->getErrorMsgs($t);
+        $contentErrors = $this->getErrorMsgs($c);
+        $formErrors = $this->getErrorMsgs($form->getErrors(true));
+        $errors = array_merge([$titleErrors, $contentErrors, $formErrors]);
+        $fields = [];
 
-    /**
-     * Creates a form to delete a ImageAnnouncement entity by id.
-     *
-     * @param mixed $id The entity id
-     *
-     * @return Form The form
-     */
-    private function createDeleteForm($id) {
-        return $this->createFormBuilder()
-                        ->setAction($this->generateUrl('announcement_image_delete', array('id' => $id)))
-                        ->setMethod('DELETE')
-                        ->add('submit', 'submit', array('label' => 'Delete'))
-                        ->getForm()
-        ;
+        if ($t->count() > 0) {
+            $fields[] = 'title';
+        }
+
+        if ($c->count() > 0) {
+            $fields[] = 'description';
+        }
+
+
+        $response = ['valid' => false, 'errors' => $errors, 'fields' => $fields];
+
+
+        return new JsonResponse($response);
     }
 
 }

@@ -5,7 +5,7 @@
         </li>
         <li>
             <a ui-sref="user.browse">
-                Admins
+                Encoders
             </a>
         </li>
         <li>
@@ -15,7 +15,7 @@
 </div>
 <div class="well row  col-lg-8 center">
     <h1>
-        Edit Admin
+        Edit Encoder
     </h1>
     <form class="form-group text-left" ng-submit="submit()" novalidate name="userFrm">
         <div class="form-group">
@@ -25,6 +25,14 @@
         <div class="form-group">
             <label for="user.username" class="required">Username</label>
             <input id="user.username" name="user.username" class="form-control" required type="text" ng-model="user.username" />
+        </div>
+        <div class="form-group">
+            <label for="user.first_name" class="required">First Name</label>
+            <input id="user.first_name" name="user.first_name" class="form-control" required type="text" ng-model="user.first_name" />
+        </div>
+        <div class="form-group">
+            <label for="user.last_name" class="required">Last Name</label>
+            <input id="user.last_name" name="user.last_name" class="form-control" required type="text" ng-model="user.last_name" />
         </div>
 
         <input type="submit" value="Update" ng-disabled="userFrm.$invalid"  class="btn btn-primary center-block col-lg-2" />

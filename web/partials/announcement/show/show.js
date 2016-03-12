@@ -11,21 +11,23 @@
                                 url: "/show/:id",
                                 controller: "ShowAnnouncementCtrl",
                                 templateUrl: constants.viewPath() + 'announcement/show/show.html',
+                                 data: {
+                                    roles: ["ADMIN"]
+                                }
                             });
                 }])
-            .controller('ShowAnnouncementCtrl', ["$scope", "$http", "$state", "$stateParams", "Idle", 'timeAgo', "$timeout", "$rootScope", function ($scope, $http, $state, $stateParams, Idle, timeAgo, $timeout, $rootScope) {
+            .controller('ShowAnnouncementCtrl', ["$scope", "$http", "$state", "$stateParams", 'timeAgo', "$rootScope", function ($scope, $http, $state, $stateParams, timeAgo, $rootScope) {
                     $('#spinner').show();
                     $scope.webPath = constants.webPath();
+                    var oneDay = 60 * 60 * 24;
+                    timeAgo.settings.fullDateAfterSeconds = oneDay;
 
-                    $scope.$on("IdleTimeout", function () {
-                        $state.go("board.show");
-                    });
 
                     $scope.previous = function () {
                         if ($rootScope.previousState.name) {
                             $state.go($rootScope.previousState.name);
                         } else {
-                            $state.go("board.show");
+                            $state.go("home");
                         }
                     };
 
@@ -47,7 +49,7 @@
                                         }
                                     },
                                     function (reason) {
-                                        $state.go("board.show");
+                                        $state.go("home");
                                         $('#spinner').fadeOut(500);
                                     }
                             );

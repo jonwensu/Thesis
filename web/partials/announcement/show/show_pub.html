@@ -1,0 +1,30 @@
+
+<div class="col-lg-10 col-lg-offset-1 well margin-top-3x" ng-if="announcement.visible" style="min-height: 80vh;">
+    <div>
+        <a ng-click="previous()" class="btn btn-success"><i class="fa fa-arrow-left" style="font-size: 2em;"></i></a>
+    </div>
+    <div class="text-center text-primary col-lg-10 col-lg-offset-1" style="font-size: 3em;">
+        {{ announcement.title}}
+    </div>
+    <div class="text-center col-lg-12" style="color: #999999; margin-bottom: 2em;">
+        Posted
+        {{ announcement.date_posted | timeAgo:"longDate" }}
+    </div>
+
+    <div ng-if="announcement.type == 'plain'" class="col-lg-10 col-lg-offset-1">
+        <div class="margin-top-1x" ng-bind-html="announcement.html_content | to_trusted" style="font-size: 2em; text-align: justify;">
+        </div>
+    </div>
+    <div ng-if="announcement.type == 'image'">
+
+        <div class="margin-top-2x">
+            <div id="image-container" class="col-lg-11 text-center" style="height: 75em; width: 110em;">
+                <img class="scale" scale  ng-src="{{webPath + announcement.document.wpath}}" data-scale="best-fit" data-align="center">
+            </div>
+        </div>
+
+        <div ng-if="announcement.description" class="col-lg-12 margin-top-1x" style="border: 1px solid #cccccc; border-radius: 5px; min-height: 5em; background: #ececec; padding: 2em;">
+            {{ announcement.description}}
+        </div>
+    </div>
+</div>

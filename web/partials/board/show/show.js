@@ -2,8 +2,6 @@
 
 (function () {
     angular.module('myApp.board.show', [
-//        'ui.router',
-//        'ng-virtual-keyboard',
         'slickCarousel',
         'myApp.filter.trustHtml',
     ])
@@ -24,6 +22,8 @@
                     $scope.logo = constants.webPath() + "pics/coe.png";
                     $scope.play = true;
                     $scope.webPath = constants.webPath();
+
+                    $('#spinner').show();
 
                     $scope.mapUrl = Routing.generate("map_view");
 
@@ -62,8 +62,6 @@
                         slidesToShow: 1,
                         slidesToScroll: 1,
                         asNavFor: '.slide-nav',
-//                        autoplay: true,
-//                        autoplaySpeed: 5000,
                         method: {
                         },
                         event: {
@@ -78,6 +76,8 @@
                             }
                         },
                     };
+
+
 
                     $scope.slickConfigNav = {
                         dots: false,
@@ -128,11 +128,20 @@
                             $scope.slickConfigNav.method.slickPause();
                         }
                     }
-                   
+
                     $scope.loaded = false;
                     $http.get(Routing.generate('get_announcements_visible', {id: 1})).success(function (response) {
                         $scope.slides = response.announcements;
                         $scope.loaded = true;
+                        $('.sl-show').mouseenter(function () {
+                            $scope.slickConfigNav.method.slickPause();
+                            $scope.play = false;
+                        });
+                        $('.sl-show').mouseleave(function () {
+                            $scope.slickConfigNav.method.slickPlay();
+                            $scope.play = true;
+                        });
+                        $('#spinner').fadeOut(500);
                     });
 
                     $scope.$on("IdleTimeout", function () {

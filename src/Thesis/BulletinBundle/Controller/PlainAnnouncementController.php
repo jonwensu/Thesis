@@ -28,6 +28,7 @@ class PlainAnnouncementController extends Controller {
      */
     public function createAction(Request $request) {
         $entity = new PlainAnnouncement();
+        $visible = $request->request->get('visible');
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -35,7 +36,10 @@ class PlainAnnouncementController extends Controller {
             $date = new \DateTime('now');
             $em = $this->getDoctrine()->getManager();
             $boards = $em->getRepository("ThesisBulletinBundle:Board")->findAll();
-            $entity->setDatePosted($date);
+            $entity->setDatePosted($date)
+                    ->setEncoder($this->getUser())
+                    ->setVisible($visible == "true")
+            ;
             $em->persist($entity);
 
             $board = null;
@@ -44,12 +48,12 @@ class PlainAnnouncementController extends Controller {
             } else {
                 $board = $boards[0];
             }
-            
+
             $board->addAnnouncement($entity);
             $em->persist($board);
 
             $em->flush();
-            $response = ['valid' => true];
+            $response = ['valid' => $entity->getVisible()];
             return new JsonResponse($response);
         }
 
@@ -101,6 +105,59 @@ class PlainAnnouncementController extends Controller {
         $form->add('submit', 'submit', array('label' => 'Create'));
 
         return $form;
+    }
+
+    /**
+     *
+     * @Route("/edit", name="announcement_plain_edit", options={"expose"=true})
+     * @Method("POST")
+     */
+    public function updateAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+        $visible = $request->request->get('visible');
+        $id = $request->request->get('id');
+        $entity = $em->getRepository("ThesisBulletinBundle:Announcement")->find($id);
+        $currVis = $entity->getVisible();
+        $form = $this->createCreateForm($entity);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $entity->setVisible($visible == "true")
+                    ->setEncoder($this->getUser())
+                    ;
+            
+            if(!$visible && $visible != $currVis){
+                $date = new \DateTime('now');
+                $entity->setDatePosted($date);
+            }
+
+            $em->persist($entity);
+            $em->flush();
+            $response = ['valid' => true];
+            return new JsonResponse($response);
+        }
+
+        $t = $form['title']->getErrors(true);
+        $c = $form['content']->getErrors(true);
+        $titleErrors = $this->getErrorMsgs($t);
+        $contentErrors = $this->getErrorMsgs($c);
+        $formErrors = $this->getErrorMsgs($form->getErrors(true));
+        $errors = array_merge([$titleErrors, $contentErrors, $formErrors]);
+        $fields = [];
+
+        if ($t->count() > 0) {
+            $fields[] = 'title';
+        }
+
+        if ($c->count() > 0) {
+            $fields[] = 'content';
+        }
+
+
+        $response = ['valid' => false, 'errors' => $errors, 'fields' => $fields];
+
+
+        return new JsonResponse($response);
     }
 
 }

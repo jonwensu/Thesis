@@ -3,10 +3,13 @@
 namespace Thesis\BulletinBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OneToMany;
 use FOS\UserBundle\Model\User as BaseUser;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\VirtualProperty;
 
 /**
  * @ORM\Entity
@@ -51,6 +54,11 @@ class User extends BaseUser {
     }
 
     /**
+     * @OneToMany(targetEntity="Announcement", mappedBy="encoder")
+     */
+    private $announcements;
+
+    /**
      * Set firstName
      *
      * @param string $firstName
@@ -92,6 +100,45 @@ class User extends BaseUser {
      */
     public function getLastName() {
         return $this->lastName;
+    }
+
+    /**
+     * Add announcement
+     *
+     * @param \Thesis\BulletinBundle\Entity\Announcement $announcement
+     *
+     * @return User
+     */
+    public function addAnnouncement(\Thesis\BulletinBundle\Entity\Announcement $announcement) {
+        $this->announcements[] = $announcement;
+
+        return $this;
+    }
+
+    /**
+     * Remove announcement
+     *
+     * @param \Thesis\BulletinBundle\Entity\Announcement $announcement
+     */
+    public function removeAnnouncement(\Thesis\BulletinBundle\Entity\Announcement $announcement) {
+        $this->announcements->removeElement($announcement);
+    }
+
+    /**
+     * Get announcements
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAnnouncements() {
+        return $this->announcements;
+    }
+
+    /**
+     * @VirtualProperty
+     * @SerializedName("full_name")
+     */
+    public function getFullName() {
+        return $this->firstName . ' ' . $this->lastName;
     }
 
 }

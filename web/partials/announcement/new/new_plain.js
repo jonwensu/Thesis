@@ -27,11 +27,11 @@
                         content: "",
                         htmlContent: "",
                         priorityLvl: 2,
-                        visible: true
                     };
-                    $scope.visibleMsg = $scope.announcement.visible ? "Visible" : "Hidden";
+                    $scope.visible = true;
+                    $scope.visibleMsg = $scope.visible ? "Visible" : "Hidden";
                     $scope.changeMsg = function () {
-                        $scope.visibleMsg = $scope.announcement.visible ? "Visible" : "Hidden";
+                        $scope.visibleMsg = $scope.visible ? "Visible" : "Hidden";
                     };
 
                     var success = function (response) {
@@ -93,7 +93,6 @@
                         menubar: false,
                         toolbar_items_size: 'small',
                         relative_urls: false,
-//                        theme: 'advanced',
                         style_formats: [{
                                 title: 'Bold text',
                                 inline: 'b'
@@ -131,17 +130,13 @@
                                 title: 'Test template 2',
                                 content: 'Test 2'
                             }],
-//                        content_css: [
-//                            '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
-//                            '//www.tinymce.com/css/codepen.min.css'
-//                        ]
                     };
 
                     $scope.submit = function () {
                         $scope.announcement.content = tinymce.activeEditor.getContent({format: 'text'});
                         var formData = {
                             thesis_bulletinbundle_plainannouncement: $scope.announcement,
-                            html_format: tinymce.activeEditor.getContent({format: 'html'})
+                            visible: $scope.visible
                         };
                         $('#spinner').show();
 

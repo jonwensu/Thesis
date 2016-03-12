@@ -1,0 +1,65 @@
+<div>
+    <ul class="breadcrumb">
+        <li>
+            <a ui-sref="home"><i class="fa fa-home"></i> Home</a>
+        </li>
+        <li>
+            <a>
+                Faculty
+            </a>
+        </li>
+        <li>
+            Edit
+        </li>
+    </ul>
+</div>
+<div class="well row  col-lg-8 center">
+    <a class="btn btn-success pull-left" ng-click="previous()">
+        <i class="fa fa-arrow-left"></i>
+    </a>
+    <h1>
+        Edit Faculty Member
+    </h1>
+    <form class="form-group text-left" novalidate name="collegeFrm">
+        <div class="form-group">
+            <label for="faculty.class.firstName" class="required">First Name</label>
+            <input id="faculty.class.firstName" name="faculty.class.firstName" class="form-control" required type="text" ng-model="faculty.class.firstName" />
+        </div>
+        <div class="form-group">
+            <label for="faculty.class.lastName" class="required">Last Name</label>
+            <input id="faculty.class.lastName" name="faculty.class.lastName" class="form-control" required type="text" ng-model="faculty.class.lastName" />
+        </div>
+        <div class="form-group">
+            <label for="faculty.class.office">Office</label>
+            <input id="faculty.class.office" name="faculty.class.office" class="form-control" type="text" ng-model="faculty.class.office" />
+        </div>
+        <div class="form-group">
+            <label for="faculty.class.email">Email</label>
+            <input id="faculty.class.email" name="faculty.class.email" class="form-control" type="text" ng-model="faculty.class.email" />
+        </div>
+        <div class="form-group">
+            <label for="faculty.department" class="required margin-top-1x">Department</label>
+            <select ng-disabled="!departmentsLoaded" class="form-control" required ng-model="faculty.department"
+                    ng-options="department.id as department.name group by department.college.name for department in departments">
+                <option value="">
+                    {{ status}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <div>
+                <label for="dropzone" class="required">
+                    Profile Picture
+                </label>
+                <a href="" uib-tooltip="Reset Image" ng-click="resetImage()">
+                    <i class="fa fa-refresh"></i>
+                </a>
+            </div>
+            <div action="" ng-model="image" class="dropzone" dropzone="" id="dropzone">
+                <div class="fallback">
+                </div>
+            </div>
+        </div>
+        <input type="submit" value="Create" ng-disabled="collegeFrm.$invalid" class="btn btn-primary center-block col-lg-2" />
+    </form>
+</div>

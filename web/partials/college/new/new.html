@@ -1,0 +1,30 @@
+<div>
+    <ul class="breadcrumb">
+        <li>
+            <a ui-sref="home"><i class="fa fa-home"></i> Home</a>
+        </li>
+        <li>
+            <a>
+                College
+            </a>
+        </li>
+        <li>
+            New
+        </li>
+    </ul>
+</div>
+<div class="well row  col-lg-8 center">
+    <a class="btn btn-success pull-left" ng-click="previous()">
+        <i class="fa fa-arrow-left"></i>
+    </a>
+    <h1>
+        Create College
+    </h1>
+    <form class="form-group text-left" ng-submit="submit()" novalidate name="collegeFrm">
+        <div class="form-group">
+            <label for="college.name" class="required">Name</label>
+            <input id="college.name" name="college.name" class="form-control" required type="text" ng-model="college.name" />
+        </div>
+        <input type="submit" value="Create" class="btn btn-primary center-block col-lg-2" />
+    </form>
+</div>

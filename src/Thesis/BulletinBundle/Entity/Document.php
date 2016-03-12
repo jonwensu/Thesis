@@ -72,6 +72,14 @@ class Document {
     public function getWebPath() {
         return null === $this->path ? null : $this->getUploadDir() . '/' . $this->path;
     }
+    
+     /**
+     * @VirtualProperty
+     * @SerializedName("size")
+     */
+    public function getSize(){
+        return filesize($this->getAbsolutePath());
+    }
 
     protected function getUploadRootDir() {
         // the absolute directory path where uploaded

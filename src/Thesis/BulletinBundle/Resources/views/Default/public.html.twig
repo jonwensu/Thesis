@@ -54,7 +54,6 @@
     <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
     <script src="{{ asset('bower_components/tinymce-dist/tinymce.js') }}"></script>
     <script src="{{ asset('bower_components/iCheck/icheck.min.js') }}"></script>
-    {#        <script src="{{ asset('bower_components/lodash/dist/lodash.min.js')}}"></script>#}
     <script src="{{ asset('bower_components/leaflet/dist/leaflet.js') }}"></script>
     <script src="{{ asset('bower_components/angular/angular.min.js') }}"></script>
     <script src="{{ asset('bower_components/angular-ui-router/release/angular-ui-router.min.js') }}"></script>
@@ -63,6 +62,7 @@
     <script src="{{ asset('bower_components/angular-ui-grid/ui-grid.min.js') }}"></script>
     <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
     <script src="{{ asset('bower_components/angular-bootstrap/ui-bootstrap.js')}}"></script>
+    <script src="{{ asset('bower_components/angular-bootstrap/ui-bootstrap-tpls.js')}}"></script>
     <script src="{{ asset('bower_components/angular-touch/angular-touch.js')}}"></script>
     <script src="{{ asset('bower_components/ng-idle/angular-idle.js')}}"></script>
     <script src="{{ asset('bower_components/angular-timeago/dist/angular-timeago.js')}}"></script>
@@ -76,7 +76,9 @@
     <script src="{{ asset('bower_components/leaflet-routing-machine/dist/leaflet-routing-machine.js') }}"></script>
     <script src="{{ asset('bower_components/lrm-valhalla/lrm-valhalla.min.js') }}"></script>
     <script src="{{ asset('bower_components/image-scale/image-scale.min.js')}}"></script>
+    <script src="{{ asset('bower_components/ng-group/src/ngGroup.js')}}"></script>
     <script src="{{ asset('bower_components/leaflet-control-geocoder/Control.Geocoder.js') }}"></script>
+    <script src="{{ asset('bower_components/moment/min/moment.min.js') }}"></script>
     <script src="{{ asset('js/campus.geojson.js') }}"></script>
 
 
@@ -93,8 +95,11 @@
     <script src="{{ asset('partials/board/show/show.js')}}"></script>
     <script src="{{ asset('partials/announcement/announcement_pub.js')}}"></script>
     <script src="{{ asset('partials/announcement/browse/browse.js')}}"></script>
-    <script src="{{ asset('partials/announcement/show/show.js')}}"></script>
+    <script src="{{ asset('partials/announcement/show/show_pub.js')}}"></script>
     <script src="{{ asset('partials/announcement/search/search.js')}}"></script>
+    <script src="{{ asset('partials/faculty/faculty_pub.js')}}"></script>
+    <script src="{{ asset('partials/faculty/search/search.js')}}"></script>
+    <script src="{{ asset('partials/faculty/show/show_pub.js')}}"></script>
     <script src="{{ asset('partials/map/map.js')}}"></script>
     <script src="{{ asset('partials/map/show/show.js')}}"></script>
     <script src="{{ asset('partials/user/user.js')}}"></script>
