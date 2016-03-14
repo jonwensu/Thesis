@@ -69,6 +69,9 @@ swiftmailer:
     spool:     { type: memory }
     
 services:
+    fos_user.doctrine_registry:
+        alias: doctrine
+        
     thesis.registration.form.type:
         class: Thesis\BulletinBundle\Form\Type\RegistrationFormType
         arguments: ["%fos_user.model.user.class%"]
@@ -81,7 +84,9 @@ services:
         tags:
             - { name: form.type, alias: thesis_user_profile }
     
+        
 fos_user:
+    
     db_driver: orm
     firewall_name: main
     user_class: Thesis\BulletinBundle\Entity\User
@@ -97,7 +102,7 @@ fos_rest:
     body_listener: true
     format_listener: true
     view:
-        view_response_listener: 'force'
+        view_response_listener: 'true'
         formats:
             xml: false
             json : true
