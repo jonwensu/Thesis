@@ -9,7 +9,7 @@
                             .state('announcement.browse', {
                                 url: "/browse",
                                 controller: "BrowseAnnouncementCtrl",
-                                templateUrl: constants.viewPath() + 'announcement/browse/browse.html',
+                                templateUrl: '/partials/announcement/browse/browse.html',
                                 data: {
                                     roles: ["ADMIN"]
                                 }

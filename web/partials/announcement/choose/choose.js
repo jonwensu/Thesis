@@ -7,7 +7,7 @@
                             .state('announcement.choose', {
                                 url: "/choose/type",
                                 controller: "ChooseTypeCtrl",
-                                templateUrl: constants.viewPath() + 'announcement/choose/choose.html',
+                                templateUrl: '/partials/announcement/choose/choose.html',
                                 data: {
                                     roles: ["ADMIN"]
                                 }

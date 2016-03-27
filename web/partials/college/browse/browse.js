@@ -7,7 +7,7 @@
                             .state('college.browse', {
                                 url: "/browse",
                                 controller: "BrowseCollegesCtrl",
-                                templateUrl: constants.viewPath() + 'college/browse/browse.html',
+                                templateUrl: '/partials/college/browse/browse.html',
                                 data: {
                                     roles: ["SUPER_ADMIN"]
                                 }

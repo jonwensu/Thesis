@@ -9,7 +9,7 @@
                             .state('announcement.new_img', {
                                 url: "/new/img",
                                 controller: "NewImgAnnouncementCtrl",
-                                templateUrl: constants.viewPath() + 'announcement/new/new_img.html',
+                                templateUrl: '/partials/announcement/new/new_img.html',
                                 data: {
                                     roles: ["ADMIN"]
                                 }

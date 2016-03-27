@@ -10,6 +10,6 @@ angular.module('myApp.user', [
                             url: "/admin",
                             abstract: true,
                             parent: 'index',
-                            templateUrl: constants.viewPath() + 'nestedbase.html',
+                            templateUrl: '/partials/nestedbase.html',
                         });
             }])

@@ -7,7 +7,7 @@
                             .state('user.browse', {
                                 url: "/all",
                                 controller: "BrowseUserCtrl",
-                                templateUrl: constants.viewPath() + 'user/browse/browse.html',
+                                templateUrl: '/partials/user/browse/browse.html',
                                 data: {
                                     roles: ["SUPER_ADMIN"]
                                 }

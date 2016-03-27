@@ -8,12 +8,12 @@
                             .state('faculty.search', {
                                 url: "/search",
                                 controller: "SearchFacultyCtrl",
-                                templateUrl: constants.viewPath() + 'faculty/search/search.html',
+                                templateUrl: '/partials/faculty/search/search.html',
                             });
                 }])
             .controller('SearchFacultyCtrl', ["$scope", "$http", "$state", function ($scope, $http, $state) {
 
-                    $scope.webPath = constants.webPath();
+                    $scope.webPath = window.location.origin + "/";
                     $scope.query = "";
                     $('#spinner').show();
                     $scope.$on("IdleStart", function () {

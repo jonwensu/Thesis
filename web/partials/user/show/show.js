@@ -7,7 +7,7 @@
                             .state('user.show', {
                                 url: "/view/:id",
                                 controller: "ViewUserCtrl",
-                                templateUrl: constants.viewPath() + 'user/show/show.html',
+                                templateUrl: '/partials/user/show/show.html',
                                 data: {
                                     roles: ["SUPER_ADMIN", "OWNER"]
                                 }

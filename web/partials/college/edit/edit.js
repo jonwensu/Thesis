@@ -8,7 +8,7 @@
                             .state('college.edit', {
                                 url: "/:id/edit",
                                 controller: "EditCollegeCtrl",
-                                templateUrl: constants.viewPath() + 'college/edit/edit.html',
+                                templateUrl: '/partials/college/edit/edit.html',
                                 data: {
                                     roles: ["SUPER_ADMIN"]
                                 }

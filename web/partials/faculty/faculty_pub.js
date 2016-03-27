@@ -7,6 +7,6 @@ angular.module('myApp.faculty', [
                         .state('faculty', {
                             url: "/faculty",
                             abstract: true,
-                            templateUrl: constants.viewPath() + 'nestedbase.html',
+                            templateUrl: '/partials/nestedbase.html',
                         });
             }])

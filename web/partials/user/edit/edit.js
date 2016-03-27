@@ -7,20 +7,28 @@
                             .state('user.edit', {
                                 url: "/:id/edit",
                                 controller: "EditUserCtrl",
-                                templateUrl: constants.viewPath() + 'user/edit/edit.html',
+                                templateUrl: '/partials/user/edit/edit.html',
                                 data: {
                                     roles: ["SUPER_ADMIN", "OWNER"]
                                 }
                             });
                 }])
 
-            .controller('EditUserCtrl', ["$scope", "$http", "$state", "$stateParams", function ($scope, $http, $state, $stateParams) {
+            .controller('EditUserCtrl', ["$scope", "$http", "$state", "$stateParams", "$rootScope", function ($scope, $http, $state, $stateParams, $rootScope) {
                     $http.get(Routing.generate('get_user', {id: $stateParams.id}))
                             .then(function (response) {
                                 var user = response.data.user;
                                 $scope.user = user;
-                                 $('#spinner').fadeOut(100);
+                                $('#spinner').fadeOut(100);
                             });
+
+                    $scope.previous = function () {
+                        if ($rootScope.previousState.name) {
+                            $state.go($rootScope.previousState.name);
+                        } else {
+                            $state.go("home");
+                        }
+                    };
 
                     $('#spinner').show();
 

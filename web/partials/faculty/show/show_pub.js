@@ -8,12 +8,12 @@
                             .state('faculty.show', {
                                 url: "/show/:id",
                                 controller: "ShowFacultyCtrl",
-                                templateUrl: constants.viewPath() + 'faculty/show/show.html',
+                                templateUrl: '/partials/faculty/show/show.html',
                             });
                 }])
             .controller('ShowFacultyCtrl', ["$scope", "$http", "$state", "$stateParams", "$rootScope", function ($scope, $http, $state, $stateParams, $rootScope) {
 
-                    $scope.webPath = constants.webPath();
+                    $scope.webPath = window.location.origin + "/";
                     $scope.query = "";
                     $scope.loaded = false;
                     $('#spinner').show();
@@ -25,8 +25,8 @@
                             $state.go("board.show");
                         }
                     };
-                    
-                      $scope.$on("IdleStart", function () {
+
+                    $scope.$on("IdleStart", function () {
                         $state.go("board.show");
                     });
 
@@ -34,7 +34,7 @@
                             .then(
                                     function (response) {
                                         $('#spinner').fadeOut(500);
-                                         $scope.loaded = true;
+                                        $scope.loaded = true;
                                         $scope.faculty = response.data.faculty;
                                     }
                             );

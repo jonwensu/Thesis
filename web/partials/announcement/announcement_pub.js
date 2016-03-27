@@ -7,6 +7,6 @@ angular.module('myApp.announcement', [
                         .state('announcement', {
                             url: "/announcement",
                             abstract: true,
-                            templateUrl: constants.viewPath() + 'nestedbase.html',
+                            templateUrl:'/partials/nestedbase.html',
                         });
             }])

@@ -6,7 +6,7 @@
                             .state('map.show', {
                                 url: "/show",
                                 controller: "ShowMapCtrl",
-                                templateUrl: constants.viewPath() + 'map/show/show.html',
+                                templateUrl: '/partials/map/show/show.html',
                             });
                 }])
 

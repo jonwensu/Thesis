@@ -9,6 +9,6 @@ angular.module('myApp.department', [
                             url: "/department",
                             abstract: true,
                             parent: 'index',
-                            templateUrl: constants.viewPath() + 'nestedbase.html',
+                            templateUrl: '/partials/nestedbase.html',
                         });
             }])

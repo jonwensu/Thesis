@@ -3,7 +3,7 @@ angular.module('myApp.index', [])
                 $stateProvider
                         .state('index', {
                             abstract: true,
-                            templateUrl: constants.viewPath() + 'nestedbase.html',
+                            templateUrl:  "/partials/nestedbase.html" ,
                             resolve: {
                                 authorize: ['authorization',
                                     function (authorization) {

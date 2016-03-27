@@ -6,6 +6,6 @@ angular.module('myApp.map', [
                         .state('map', {
                             url: "/map",
                             abstract: true,
-                            templateUrl: constants.viewPath() + 'nestedbase.html',
+                            templateUrl: '/partials/nestedbase.html',
                         });
             }])

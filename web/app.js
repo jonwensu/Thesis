@@ -28,7 +28,7 @@
                         url: "/",
                         controller: "MainCtrl",
                         parent: 'index',
-                        templateUrl: constants.viewPath() + "index.html",
+                        templateUrl:  "/partials/index.html",
                         data: {
                             roles: ["ADMIN"]
                         }

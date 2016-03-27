@@ -7,7 +7,7 @@
                             .state('announcement.new_plain', {
                                 url: "/new/plain",
                                 controller: "NewPlainAnnouncementCtrl",
-                                templateUrl: constants.viewPath() + 'announcement/new/new_plain.html',
+                                templateUrl: '/partials/announcement/new/new_plain.html',
                                 data: {
                                     roles: ["ADMIN"]
                                 }

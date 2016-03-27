@@ -10,7 +10,7 @@
                             .state('announcement.show', {
                                 url: "/show/:id",
                                 controller: "ShowAnnouncementCtrl",
-                                templateUrl: constants.viewPath() + 'announcement/show/show_pub.html',
+                                templateUrl: '/partials/announcement/show/show_pub.html',
                             });
                 }])
             .controller('ShowAnnouncementCtrl', ["$scope", "$http", "$state", "$stateParams", "Idle", 'timeAgo', "$timeout", "$rootScope", function ($scope, $http, $state, $stateParams, Idle, timeAgo, $timeout, $rootScope) {

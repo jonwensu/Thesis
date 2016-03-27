@@ -8,7 +8,7 @@
                             .state('department.new', {
                                 url: "/new",
                                 controller: "NewDepartmentCtrl",
-                                templateUrl: constants.viewPath() + 'department/new/new.html',
+                                templateUrl: '/partials/department/new/new.html',
                                 data: {
                                     roles: ["SUPER_ADMIN"]
                                 }

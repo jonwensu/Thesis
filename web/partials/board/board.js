@@ -6,6 +6,6 @@ angular.module('myApp.board', [
                         .state('board', {
                             url: "/board",
                             abstract: true,
-                            templateUrl: constants.viewPath() + 'nestedbase.html',
+                            templateUrl: '/partials/nestedbase.html',
                         });
             }])

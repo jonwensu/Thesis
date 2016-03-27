@@ -10,7 +10,7 @@
                             .state('announcement.show', {
                                 url: "/show/:id",
                                 controller: "ShowAnnouncementCtrl",
-                                templateUrl: constants.viewPath() + 'announcement/show/show.html',
+                                templateUrl: '/partials/announcement/show/show.html',
                                  data: {
                                     roles: ["ADMIN"]
                                 }

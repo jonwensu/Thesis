@@ -7,7 +7,7 @@
                             .state('announcement.edit_plain', {
                                 url: "/:id/edit/plain",
                                 controller: "EditPlainAnnouncementCtrl",
-                                templateUrl: constants.viewPath() + 'announcement/edit/edit_plain.html',
+                                templateUrl: '/partials/announcement/edit/edit_plain.html',
                                 data: {
                                     roles: ["ADMIN"]
                                 }

@@ -9,7 +9,7 @@
                             .state('announcement.search', {
                                 url: "/search",
                                 controller: "SearchAnnouncementCtrl",
-                                templateUrl: constants.viewPath() + 'announcement/search/search.html',
+                                templateUrl: '/partials/announcement/search/search.html',
                             });
                 }])
             .controller('SearchAnnouncementCtrl', ["$scope", "$http", "$state", "$stateParams", "Idle", 'timeAgo', "$timeout", function ($scope, $http, $state, $stateParams, Idle, timeAgo, $timeout) {

@@ -11,7 +11,7 @@
                             .state('board.show', {
                                 url: "/show",
                                 controller: "ShowBoardCtrl",
-                                templateUrl: constants.viewPath() + 'board/show/show.html',
+                                templateUrl: '/partials/board/show/show.html',
                             });
                 }])
             .controller('ShowBoardCtrl', ["$scope", "$http", "$state", "$timeout", "Idle", 'timeAgo', function ($scope, $http, $state, $timeout, Idle, timeAgo) {
@@ -19,9 +19,9 @@
                     $scope.clock = "loading clock..."; // initialise the time variable
                     $scope.tickInterval = 1000; //ms
                     $scope.slideInterval = 3000;
-                    $scope.logo = constants.webPath() + "pics/coe.png";
+                    $scope.logo = "/pics/coe.png";
                     $scope.play = true;
-                    $scope.webPath = constants.webPath();
+                    $scope.webPath = window.location.origin + "/";
 
                     $('#spinner').show();
 

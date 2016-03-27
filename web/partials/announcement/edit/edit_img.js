@@ -7,7 +7,7 @@
                             .state('announcement.edit_img', {
                                 url: "/:id/edit/image",
                                 controller: "EditImageAnnouncementCtrl",
-                                templateUrl: constants.viewPath() + 'announcement/edit/edit_img.html',
+                                templateUrl: '/partials/announcement/edit/edit_img.html',
                                 data: {
                                     roles: ["ADMIN"]
                                 }

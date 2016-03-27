@@ -8,7 +8,7 @@
                             .state('department.edit', {
                                 url: "/:id/edit",
                                 controller: "EditDepartmentCtrl",
-                                templateUrl: constants.viewPath() + 'department/edit/edit.html',
+                                templateUrl: '/partials/department/edit/edit.html',
                                 data: {
                                     roles: ["SUPER_ADMIN"]
                                 }
