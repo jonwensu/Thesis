@@ -7,7 +7,7 @@ angular.module('myApp.user', [
         .config(['$stateProvider', function ($stateProvider) {
                 $stateProvider
                         .state('user', {
-                            url: "/admin",
+                            url: "/encoder",
                             abstract: true,
                             parent: 'index',
                             templateUrl: '/partials/nestedbase.html',
