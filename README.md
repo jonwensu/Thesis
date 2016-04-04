@@ -1,4 +1,4 @@
-Touch Screen Bulletin Board System with Content Management and Interactive Map
+# Touch Screen Bulletin Board System with Content Management and Interactive Map #
 
 Getting Started:
 
