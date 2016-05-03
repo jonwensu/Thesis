@@ -1,4 +1,4 @@
-Touch Screen Bulletin Board System with Content Management and Interactive Map
+# Touch Screen Bulletin Board System with Content Management and Interactive Map #
 
 Getting Started:
 
@@ -7,7 +7,7 @@ Getting Started:
 ```
 #!
 
-cd C:\xampp\htdocs\Thesis
+cd path\to\project\Thesis
 composer update
 ```
 
@@ -16,7 +16,7 @@ composer update
 ```
 #!
 
-cd C:\xampp\htdocs\Thesis
+cd path\to\project\Thesis
 php app/console doctrine:database:create
 ```
 
@@ -26,7 +26,7 @@ php app/console doctrine:database:create
 ```
 #!
 
-cd C:\xampp\htdocs\Thesis
+cd path\to\project\Thesis
 php app/console doctrine:schema:update --force
 ```
 
@@ -34,21 +34,21 @@ php app/console doctrine:schema:update --force
 ```
 #!
 
-cd C:\xampp\htdocs\Thesis
+cd path\to\project\Thesis
 php app/console fos:user:create
 ```
-5.) Promote admin to admin using "fos:user:promote" and enter "ROLE_ADMIN"
+5.) Promote the account to admin using "fos:user:promote" and enter "ROLE_ADMIN"
 ```
 #!
 
-cd C:\xampp\htdocs\Thesis
+cd path\to\project\Thesis
 php app/console fos:user:promote
 ```
 
-6.) Promote admin to super admin using "fos:user:promote" and enter "ROLE_SUPER_ADMIN"
+6.) Promote the account to super admin using "fos:user:promote" and enter "ROLE_SUPER_ADMIN"
 ```
 #!
 
-cd C:\xampp\htdocs\Thesis
+cd path\to\project\Thesis
 php app/console fos:user:promote
 ```
