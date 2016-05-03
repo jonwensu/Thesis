@@ -25,13 +25,13 @@
                     };
 
                     $scope.isOwner = function () {
-                        return principal.isInRole("ROLE_OWNER");
+                        return principal.isInAnyRole("ROLE_OWNER");
                     };
 
                     $scope.isAdmin = function () {
                         return principal.isInRole("ROLE_SUPER_ADMIN");
                     };
-                    
+
                     $scope.id = $stateParams.id;
                     $http.get(Routing.generate('get_user', {id: $scope.id}))
                             .then(function (response) {
@@ -39,23 +39,26 @@
                             });
 
                     $scope.change = function () {
-                        $('#changePassModal').modal('show');
-                    }
-
-                    $('#changePass').click(function () {
-                        $('#changePassModal').modal('show');
-                    });
+                            $('#changePassModal').modal('show');
+                    };
+                    
+                    $scope.pass = {
+                        new : "",
+                        confirm : "",
+                        old : "",
+                    };
 
                     function clearPassFields() {
-                        $scope.oldPassword = "";
-                        $scope.newPassword = "";
-                        $scope.confirmPassword = "";
+                        $scope.pass.old = "";
+                        $scope.pass.new = "";
+                        $scope.pass.confirm = "";
                     }
+
 
 
                     $scope.changePass = function () {
-                        if (($scope.newPassword == "" || $scope.confirmPassword == "" || $scope.oldPassword == "") && $scope.isOwner()
-                                || ($scope.newPassword == "" || $scope.confirmPassword == "") && $scope.isAdmin()) {
+                        if (($scope.pass.new == "" || $scope.pass.confirm == "" || $scope.pass.old == "") && $scope.isOwner()
+                                || ($scope.pass.new == "" || $scope.pass.confirm == "") && $scope.isAdmin()) {
                             var n = noty({
                                 text: "Please fill in all fields",
                                 type: 'error',
@@ -67,7 +70,7 @@
                                 timeout: 5000
                             });
                         } else {
-                            if ($scope.newPassword != $scope.confirmPassword) {
+                            if ($scope.pass.new != $scope.pass.new) {
                                 var n = noty({
                                     text: "Passwords don't match",
                                     type: 'error',
@@ -79,8 +82,8 @@
                                     timeout: 5000
                                 });
                             } else {
-                                $scope.oldPassword = $scope.isOwner() ? $scope.oldPassword : "password";
-                                $http.post(Routing.generate('user_changepass'), {id: $scope.id, pass: $scope.newPassword, conPass: $scope.confirmPassword, oldPass: $scope.oldPassword})
+//                                $scope.pass.old = $scope.isOwner() ? $scope.pass.old : "password";
+                                $http.post(Routing.generate('user_changepass'), {id: $scope.id, pass: $scope.pass.new, conPass: $scope.pass.confirm, oldPass: $scope.pass.old})
                                         .then(
                                                 function (response) {
                                                     var changed = response.data.changed;
@@ -107,6 +110,7 @@
                                                             },
                                                             timeout: 5000
                                                         });
+
                                                     }
                                                 }
                                         );
@@ -114,6 +118,7 @@
                         }
                         clearPassFields();
                         $('#changePassModal').modal('hide');
+                        $('#changeOwnPassModal').modal('hide');
                     }
 
                 }]);
