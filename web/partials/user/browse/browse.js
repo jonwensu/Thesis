@@ -18,7 +18,7 @@
                     return value ? "Yes" : "No"
                 }
             })
-            .controller('BrowseUserCtrl', ["$scope", "$http", "uiGridConstants", "userService", "$interval", "$rootScope", "$state", function ($scope, $http, uiGridConstants, userService, $interval, $rootScope, $state) {
+            .controller('BrowseUserCtrl', ["$scope", "$http", "uiGridConstants", "userService", "$interval", "$rootScope", "$state", "principal", function ($scope, $http, uiGridConstants, userService, $interval, $rootScope, $state, principal) {
 
                     var init = true;
                     $('#spinner').show();
@@ -40,15 +40,11 @@
                             '<a class="label label-warning" uib-tooltip="Change Password" tooltip-placement="left" ng-click="grid.appScope.change(row.entity.id)">' +
                             '<i class="fa fa-unlock-alt"></i>' +
                             '</a>&nbsp;' +
-                            '<a href="" ng-if="row.entity.enabled" uib-tooltip="Disable" tooltip-placement="left" ng-click="grid.appScope.disable(row.entity.id)">' +
-                            '<span ng-if="row.entity.enabled" class="label label-danger">' +
+                            '<a ng-if="row.entity.enabled" class="label label-danger" uib-tooltip="Disable" tooltip-placement="left" ng-click="grid.appScope.disable(row.entity.id)">' +
                             '<i class="fa fa-times"></i>' +
-                            '</span>&nbsp;' +
                             '</a>' +
-                            '<a href="" ng-if="!row.entity.enabled" uib-tooltip="Enable" tooltip-placement="left" ng-click="grid.appScope.disable(row.entity.id)">' +
-                            '<span ng-if="!row.entity.enabled" class="label label-success">' +
+                            '<a ng-if="!row.entity.enabled" class="label label-success" uib-tooltip="Enable" tooltip-placement="left" ng-click="grid.appScope.disable(row.entity.id)">' +
                             '<i class="fa fa-check"></i>' +
-                            '</span>&nbsp;' +
                             '</a>' +
                             '</div>';
                     $scope.gridOptions = {
@@ -69,6 +65,10 @@
                             {name: "Action", enableSorting: false, enableFiltering: false, enableHiding: false, cellTemplate: actionTemplate},
                         ]
                     };
+
+                    $scope.isAdmin = function () {
+                        return principal.isInRole("ROLE_ADMIN");
+                    };
                     $scope.toggleFiltering = function () {
                         $scope.gridOptions.enableFiltering = !$scope.gridOptions.enableFiltering;
                         $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
@@ -80,7 +80,6 @@
                     $scope.change = function (id) {
                         $scope.id = id;
                         $('#changePassModal').modal('show');
-                        console.log(id);
                     }
 
                     $('#disableModal').on('hide.bs.modal', function () {
@@ -120,6 +119,11 @@
                                 });
                         $('#disableModal').modal('hide');
                     };
+                     function clearPassFields() {
+                        $scope.newPassword = "";
+                        $scope.confirmPassword = "";
+                    }
+                    
                     $scope.changePass = function () {
                         if ($scope.newPassword == "" || $scope.confirmPassword == "") {
                             var n = noty({
@@ -145,11 +149,9 @@
                                     timeout: 5000
                                 });
                             } else {
-                                $('#spinner').fadeIn(300);
-                                $http.post(Routing.generate('user_changepass'), {id: $scope.id, pass: $scope.newPassword, conPass: $scope.confirmPassword})
+                                $http.post(Routing.generate('user_changepass'), {id: $scope.id, pass: $scope.newPassword, conPass: $scope.confirmPassword, oldPass: "password"})
                                         .then(
                                                 function (response) {
-                                                    $('#spinner').fadeOut(300);
                                                     var changed = response.data.changed;
                                                     if (changed) {
                                                         var n = noty({
@@ -163,8 +165,9 @@
                                                             timeout: 5000
                                                         });
                                                     } else {
+                                                        var message = response.data.message;
                                                         var n = noty({
-                                                            text: "Change password failed",
+                                                            text: message,
                                                             type: 'error',
                                                             layout: 'topRight',
                                                             animation: {
@@ -176,11 +179,10 @@
                                                     }
                                                 }
                                         );
-                                $('#changePassModal').modal('hide');
-                                $scope.newPassword = "";
-                                $scope.confirmPassword = "";
                             }
                         }
+                        clearPassFields();
+                        $('#changePassModal').modal('hide');
                     }
 
 

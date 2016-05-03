@@ -45,6 +45,9 @@
                 {{ user.email}}
             </div>
         </div>
+        <div class="margin-top-1x">
+            <a id="changePass" class="btn btn-primary">Change Password</a>
+        </div>
     </div>
 </div>
 
@@ -57,8 +60,8 @@
             </div>
             <form name="passFrm" novalidate ng-submit="changePass()">
                 <div class="modal-body col-lg-12">
-                    <input type="password" class="form-control" placeholder="Old Password" required ng-model="oldPassword">
-                    <input type="password" class="form-control" placeholder="New Password" required ng-model="newPassword">
+                    <input ng-if="isOwner()" type="password" class="form-control" placeholder="Old Password" required ng-model="oldPassword">
+                    <input type="password" class="form-control margin-top-1x" placeholder="New Password" required ng-model="newPassword">
                     <input type="password" class="form-control margin-top-1x" placeholder="Confirm Password" required ng-model="confirmPassword">
                 </div>
                 <div class="modal-footer">
@@ -69,3 +72,4 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+

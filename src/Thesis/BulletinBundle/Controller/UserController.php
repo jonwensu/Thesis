@@ -202,14 +202,22 @@ class UserController extends Controller {
 
         $pass = $request->request->get('pass');
         $conPass = $request->request->get('conPass');
+        $oldPass = $request->request->get('oldPass');
+
         if ($pass != $conPass) {
-            return new JsonResponse(["changed" => false]);
+            return new JsonResponse(["changed" => false, "message" => "Passwords don't match"]);
         } else {
+
             $id = $request->request->get('id');
             $user = $em->getRepository('ThesisBulletinBundle:User')->find($id);
             $factory = $this->get('security.encoder_factory');
             $encoder = $factory->getEncoder($user);
             $password = $encoder->encodePassword($pass, $user->getSalt());
+
+            if ($this->getUser()->getId() == $id && $encoder->encodePassword($oldPass, $user->getSalt()) != $user->getPassword()) {
+                return new JsonResponse(["changed" => false, "message" => "Old password is wrong"]);
+            }
+
             $user->setPassword($password);
             $em->persist($user);
             $em->flush();
