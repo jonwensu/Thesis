@@ -5,9 +5,9 @@ namespace Thesis\BulletinBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\OneToOne;
+use JMS\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ExecutionContextInterface;
-use JMS\Serializer\Annotation\Groups;
 
 /**
  * ImageAnnouncement
@@ -69,11 +69,11 @@ class ImageAnnouncement extends Announcement {
     /**
      * Set document
      *
-     * @param \Thesis\BulletinBundle\Entity\Document $document
+     * @param Document $document
      *
      * @return ImageAnnouncement
      */
-    public function setDocument(\Thesis\BulletinBundle\Entity\Document $document = null) {
+    public function setDocument(Document $document = null) {
         $this->document = $document;
 
         return $this;
@@ -82,10 +82,54 @@ class ImageAnnouncement extends Announcement {
     /**
      * Get document
      *
-     * @return \Thesis\BulletinBundle\Entity\Document
+     * @return Document
      */
     public function getDocument() {
         return $this->document;
+    }
+
+    /**
+     * Set pinned
+     *
+     * @param boolean $pinned
+     *
+     * @return ImageAnnouncement
+     */
+    public function setPinned($pinned) {
+        $this->pinned = $pinned;
+
+        return $this;
+    }
+
+    /**
+     * Get pinned
+     *
+     * @return boolean
+     */
+    public function getPinned() {
+        return $this->pinned;
+    }
+
+    /**
+     * Set pinnedContent
+     *
+     * @param string $pinnedContent
+     *
+     * @return ImageAnnouncement
+     */
+    public function setPinnedContent($pinnedContent) {
+        $this->pinnedContent = $pinnedContent;
+
+        return $this;
+    }
+
+    /**
+     * Get pinnedContent
+     *
+     * @return string
+     */
+    public function getPinnedContent() {
+        return $this->pinnedContent;
     }
 
 }

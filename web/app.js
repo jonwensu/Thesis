@@ -20,6 +20,7 @@
         'ngIdle',
         'yaru22.angular-timeago',
         'myApp.directive.imgscale',
+        'ui.grid.resizeColumns',
     ])
             .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 
@@ -28,7 +29,7 @@
                         url: "/",
                         controller: "MainCtrl",
                         parent: 'index',
-                        templateUrl:  "/partials/index.html",
+                        templateUrl: "/partials/index.html",
                         data: {
                             roles: ["ADMIN"]
                         }

@@ -76,6 +76,24 @@ abstract class Announcement {
      * @Groups({"search"})
      */
     protected $priorityLvl;
+    
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="pinned", type="boolean")
+     * @Groups({"ticker"})
+     */
+    protected $pinned;
+    
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="pinnedContent", type="text")
+     * @Groups({"ticker"})
+     */
+    protected $pinnedContent;
 
     /**
      * Get id
@@ -206,7 +224,6 @@ abstract class Announcement {
      */
     public function setVisible($visible) {
         $this->visible = $visible;
-
         return $this;
     }
 

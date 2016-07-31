@@ -64,7 +64,7 @@
                                     size: file.size
                                 };
                                 dropzone.options.addedfile.call(dropzone,  scope.currFile);
-                                dropzone.options.thumbnail.call(dropzone,  scope.currFile, constants.webPath() + file.wpath);
+                                dropzone.options.thumbnail.call(dropzone,  scope.currFile, window.location.origin + "/" + file.wpath);
                                 dropzone.options.complete.call(dropzone,  scope.currFile);
                                 var existingFileCount = 1;
                                 dropzone.options.maxFiles = dropzone.options.maxFiles - existingFileCount;

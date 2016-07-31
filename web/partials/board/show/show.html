@@ -1,39 +1,46 @@
-<div id="wrap" class="margin-top-3x">
+<div id="wrap" class="margin-top-2x">
 
-    <div class="col-lg-3">
-        <div>
+    <div class="col-lg-2">
+        <div id="eng-logo">
             <img ng-src="{{ logo}}" />
         </div>
-        <div class="panel panel-danger margin-top-2x">
+        <div id="board-calendar" class="panel panel-danger margin-top-1x">
             <div class="panel-heading">
-                <div class="text-center text-uppercase" style="color: white; font-size: 4em;">
+                <div class="text-center text-uppercase calendar-month">
                     {{ clock | date:'MMMM'}}
                 </div>
             </div>
             <div class="panel-body">
-                <h1 class="text-center" style="font-size: 11em;">
+                <h1 class="text-center calendar-date">
                     {{ clock | date:'d'}}
                 </h1>
-                <div class="text-center text-uppercase" style="font-size: 5em;">
+                <div class="text-center text-uppercase calendar-day">
                     {{ clock | date:'EEE'}}
                 </div>
             </div>
         </div>
-        <div class="container-fluid text-center bg-primary time">
-            {{ clock | date:'h'}}<span class="blink">:</span>{{ clock | date:'mm'}} {{ clock | date:'a'}}
+        <div id="board-clock" class="container-fluid text-center bg-info clock">
+            <span class="time">{{ clock | date:'h'}}<span class="blink">:</span>{{ clock | date:'mm'}}</span><span class="am-pm">{{ clock | date:'a'}}</span>
         </div>
 
-
+        <div class="container-fluid margin-top-1x text-center announcement-summary bg-success">
+            <div>
+                <div class="announcement-count">
+                    {{ slides.length}}
+                </div>
+                Announcements Currently Posted
+            </div>
+        </div>
     </div>
 
-    <div id="main" class="col-lg-6">
+    <div id="main" class="col-lg-8">
 
-        <div class="slide-cont sl-show">
+        <div class="slide-cont sl-show board-announcements">
 
             <slick ng-if="loaded" class="slider-for" settings="slickConfigFor">
 
                 <div class="sl" ng-repeat="slide in slides">
-                    <a class="pull-right" ui-sref="announcement.show({id: slide.id})" style="font-size: 2em;  outline: none; color: #6699ff;"><i class="fa fa-expand"></i></a>
+                    <a class="pull-right expand btn btn-default" ui-sref="announcement.show({id: slide.id})"><i class="fa fa-expand"></i></a>
                     <a ui-sref="announcement.show({id: slide.id})" style="text-decoration: none; outline: none;">
                         <h1 class="text-center">
                             {{ slide.title | limitTo:80 }}
@@ -42,16 +49,16 @@
                             </span>
                         </h1>
                     </a>
-                    <div style="padding: 1em 3em 1em 3em; height: 38em; overflow-y: auto; overflow-x: hidden;">
+                    <div class="slide-image">
                         <div ng-if="slide.type == 'image'" class="col-lg-12">
                             <div>
-                                <div id="image-container" class="" style="height: 35em; width: 56em;">
+                                <div id="image-container">
                                     <img class="scale" scale ng-src="{{webPath + slide.document.wpath}}" data-scale="best-fit-down" data-align="center">
                                 </div>
                             </div>
                         </div>
                         <div ng-if="slide.type == 'plain'">
-                            <div class="margin-top-1x" ng-bind-html="slide.html_content | to_trusted" style="font-size: 2em; text-align: justify;">
+                            <div class="margin-top-1x slide-content-plain" ng-bind-html="slide.html_content | to_trusted">
                             </div>
                         </div>
                     </div>
@@ -60,49 +67,52 @@
                             <i class="fa fa-clock-o"></i> 
                             {{ slide.date_posted | timeAgo:"longDate" }}
                         </div>
-                        <div class="pull-right">
-                            <a href="#" ng-click="togglePlay()" style="text-decoration: none;">
-                                <i ng-if="play" class="fa fa-pause"></i>
-                                <i ng-if="!play" class="fa fa-play"></i>
-                            </a>
-                            <a href="#" ng-click="updateSlides()" style="text-decoration: none;">
-                                <i class="fa fa-refresh"></i>
-                            </a>
-                        </div>
                     </div>
                 </div>
 
             </slick>
         </div>
     </div>
-    <div class="col-lg-3">
-        <div>
-            <a ui-sref="announcement.search" class="btn btn-block btn-info">
-                <i class="fa fa-search" style="font-size: 7.5em;"></i>
-                <div  style="font-size: 5em;">
+    <div class="col-lg-2">
+        <div id="board-search">
+            <a ui-sref="announcement.search" class="btn btn-block btn-info board-btn">
+                <i class="fa fa-search"></i>
+                <div>
                     SEARCH
                 </div>
             </a>
         </div>
-        <div class="margin-top-1x">
-            <a ui-sref="faculty.search" class="btn btn-block btn-primary">
-                <i class="fa fa-users" style="font-size: 7.5em;"></i>
-                <div  style="font-size: 5em;">
+        <div id="board-faculty" class="margin-top-1x">
+            <a ui-sref="faculty.search" class="btn btn-block btn-primary board-btn">
+                <i class="fa fa-users"></i>
+                <div>
                     FACULTY
                 </div>
             </a>
         </div>
-        <div class="margin-top-1x">
-            <a ui-sref="map.show" class="btn btn-block btn-success">
-                <i class="fa fa-map" style="font-size: 7.5em;"></i>
-                <div style="font-size: 5em;">
+        <div id="board-map" class="margin-top-1x">
+            <a ui-sref="map.show" class="btn btn-block btn-success board-btn">
+                <i class="fa fa-map"></i>
+                <div>
                     MAP
                 </div>
             </a>
         </div>
+        <div class="margin-top-1x text-center" >
+            <a href="#" id="play-toggle" class="col-lg-3 btn btn-d-blue sm-board-btn sm-board-btn-1st" ng-click="togglePlay()">
+                <i ng-if="play" class="fa fa-pause"></i>
+                <i ng-if="!play" class="fa fa-play"></i>
+            </a>
+            <a href="#" id="refresh-announcements" class="col-lg-3 btn btn-d-yellow sm-board-btn sm-board-btn-rest" ng-click="updateSlides()">
+                <i class="fa fa-refresh"></i>
+            </a>
+            <a href="#" id="board-tour" class="col-lg-3 btn btn-orange sm-board-btn sm-board-btn-rest" ng-click="startTour()">
+                <i class="fa fa-question"></i>
+            </a>
+        </div>
     </div>
-    <div class="col-lg-12 slide-cont">
-        <slick ng-if="loaded" class="slider-nav col-lg-10 col-lg-offset-1" settings="slickConfigNav">
+    <div class="slide-cont">
+        <slick ng-if="loaded" class="slider-nav col-lg-10 col-lg-offset-1 board-announcement-nav" settings="slickConfigNav">
             <div ng-repeat="slide in slides" class="text-center">
                 <h2 class="slide-title">
                     {{ slide.title | limitTo:40 }}
@@ -116,3 +126,18 @@
     </div>
 
 </div>
+<div class="bg-dk-blue ticker ticker ticker-1 col-lg-3">
+    <div id="greetings" class="ticker-text text-center">
+        Central Philippine University
+    </div>
+</div>
+<div class="col-lg-12 ticker ticker-2 bg-gold">   
+    <div class="ticker-text" hidden angular-marquee scroll="scrollTicker" duration="tickerDuration">
+        <span ng-repeat="a in pinnedAnnouncements">
+            <i class="fa fa-dot-circle-o ticker-separator"></i>
+            {{ a.pcontent}}
+            <i class="fa fa-dot-circle-o ticker-separator" ng-if="$last"></i>
+        </span>
+    </div>
+
+

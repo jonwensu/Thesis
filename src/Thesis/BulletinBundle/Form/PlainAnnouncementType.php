@@ -29,7 +29,7 @@ class PlainAnnouncementType extends AbstractType {
                 ->add('content')
                 ->add('htmlContent')
                 ->add('priorityLvl')
-//                ->add('visible', 'checkbox')
+                ->add('pinnedContent')
         ;
     }
 

@@ -48,6 +48,8 @@ class ImageAnnouncementController extends Controller {
     public function createAction(Request $request) {
         $entity = new ImageAnnouncement();
         $visible = $request->request->get('visible');
+        $pinned = $request->request->get('pinned');
+        $entity->setPinned($pinned == "true");
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -139,6 +141,8 @@ class ImageAnnouncementController extends Controller {
         $docId = $request->request->get('docId');
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('ThesisBulletinBundle:Announcement')->find($id);
+        $pinned = $request->request->get('pinned');
+        $entity->setPinned($pinned == "true");
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -151,13 +155,14 @@ class ImageAnnouncementController extends Controller {
                     ->setVisible($visible == "true")
             ;
 
-//            if ($changed == 'true') {
-//                $entity->setDocument(null);
-//                $em->persist($entity);
-//                $doc = $em->getRepository('ThesisBulletinBundle:Document')->find($docId);
-//                $em->remove($doc);
-//            }
-            
+            if ($changed == 'true') {
+                $doc = $em->getRepository('ThesisBulletinBundle:Document')->find($docId);
+                $doc->removeUpload();
+                $entity->setDocument(null);
+                $em->persist($entity);
+                $em->remove($doc);
+            }
+
 
             $board = null;
             if (count($boards) < 1) {
@@ -168,7 +173,7 @@ class ImageAnnouncementController extends Controller {
 
             $board->addAnnouncement($entity);
             $em->persist($board);
-            
+
             $em->flush();
             $response = ['valid' => true, 'id' => $entity->getId()];
             return new JsonResponse($response);

@@ -88,6 +88,16 @@ class Board {
                 ->where(Criteria::expr()->eq("visible", true))
                 ->orderBy(["priorityLvl" => Criteria::ASC, "datePosted" => Criteria::DESC, "title" => Criteria::ASC])
         ;
+
+        return $this->announcements->matching($criteria);
+    }
+
+    public function getPinnedAnnouncements() {
+        $criteria = Criteria::create()
+                ->where(Criteria::expr()->eq("visible", true))
+                ->andWhere(Criteria::expr()->eq("pinned", true))
+                ->orderBy(["priorityLvl" => Criteria::ASC, "datePosted" => Criteria::DESC, "title" => Criteria::ASC])
+        ;
         
         return $this->announcements->matching($criteria);
     }

@@ -3,12 +3,12 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}CPU Engineering Touch Screen Bulletin Board{% endblock %}</title>
         <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.css') }}"/>
         <link href="{{ asset('template/css/bootstrap-cerulean.min.css') }}" rel="stylesheet">
         <link href="{{ asset('template/css/charisma-app.css') }}" rel="stylesheet">
-        <link href="{{ asset('template/bootstrap-tour/build/css/bootstrap-tour.min.css') }}" rel="stylesheet">
         <link href="{{ asset('template/css/animate.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css') }}" rel="stylesheet">
         <link href="{{ asset('bower_components/angular-ui-grid/ui-grid.min.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('bower_components/iCheck/skins/flat/blue.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
@@ -79,6 +79,13 @@
     <script src="{{ asset('bower_components/ng-group/src/ngGroup.js')}}"></script>
     <script src="{{ asset('bower_components/leaflet-control-geocoder/Control.Geocoder.js') }}"></script>
     <script src="{{ asset('bower_components/moment/min/moment.min.js') }}"></script>
+    <script src="{{ asset('bower_components/bootstrap-tour/build/js/bootstrap-tour.js')}}"></script>
+    <script src="{{ asset('bower_components/jquery-snowfall/dist/snowfall.jquery.min.js')}}"></script>
+    <script src="{{ asset('bower_components/moment-holidays/moment-holidays.js')}}"></script>
+    <script src="{{ asset('bower_components/moment-range/dist/moment-range.min.js')}}"></script>
+    <script src="{{ asset('bower_components/angular-marquee/src/marquee.js')}}"></script>
+    <script src="{{ asset('bower_components/underscore/underscore-min.js')}}"></script>
+    <script src="{{ asset('js/greetings.js') }}"></script>
     <script src="{{ asset('js/campus.geojson.js') }}"></script>
 
 
@@ -109,7 +116,6 @@
     <script src="{{ asset('partials/user/browse/browse.js')}}"></script>
     <script src="{{ asset('partials/user/edit/edit.js')}}"></script>
     <script src="{{ asset('template/js/jquery.noty.packaged.min.js')}}"></script>
-    <script src="{{ asset('template/bootstrap-tour/build/js/bootstrap-tour.min.js')}}"></script>
     <script src="{{ asset('js/script.js')}}"></script>
 
 </body>

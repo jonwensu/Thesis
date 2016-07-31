@@ -73,9 +73,26 @@ abstract class Announcement {
      * @var integer
      *
      * @ORM\Column(name="priorityLvl", type="integer")
-     * @Groups({"search"})
+     * @Groups({"search", "ticker"})
      */
     protected $priorityLvl;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="pinned", type="boolean")
+     * @Groups({"ticker", "search"})
+     */
+    protected $pinned;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="pinnedContent", type="text", nullable=true)
+     * @SerializedName("pcontent")
+     * @Groups({"ticker", "search"})
+     */
+    protected $pinnedContent;
 
     /**
      * Get id
@@ -146,6 +163,10 @@ abstract class Announcement {
 
         if ($this->title === null) {
             $context->addViolationAt('title', null);
+        }
+
+        if ($this->pinned && $this->pinnedContent === null) {
+            $context->addViolation('pinnedContent', "This announcement has been pinned. Please enter the content to show on the ticker.");
         }
     }
 
@@ -226,7 +247,7 @@ abstract class Announcement {
     public function formattedDate() {
         return $this->datePosted->format("F j, Y");
     }
-    
+
     /**
      * @VirtualProperty
      * @SerializedName("encoder_name")
@@ -256,6 +277,50 @@ abstract class Announcement {
      */
     public function getEncoder() {
         return $this->encoder;
+    }
+
+    /**
+     * Set pinned
+     *
+     * @param boolean $pinned
+     *
+     * @return Announcement
+     */
+    public function setPinned($pinned) {
+        $this->pinned = $pinned;
+
+        return $this;
+    }
+
+    /**
+     * Get pinned
+     *
+     * @return boolean
+     */
+    public function getPinned() {
+        return $this->pinned;
+    }
+
+    /**
+     * Set pinnedContent
+     *
+     * @param string $pinnedContent
+     *
+     * @return Announcement
+     */
+    public function setPinnedContent($pinnedContent) {
+        $this->pinnedContent = $pinnedContent;
+
+        return $this;
+    }
+
+    /**
+     * Get pinnedContent
+     *
+     * @return string
+     */
+    public function getPinnedContent() {
+        return $this->pinnedContent;
     }
 
 }

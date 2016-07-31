@@ -148,14 +148,16 @@
                         enableFiltering: false,
                         enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
                         enableVerticalScrollbar: uiGridConstants.scrollbars.WHEN_NEEDED,
+//                        enableColumnResizing: true,
                         columnDefs: [
                             {field: "title", cellClass: "text-left"},
                             {name: "priority_lvl", displayName: "Priority Level", cellFilter: "priorityFilter"},
                             {field: "type", cellClass: "text-capitalize"},
-                            {field: "date_posted",
-                                cellFilter: 'date:\'longDate\''},
+                            {field: "date_posted", cellClass: "text-left",
+                                        cellFilter: 'date:\'medium\''},
                             {field: "visible", enableFiltering: false, cellTemplate: '<div class="ui-grid-cell-contents"><span ng-if="row.entity.visible">Yes</span><span ng-if="!row.entity.visible">No</span></div>'},
-                            {field: "encoder.full_name", displayName: "Encoder"},
+                            {field: "pinned", enableFiltering: false, cellTemplate: '<div class="ui-grid-cell-contents"><span ng-if="row.entity.pinned">Yes</span><span ng-if="!row.entity.pinned">No</span></div>'},
+                            {field: "encoder.full_name", displayName: "Encoder", cellClass: "text-left"},
                             {name: "Action", enableSorting: false, enableFiltering: false, enableHiding: false, cellTemplate: actionTemplate},
                         ]
                     };

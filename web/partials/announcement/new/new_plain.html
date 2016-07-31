@@ -40,9 +40,17 @@
             </div>
         </div>
         <div class="form-group">
+            <checkbox id="pinned" large class="btn-info form-checkbox" ng-change="togglePinnedVisibility()" ng-model="pinned"></checkbox>
+            <label for="pinned" class="form-checkbox-lbl">Pinned</label>
+        </div>
+        <div class="form-group" id="pinnedContent">
+            <label for="announcement.pinnedContent">Content for Ticker</label>
+            <textarea name="announcement.pinnedContent" class="form-control" rows="5" ng-model="announcement.pinnedContent"></textarea>
+        </div>
+        <div class="form-group">
             <div>
-                <checkbox style="margin-top: -0.9em;" id="visible" large class="btn-warning" ng-model="visible" ng-change="changeMsg()"></checkbox>
-                <label style="font-size: 1.8em;" for="visible" id="visMsg">{{ visibleMsg}}</label>
+                <checkbox id="visible" large class="btn-warning form-checkbox" ng-model="visible" ng-change="changeMsg()"></checkbox>
+                <label class="form-checkbox-lbl" for="visible" id="visMsg">{{ visibleMsg }}</label>
             </div>
         </div>
         <div class="col-lg-12 margin-top-1x">

@@ -6,9 +6,13 @@
     <div class="text-center text-primary col-lg-10 col-lg-offset-1" style="font-size: 3em;">
         {{ announcement.title}}
     </div>
+    <div class="text-center col-lg-12" style="color: #999999;">
+        Posted:
+        {{ announcement.date_posted | date:"medium" }}
+    </div>
     <div class="text-center col-lg-12" style="color: #999999; margin-bottom: 2em;">
-        Posted
-        {{ announcement.date_posted | timeAgo:"longDate" }}
+
+        by: {{ announcement.encoder.full_name}}
     </div>
 
     <div ng-if="announcement.type == 'plain'" class="col-lg-10 col-lg-offset-1">

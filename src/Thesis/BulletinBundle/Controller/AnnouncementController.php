@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormErrorIterator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Thesis\BulletinBundle\Entity\Announcement;
+use Thesis\BulletinBundle\Entity\ImageAnnouncement;
 use Thesis\BulletinBundle\Entity\PlainAnnouncement;
 use Thesis\BulletinBundle\Form\AnnouncementType;
 
@@ -183,6 +184,20 @@ class AnnouncementController extends Controller {
     }
 
     /**
+     * @View()
+     */
+    public function getAnnouncementsPinnedAction($id) {
+
+        return [
+            'announcements' => $this->getDoctrine()
+                    ->getManager()
+                    ->getRepository('ThesisBulletinBundle:Board')
+                    ->find($id)
+                    ->getPinnedAnnouncements()
+        ];
+    }
+
+    /**
      * @Route("/toggle/visibility", name="toggle_visibility", options={"expose"=true})
      * @Method("POST")
      */
@@ -227,13 +242,20 @@ class AnnouncementController extends Controller {
         $match = $encoded_pass == $user->getPassword();
 
         if ($match) {
-            $target = $this->getDoctrine()
-                    ->getManager()
-                    ->getRepository('ThesisBulletinBundle:Announcement')
-                    ->find($id);
             $em = $this->getDoctrine()->getManager();
+            $target = $em->getRepository("ThesisBulletinBundle:Announcement")->find($id);
+            $img = new ImageAnnouncement();
+
+            if ($target instanceof $img) {
+                $doc = $em->getRepository("ThesisBulletinBundle:Document")->find($target->getDocument()->getId());
+                $doc->removeUpload();
+                $em->remove($doc);
+            }
+            
             $em->remove($target);
             $em->flush();
+
+
             return new JsonResponse(['match' => $match]);
         }
         return new JsonResponse(['match' => $match]);

@@ -22,6 +22,14 @@
                         Low: 3,
                     };
 
+                    $scope.togglePinnedVisibility = function () {
+                        if ($scope.pinned) {
+                            $("#pinnedContent").fadeIn(500);
+                        } else {
+                            $("#pinnedContent").fadeOut(500);
+                        }
+                    };
+
                     $('#spinner').show();
                     $scope.loading = true;
 
@@ -38,12 +46,15 @@
                                             title: a.title,
                                             description: a.description,
                                             priorityLvl: a.priority_lvl,
+                                            pinnedContent: a.pcontent,
                                         };
 
                                         currImg = a.document;
                                         $scope.loadImage(currImg);
                                         $scope.visible = a.visible;
                                         $scope.visibleMsg = $scope.visible ? "Visible" : "Hidden";
+                                        $scope.pinned = a.pinned;
+                                        $scope.togglePinnedVisibility();
                                         $scope.dropzoneEvent('addedfile', function (file) {
                                             if (!currFileRemoved) {
                                                 $scope.getDropzone().removeFile($scope.currFile);
@@ -215,11 +226,11 @@
                             var formData = {
                                 thesis_bulletinbundle_imageannouncement: $scope.announcement,
                                 visible: $scope.visible,
+                                pinned: $scope.pinned,
                                 changed: currFileRemoved,
                                 id: $stateParams.id,
                                 docId: currImg.id
                             };
-                            console.log(formData);
                             $('#spinner').show();
                             $http.post(Routing.generate('announcement_image_edit'), $.param(formData), {
                                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}

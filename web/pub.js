@@ -16,7 +16,8 @@
         'yaru22.angular-timeago',
         'leaflet-directive',
         'myApp.directive.imgscale',
-        'ng.group'
+        'ng.group',
+        'angular-marquee'
     ])
             .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
                     $urlRouterProvider.otherwise("/board/show");
@@ -27,10 +28,10 @@
                             });
                 }])
             .config(["IdleProvider", "KeepaliveProvider", function (IdleProvider, KeepaliveProvider) {
-                    // 3 mins idle
-                    IdleProvider.idle(60);
-                    // 2 mins to refresh
-                    IdleProvider.timeout(240);
+                    // consider as idle after 30 sec of no activity
+                    IdleProvider.idle(30);
+                    // wait 60 sec more after being idle
+                    IdleProvider.timeout(60);
                 }])
             .run(['$rootScope', '$state', 'Idle', function ($rootScope, $state, Idle) {
                     $rootScope.$on('$stateChangeStart', function (e, toState, toParams) {

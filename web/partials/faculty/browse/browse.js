@@ -78,6 +78,7 @@
                             {field: "first_name", cellClass: "text-left", enableHiding: false },
                             {field: "college", cellClass: "text-left", enableHiding: false},
                             {field: "department", cellClass: "text-left", enableHiding: false},
+                            {field: "office", cellClass: "text-left", enableHiding: false},
                             {name: "Action", enableSorting: false, enableFiltering: false, enableHiding: false, cellTemplate: actionTemplate},
                         ]
                     };

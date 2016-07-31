@@ -1,4 +1,6 @@
-
+html, body {
+    overflow-x: hidden;
+}
 .form-row{
     padding-bottom: 100px;
 }
@@ -235,24 +237,6 @@
 
 }
 
-/*.outer {
-    display: table;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-}
-
-.middle {
-    display: table-cell;
-    vertical-align: middle;
-}
-
-.inner {
-    margin-left: auto;
-    margin-right: auto; 
-    width: whatever width you want;
-}*/
-
 .slider-nav .slick-current{
     border-color:  #83c5fa;
 }
@@ -269,12 +253,6 @@
 .slide-title{
     word-wrap: normal;
 }
-.time{
-    font-size: 6em;
-    border-radius: 0.1em; 
-    border: 1px solid #cccccc;
-}
-
 
 .foot {
     position:absolute;
@@ -344,3 +322,196 @@ textarea {
     vertical-align: middle; 
     text-align: center;
 }
+
+.popover {
+    max-width: 25em;
+}
+
+.tour-tour .popover-navigation {
+    width: 25em;
+}
+
+.tour-tour .popover-title{
+    font-size: 2em;
+    text-align: center;
+    padding: 0.5em;
+    background: #bfe1f8;
+    color: black;
+}
+
+.tour-tour .popover-content{
+    font-size: 1.3em;
+    text-align: center;
+}
+
+.btn-d-yellow {
+    background: #c3c05d;
+    color: white;
+    border: 1px solid #cccccc;
+}
+.btn-d-blue {
+    background: #a8bdc0;
+    color: white;
+    border: 1px solid #cccccc;
+}
+
+.btn-orange {
+    background: orange;
+    color: white;
+    border: 1px solid #cccccc;
+}
+
+.sm-board-btn {
+    font-size: 2.5em;
+    padding: 0.3em;
+}
+
+.sm-board-btn-1st {
+    margin-left: 0.7em;
+}
+
+.sm-board-btn-rest {
+    margin-left: 0.3em;
+}
+
+.pad-left-1 {
+    padding-left: 0.1em;
+}
+
+.expand {
+    font-size: 2em; 
+    outline: none; 
+    color: #6699ff;
+}
+
+#eng-logo img{
+    width: 25em;
+}
+
+.calendar-month {
+    color: white;
+    font-size: 4vmin;
+}
+
+.calendar-date {
+    font-size: 7em;
+}
+
+.calendar-day {
+    font-size: 4vmin;
+}
+
+.clock{
+    border-radius: 0.5em; 
+    border: 1px solid #cccccc;
+}
+
+.clock .time {
+    font-size: 7.5vmin;
+}
+
+.clock .am-pm {
+    font-size: 4vmin;
+}
+
+.announcement-summary {
+    font-size: 2vmin;
+    padding: 1em 0 1em 0;
+    border: 1px solid #d9dada;
+    border-radius: 0.5em;
+}
+
+.announcement-count{
+    font-size: 3vmin;
+}
+
+.ticker {
+    position: absolute;
+    bottom: -100vh;
+    padding: 1em;
+    height: 7vh;
+}
+
+.ticker-2 {
+    right: 0;
+    float: right;
+    min-width: 100%;
+    overflow-x: hidden;
+}
+
+.ticker-text{
+    font-size: 3vmin;
+}
+
+.ticker-separator {
+    font-size: 0.7em;
+    color: blue;
+}
+
+.bg-gold {
+    background: gold;
+    color: black;
+}
+
+
+.bg-dk-blue {
+    background: #005c9d;
+    color: white;
+}
+
+.slide-image {
+    padding: 1em 3em 1em 3em;
+    height: 38em;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.text-yellow {
+    color: yellow;
+}
+
+
+.form-checkbox {
+    margin-top: -0.9em;
+}
+
+.form-checkbox-lbl{
+    font-size: 1.8em;
+}
+
+.image-container {
+    height: 35em;
+    width: 80em;
+}
+
+#image-container {
+    height: 35em;
+    width: 80em;
+}
+
+.slide-content-plain {
+    font-size: 2em;
+    text-align: justify;
+}
+
+.board-btn i {
+    font-size: 7em;
+}
+
+.board-btn div {
+    font-size: 4em;
+}
+
+.ticker-1 {
+    z-index: 999;
+}
+
+.ui-grid-row:hover .ui-grid-cell {
+    background: #bbe4f6;
+}
+
+.btn:focus {
+    color: white;
+}
+
+

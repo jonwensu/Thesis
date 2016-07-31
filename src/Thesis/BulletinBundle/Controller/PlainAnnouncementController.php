@@ -29,8 +29,11 @@ class PlainAnnouncementController extends Controller {
     public function createAction(Request $request) {
         $entity = new PlainAnnouncement();
         $visible = $request->request->get('visible');
+        $pinned = $request->request->get('pinned');
+        $entity->setPinned($pinned == "true");
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
+
 
         if ($form->isValid()) {
             $date = new \DateTime('now');
@@ -39,6 +42,7 @@ class PlainAnnouncementController extends Controller {
             $entity->setDatePosted($date)
                     ->setEncoder($this->getUser())
                     ->setVisible($visible == "true")
+
             ;
             $em->persist($entity);
 
@@ -115,8 +119,10 @@ class PlainAnnouncementController extends Controller {
     public function updateAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
         $visible = $request->request->get('visible');
+        $pinned = $request->request->get('pinned');
         $id = $request->request->get('id');
         $entity = $em->getRepository("ThesisBulletinBundle:Announcement")->find($id);
+        $entity->setPinned($pinned == "true");
         $currVis = $entity->getVisible();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -124,9 +130,9 @@ class PlainAnnouncementController extends Controller {
         if ($form->isValid()) {
             $entity->setVisible($visible == "true")
                     ->setEncoder($this->getUser())
-                    ;
-            
-            if(!$visible && $visible != $currVis){
+            ;
+
+            if (!$visible && $visible != $currVis) {
                 $date = new \DateTime('now');
                 $entity->setDatePosted($date);
             }

@@ -19,6 +19,7 @@ class ImageAnnouncementType extends AnnouncementType {
                 ->add('datePosted')
                 ->add('priorityLvl')
                 ->add('visible')
+                ->add('pinnedContent')
         ;
     }
 

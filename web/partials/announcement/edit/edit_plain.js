@@ -43,9 +43,12 @@
                                             content: a.content,
                                             htmlContent: a.html_content,
                                             priorityLvl: a.priority_lvl,
+                                            pinnedContent: a.pcontent
                                         };
                                         $scope.visible = a.visible;
+                                        $scope.pinned = a.pinned;
                                         $scope.visibleMsg = $scope.visible ? "Visible" : "Hidden";
+                                        $scope.togglePinnedVisibility();
                                     }
                             );
 
@@ -53,12 +56,20 @@
                         $scope.visibleMsg = $scope.visible ? "Visible" : "Hidden";
                     };
 
+                    $scope.togglePinnedVisibility = function () {
+                        if ($scope.pinned) {
+                            $("#pinnedContent").fadeIn(500);
+                        } else {
+                            $("#pinnedContent").fadeOut(500);
+                        }
+                    };
+
                     var success = function (response) {
                         $('#spinner').fadeOut(100);
                         var valid = response.data.valid;
                         if (valid) {
                             $timeout(function () {
-                                $state.go('home');
+                                $state.go('announcement.browse');
                             }, 1000);
                         } else {
                             var errors = response.data.errors;
@@ -154,17 +165,33 @@
                     $scope.submit = function () {
                         $scope.announcement.content = tinymce.activeEditor.getContent({format: 'text'});
 
-                        var formData = {
-                            thesis_bulletinbundle_plainannouncement: $scope.announcement,
-                            id: $stateParams.id,
-                            visible: $scope.visible
-                        };
-                        $('#spinner').show();
+                        if ($scope.pinned && $scope.announcement.pinnedContent == "") {
+                            var n = noty({
+                                text: "You have pinned this announcement. Please enter the content to show in the ticker.",
+                                type: 'error',
+                                layout: 'topRight',
+                                animation: {
+                                    open: 'animated tada', // Animate.css class names
+                                    close: 'animated bounceOut', // Animate.css class names
+                                },
+                                timeout: 10000
+                            });
+                        } else {
+                            var formData = {
+                                thesis_bulletinbundle_plainannouncement: $scope.announcement,
+                                id: $stateParams.id,
+                                visible: $scope.visible,
+                                pinned: $scope.pinned
+                            };
+                            $('#spinner').show();
 
-                        $http.post(Routing.generate('announcement_plain_edit'), $.param(formData), {
-                            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                        })
-                                .then(success, error);
+                            $http.post(Routing.generate('announcement_plain_edit'), $.param(formData), {
+                                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                            })
+                                    .then(success, error);
+                        }
+
+
                     };
 
 

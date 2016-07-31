@@ -28,10 +28,22 @@
                         title: "",
                         description: "",
                         priorityLvl: 2,
+                        pinnedContent: "",
+                    };
+
+
+                    $scope.togglePinnedVisibility = function () {
+                        if ($scope.pinned) {
+                            $("#pinnedContent").fadeIn(500);
+                        } else {
+                            $("#pinnedContent").fadeOut(500);
+                        }
                     };
 
                     $scope.visible = true;
                     $scope.visibleMsg = $scope.visible ? "Visible" : "Hidden";
+                    $scope.pinned = false;
+                    $scope.togglePinnedVisibility();
                     $scope.changeMsg = function () {
                         $scope.visibleMsg = $scope.visible ? "Visible" : "Hidden";
                     };
@@ -155,11 +167,23 @@
                                 },
                                 timeout: 10000
                             });
+                        } else if ($scope.pinned && $scope.announcement.pinnedContent == "") {
+                            var n = noty({
+                                text: "You have pinned this announcement. Please enter the content to show in the ticker.",
+                                type: 'error',
+                                layout: 'topRight',
+                                animation: {
+                                    open: 'animated tada', // Animate.css class names
+                                    close: 'animated bounceOut', // Animate.css class names
+                                },
+                                timeout: 10000
+                            });
                         } else {
 
                             var formData = {
                                 thesis_bulletinbundle_imageannouncement: $scope.announcement,
-                                visible: $scope.visible
+                                visible: $scope.visible,
+                                pinned: $scope.pinned
                             };
 
                             $('#spinner').show();

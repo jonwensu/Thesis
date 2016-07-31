@@ -53,6 +53,7 @@ class Faculty {
      * @var string
      *
      * @ORM\Column(name="office", type="string", length=255, nullable=true)
+     * @Groups({"search"})
      */
     private $office;
 

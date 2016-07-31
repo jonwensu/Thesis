@@ -33,7 +33,7 @@ class AnnouncementRepository extends \Doctrine\ORM\EntityRepository {
                         ->orderBy('a.priorityLvl', 'asc')
                         ->addOrderBy('a.datePosted', 'desc')
                         ->addOrderBy('a.title', 'asc')
-//                        ->setParameter('id', 1)
+                        ->setParameter('id', 1)
                         ->getQuery()
                         ->getResult()
         ;
@@ -51,6 +51,21 @@ class AnnouncementRepository extends \Doctrine\ORM\EntityRepository {
                         ->addOrderBy('a.datePosted', 'desc')
                         ->addOrderBy('a.title', 'asc')
                         ->setParameter('id', $id)
+                        ->getQuery()
+                        ->getResult()
+        ;
+    }
+
+    public function findAllPinned() {
+        return $this->getEntityManager()
+                        ->createQueryBuilder()
+                        ->select('a')
+                        ->from('ThesisBulletinBundle:Announcement', 'a')
+                        ->where('a.visible = true')
+                        ->andWhere('a.pinned = true')
+                        ->orderBy('a.priorityLvl', 'asc')
+                        ->addOrderBy('a.datePosted', 'desc')
+                        ->addOrderBy('a.title', 'asc')
                         ->getQuery()
                         ->getResult()
         ;

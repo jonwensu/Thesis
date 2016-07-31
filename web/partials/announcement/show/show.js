@@ -11,14 +11,14 @@
                                 url: "/show/:id",
                                 controller: "ShowAnnouncementCtrl",
                                 templateUrl: '/partials/announcement/show/show.html',
-                                 data: {
+                                data: {
                                     roles: ["ADMIN"]
                                 }
                             });
                 }])
             .controller('ShowAnnouncementCtrl', ["$scope", "$http", "$state", "$stateParams", 'timeAgo', "$rootScope", function ($scope, $http, $state, $stateParams, timeAgo, $rootScope) {
                     $('#spinner').show();
-                    $scope.webPath = constants.webPath();
+                    $scope.webPath = window.location.origin + "/";
                     var oneDay = 60 * 60 * 24;
                     timeAgo.settings.fullDateAfterSeconds = oneDay;
 

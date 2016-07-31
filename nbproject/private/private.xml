@@ -21,6 +21,7 @@
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/announcement/edit/edit_img.html</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/announcement/new/new_plain.html</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/college/college.js</file>
+            <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Resources/views/Security/login.html.twig</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/pub.js</file>
             <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Entity/PlainAnnouncement.php</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/app.js</file>
@@ -47,6 +48,7 @@
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/map/show/show.html</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/department/department.js</file>
             <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Form/PlainAnnouncementType.php</file>
+            <file>file:/C:/xampp/htdocs/Thesis/web/services/authorization.js</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/user/user.js</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/announcement/announcement_pub.js</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/announcement/choose/choose.js</file>
@@ -65,12 +67,14 @@
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/user/browse/browse.html</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/index.html</file>
             <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Controller/DefaultController.php</file>
+            <file>file:/C:/xampp/htdocs/Thesis/web/services/principal.js</file>
             <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Controller/RegistrationController.php</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/announcement/show/show.js</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/user/edit/edit.js</file>
             <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Entity/Announcement.php</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/board/show/show.js</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/user/edit/edit.html</file>
+            <file>file:/C:/xampp/htdocs/Thesis/web/js/script.js</file>
             <file>file:/C:/xampp/htdocs/Thesis/web/partials/faculty/new/new.js</file>
             <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Controller/ImageAnnouncementController.php</file>
             <file>file:/C:/xampp/htdocs/Thesis/src/Thesis/BulletinBundle/Entity/College.php</file>
