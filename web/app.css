@@ -415,7 +415,7 @@ textarea {
 }
 
 .announcement-summary {
-    font-size: 2vmin;
+    font-size: 1vw;
     padding: 1em 0 1em 0;
     border: 1px solid #d9dada;
     border-radius: 0.5em;
@@ -485,8 +485,8 @@ textarea {
 }
 
 #image-container {
-    height: 35em;
-    width: 80em;
+    height: 60vh;
+    width: 115vh;
 }
 
 .slide-content-plain {
