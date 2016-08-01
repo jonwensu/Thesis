@@ -362,16 +362,16 @@ textarea {
 }
 
 .sm-board-btn {
-    font-size: 2.5em;
-    padding: 0.3em;
+    font-size: 1.8vw;
+    padding: 0.5vw;
 }
 
 .sm-board-btn-1st {
-    margin-left: 0.7em;
+    margin-left: 1vw;
 }
 
 .sm-board-btn-rest {
-    margin-left: 0.3em;
+    margin-left: 0.7vw;
 }
 
 .pad-left-1 {
@@ -385,7 +385,7 @@ textarea {
 }
 
 #eng-logo img{
-    width: 25em;
+    width: 18vw;
 }
 
 .calendar-month {
@@ -495,11 +495,11 @@ textarea {
 }
 
 .board-btn i {
-    font-size: 7em;
+    font-size: 5vw;
 }
 
 .board-btn div {
-    font-size: 4em;
+    font-size: 3vw;
 }
 
 .ticker-1 {

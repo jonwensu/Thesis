@@ -37,16 +37,20 @@
                     $http.get(Routing.generate('get_faculty', {id: $scope.id}))
                             .then(function (response) {
                                 var temp = response.data.faculty;
-                                $scope.currImg = temp.picture;
-                                $scope.loadImage($scope.currImg);
-                                $scope.dropzoneEvent('addedfile', function (file) {
-                                    $scope.resetImage();
-                                    if (!$scope.currFileRemoved) {
-                                        $scope.currFileRemoved = true;
-                                        $scope.getDropzone().removeFile($scope.currFile);
-                                        $scope.getDropzone().options.maxFiles = 1;
-                                    }
-                                });
+
+                                $scope.noProfPic = temp.picture != null;
+                                if (temp.picture != null) {
+                                    $scope.currImg = temp.picture;
+                                    $scope.loadImage($scope.currImg);
+                                    $scope.dropzoneEvent('addedfile', function (file) {
+                                        $scope.resetImage();
+                                        if (!$scope.currFileRemoved) {
+                                            $scope.currFileRemoved = true;
+                                            $scope.getDropzone().removeFile($scope.currFile);
+                                            $scope.getDropzone().options.maxFiles = 1;
+                                        }
+                                    });
+                                }
                                 $http.get(Routing.generate("get_departments"))
                                         .then(function (response) {
                                             $scope.departments = response.data.departments;
@@ -81,7 +85,7 @@
                         $scope.setDropzoneUrl(Routing.generate('upload_profpic'));
                         var valid = response.data.valid;
                         if (valid) {
-                            if ($scope.currFileRemoved)
+                            if ($scope.currFileRemoved || $scope.noProfPic && $scope.currImg != null)
                             {
                                 var id = response.data.id;
                                 $scope.dropzoneEvent("sending", function (file, xhr, data) {
@@ -91,7 +95,7 @@
                             } else {
                                 $('#spinner').fadeOut(100);
                                 var n = noty({
-                                    text: "Faculty member successfully added",
+                                    text: "Faculty member info successfully updated",
                                     type: 'success',
                                     layout: 'topRight',
                                     animation: {
@@ -102,7 +106,7 @@
                                 });
                                 $timeout(function () {
                                     $state.go('home');
-                                }, 1000);
+                                }, 1500);
                             }
                         } else {
                             var errors = response.data.errors;

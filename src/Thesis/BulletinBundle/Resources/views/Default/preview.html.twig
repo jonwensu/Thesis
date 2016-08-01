@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.css') }}"/>
+        <link href="{{ asset('template/css/bootstrap-cerulean.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('template/css/charisma-app.css') }}" rel="stylesheet">
+        <link href="{{ asset('template/bootstrap-tour/build/css/bootstrap-tour.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('template/css/animate.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('bower_components/angular-ui-grid/ui-grid.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('bower_components/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('bower_components/nya-bootstrap-select/dist/css/nya-bs-select.css') }}" rel="stylesheet">
+        <link href="{{ asset('bower_components/dropzone/dist/basic.css') }}" rel="stylesheet">
+        <link href="{{ asset('bower_components/dropzone/dist/dropzone.css') }}" rel="stylesheet">
+        <link href="{{ asset('fonts/fftusj/stylesheet.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('app.css') }}" rel="stylesheet">
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% block stylesheets %}
+        {% endblock %}
+
+        <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
+
+    </head>
+    <body>
+        <div class="navbar navbar-default" role="navigation">
+
+            <div class="navbar-inner">
+                <a class="navbar-brand text-center" ui-sref="home">
+                    CPU COE
+                </a>
+                <!-- user dropdown starts -->
+                <div class="btn-group pull-right">
+                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <i class="glyphicon glyphicon-user"></i><span class="hidden-sm hidden-xs"> {{ app.user.username }} </span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a ui-sref="user.show({id: id})">Profile</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+                    </ul>
+                </div>
+                <!-- user dropdown ends -->
+
+            </div>
+        </div>
+        <!-- topbar ends -->
+        <div class="ch-container">
+            <div class="row" id="cont">
+
+                <!-- left menu starts -->
+                <div class="col-sm-2 col-lg-2">
+                    <div class="sidebar-nav">
+                        <div class="nav-canvas">
+                            <div class="nav-sm nav nav-stacked">
+
+                            </div>
+                            <ul class="nav nav-pills nav-stacked main-menu">
+                                <li class="nav-header">Main</li>
+                                <li>
+                                    <a ui-sref="home"><i class="glyphicon glyphicon-home"></i><span> Dashboard</span></a>
+                                </li>
+                                <li><a href="{{ path("board_view") }}"><i class="fa fa-newspaper-o"></i><span> Bulletin Board</span></a>
+                                </li>
+                                <li class="accordion">
+                                    <a href="#"><i class="fa fa-bullhorn"></i><span> Anouncements</span> <span class="accordion-arrow pull-right"><i class='fa fa-chevron-right'></i></span></a>
+                                    <ul class="nav nav-pills nav-stacked">
+                                        <li><a ui-sref="announcement.browse" data-toggle="tooltip" data-placement="right" title="Browse Announcements"><i class="fa fa-angle-double-right"></i> Browse</a></li>
+                                        <li><a ui-sref="announcement.choose"   data-toggle="tooltip" data-placement="right" title="Create Announcement"><i class="fa fa-angle-double-right"></i> Create</a></li>
+                                    </ul>
+                                </li>
+                                {% if "ROLE_SUPER_ADMIN" in app.user.roles %}
+                                    <li class="accordion">
+                                        <a href="#"><i class="fa fa-user"></i><span> Encoders</span> <span class="accordion-arrow pull-right"><i class='fa fa-chevron-right'></i></span></a>
+                                        <ul class="nav nav-pills nav-stacked">
+
+                                            <li>
+                                                <a ui-sref="user.browse" data-placement="right" data-toggle="tooltip" title="Browse Encoders">
+                                                    <i class="fa fa-angle-double-right"></i> Browse
+                                                </a>
+                                            </li>
+                                            <li><a ui-sref="user.new" data-placement="right" data-toggle="tooltip" title="Register Encoder"><i class="fa fa-angle-double-right"></i> Register</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="accordion">
+                                        <a class="ajax-link" href="#"><i class="fa fa-users"></i><span> Faculty</span> <span class="accordion-arrow pull-right"><i class='fa fa-chevron-right'></i></span></a>
+                                        <ul class="nav nav-pills nav-stacked">
+                                            <li><a ui-sref="faculty.browse" data-toggle="tooltip" data-placement="right" title="Browse Faculty"><i class="fa fa-angle-double-right"></i> Browse</a></li>
+                                            <li><a ui-sref="faculty.new"   data-toggle="tooltip" data-placement="right" title="Add Faculty Member"><i class="fa fa-angle-double-right"></i> Add</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="accordion">
+                                        <a class="ajax-link" href="#"><i class="fa fa-university"></i><span> College</span> <span class="accordion-arrow pull-right"><i class='fa fa-chevron-right'></i></span></a>
+                                        <ul class="nav nav-pills nav-stacked">
+                                            <li><a ui-sref="college.browse" data-toggle="tooltip" data-placement="right" title="Browse College"><i class="fa fa-angle-double-right"></i> Browse</a></li>
+                                            <li><a ui-sref="college.new"   data-toggle="tooltip" data-placement="right" title="Add College"><i class="fa fa-angle-double-right"></i> Add</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="accordion">
+                                        <a class="ajax-link" href="#"><i class="fa fa-building"></i><span> Department</span> <span class="accordion-arrow pull-right"><i class='fa fa-chevron-right'></i></span></a>
+                                        <ul class="nav nav-pills nav-stacked">
+                                            <li><a ui-sref="department.browse" data-toggle="tooltip" data-placement="right" title="Browse Departments"><i class="fa fa-angle-double-right"></i> Browse</a></li>
+                                            <li><a ui-sref="department.new"   data-toggle="tooltip" data-placement="right" title="Add Department"><i class="fa fa-angle-double-right"></i> Add</a></li>
+                                        </ul>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--/span-->
+                <!-- left menu ends -->
+
+                <div id="content" class="col-lg-10 col-sm-10">
+                    <!-- content starts -->
+
+                    {% block body %}
+
+                    {% endblock %}
+                    <!-- content ends -->
+                </div><!--/#content.col-md-0-->
+            </div><!--/fluid-row-->
+            <hr>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            <h3>Settings</h3>
+                        </div>
+                        <div class="modal-body">
+                            <p>Here settings can be configured...</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+                            <a href="#" class="btn btn-primary" data-dismiss="modal">Save changes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="row">
+                <p class="col-md-9 col-sm-9 col-xs-12 copyright center">&copy; 
+                    <a href="#" target="_blank">
+                        Central Philippine University College of Engineering
+                    </a>
+                </p>
+            </footer>
+
+        </div><!--/.fluid-container-->
+        {% block javascripts %}
+        {% endblock %}
+
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+        <script src="{{ asset('bower_components/tinymce-dist/tinymce.js') }}"></script>
+        <script src="{{ asset('bower_components/angular/angular.min.js') }}"></script>
+        <script src="{{ asset('bower_components/angular-ui-router/release/angular-ui-router.min.js') }}"></script>
+        <script src="{{ asset('bower_components/angular-animate/angular-animate.min.js') }}"></script>
+        <script src="{{ asset('bower_components/angular-ui-tinymce/src/tinymce.js') }}"></script>
+        <script src="{{ asset('bower_components/angular-ui-grid/ui-grid.min.js') }}"></script>
+        <script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+        <script src="{{ asset('bower_components/angular-bootstrap/ui-bootstrap.js')}}"></script>
+        <script src="{{ asset('bower_components/angular-bootstrap/ui-bootstrap-tpls.js')}}"></script>
+        <script src="{{ asset('bower_components/angular-ui-tinymce/src/tinymce.js') }}"></script>
+        <script src="{{ asset('bower_components/ng-idle/angular-idle.js')}}"></script>
+        <script src="{{ asset('bower_components/angular-timeago/dist/angular-timeago.js')}}"></script>
+        <script src="{{ asset('bower_components/image-scale/image-scale.min.js')}}"></script>
+        <script src="{{ asset('bower_components/dropzone/dist/dropzone.js')}}"></script>
+        <script src="{{ asset('bower_components/underscore/underscore.js')}}"></script>
+        <script src="{{ asset('bower_components/angular-bootstrap-checkbox/angular-bootstrap-checkbox.js')}}"></script>
+        <script src="{{ asset('app.js')}}"></script>
+        <script src="{{ asset('directives/dropzone.js')}}"></script>
+        <script src="{{ asset('directives/imgscale.js')}}"></script>
+        <script src="{{ asset('filters/trustHtml.js')}}"></script>
+        <script src="{{ asset('services/user.js')}}"></script>
+        <script src="{{ asset('services/authorization.js')}}"></script>
+        <script src="{{ asset('services/principal.js')}}"></script>
+        <script src="{{ asset('partials/announcement/announcement.js')}}"></script>
+        <script src="{{ asset('partials/announcement/new/new_plain.js')}}"></script>
+        <script src="{{ asset('partials/announcement/new/new_img.js')}}"></script>
+        <script src="{{ asset('partials/announcement/choose/choose.js')}}"></script>
+        <script src="{{ asset('partials/announcement/browse/browse.js')}}"></script>
+        <script src="{{ asset('partials/announcement/show/show.js')}}"></script>
+        <script src="{{ asset('partials/announcement/edit/edit_plain.js')}}"></script>
+        <script src="{{ asset('partials/announcement/edit/edit_img.js')}}"></script>
+        <script src="{{ asset('partials/college/college.js')}}"></script>
+        <script src="{{ asset('partials/college/new/new.js')}}"></script>
+        <script src="{{ asset('partials/college/browse/browse.js')}}"></script>
+        <script src="{{ asset('partials/college/edit/edit.js')}}"></script>
+        <script src="{{ asset('partials/department/department.js')}}"></script>
+        <script src="{{ asset('partials/department/new/new.js')}}"></script>
+        <script src="{{ asset('partials/department/browse/browse.js')}}"></script>
+        <script src="{{ asset('partials/department/edit/edit.js')}}"></script>
+        <script src="{{ asset('partials/faculty/faculty.js')}}"></script>
+        <script src="{{ asset('partials/faculty/new/new.js')}}"></script>
+        <script src="{{ asset('partials/faculty/browse/browse.js')}}"></script>
+        <script src="{{ asset('partials/faculty/show/show.js')}}"></script>
+        <script src="{{ asset('partials/faculty/edit/edit.js')}}"></script>
+        <script src="{{ asset('partials/user/user.js')}}"></script>
+        <script src="{{ asset('partials/index.js')}}"></script>
+        <script src="{{ asset('partials/faculty/faculty.js')}}"></script>
+        <script src="{{ asset('partials/faculty/new/new.js')}}"></script>
+        <script src="{{ asset('partials/user/new/new.js')}}"></script>
+        <script src="{{ asset('partials/user/show/show.js')}}"></script>
+        <script src="{{ asset('partials/user/browse/browse.js')}}"></script>
+        <script src="{{ asset('partials/user/edit/edit.js')}}"></script>
+        <script src="{{ asset('template/js/jquery.noty.packaged.min.js')}}"></script>
+        <script src="{{ asset('template/bootstrap-tour/build/js/bootstrap-tour.min.js')}}"></script>
+        <script src="{{ asset('js/script.js')}}"></script>
+
+    </body>
+</html>
