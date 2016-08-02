@@ -16,7 +16,7 @@
                 }])
             .controller('ShowBoardCtrl', ["$scope", "$http", "$state", "$timeout", "Idle", 'timeAgo', '$filter', function ($scope, $http, $state, $timeout, Idle, timeAgo, $filter) {
 
-                    $scope.clock = "loading clock..."; // initialise the time variable
+                    $scope.clock = "..."; // initialise the time variable
                     $scope.tickInterval = 1000; //ms
                     $scope.slideInterval = 3000;
                     $scope.logo = "/pics/logo.png";

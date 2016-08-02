@@ -161,6 +161,8 @@ class ImageAnnouncementController extends Controller {
                 $entity->setDocument(null);
                 $em->persist($entity);
                 $em->remove($doc);
+            } else {
+                $em->persist($entity);
             }
 
 

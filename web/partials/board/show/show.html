@@ -49,16 +49,16 @@
                             </span>
                         </h1>
                     </a>
-                    <div class="slide-image">
+                    <div class="margin-top-3x">
                         <div ng-if="slide.type == 'image'" class="col-lg-12">
-                            <div>
-                                <div id="image-container">
-                                    <img class="scale" scale ng-src="{{webPath + slide.document.wpath}}" data-scale="best-fit-down" data-align="center">
-                                </div>
+                            <div id="image-container" style="height: 50vh; width: 64vw;">
+                                <img class="scale" scale ng-src="{{webPath + slide.document.wpath}}" data-scale="best-fit-down" data-align="center">
                             </div>
                         </div>
-                        <div ng-if="slide.type == 'plain'">
-                            <div class="margin-top-1x slide-content-plain" ng-bind-html="slide.html_content | to_trusted">
+                        <div class="slide-plain">
+                            <div class="slide-image" ng-if="slide.type == 'plain'">
+                                <div class="margin-top-1x slide-content-plain" ng-bind-html="slide.html_content | to_trusted">
+                                </div>
                             </div>
                         </div>
                     </div>

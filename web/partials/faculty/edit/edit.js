@@ -38,8 +38,8 @@
                             .then(function (response) {
                                 var temp = response.data.faculty;
 
-                                $scope.noProfPic = temp.picture != null;
-                                if (temp.picture != null) {
+                                $scope.noProfPic = temp.picture == null;
+                                if (!$scope.noProfPic) {
                                     $scope.currImg = temp.picture;
                                     $scope.loadImage($scope.currImg);
                                     $scope.dropzoneEvent('addedfile', function (file) {
@@ -85,7 +85,7 @@
                         $scope.setDropzoneUrl(Routing.generate('upload_profpic'));
                         var valid = response.data.valid;
                         if (valid) {
-                            if ($scope.currFileRemoved || $scope.noProfPic && $scope.currImg != null)
+                            if ($scope.currFileRemoved || $scope.noProfPic)
                             {
                                 var id = response.data.id;
                                 $scope.dropzoneEvent("sending", function (file, xhr, data) {
@@ -165,7 +165,9 @@
                             var formData = {
                                 thesis_bulletinbundle_faculty: $scope.faculty.class,
                                 id: $scope.id,
-                                dep_id: $scope.faculty.department
+                                dep_id: $scope.faculty.department,
+                                changed: $scope.currFileRemoved,
+                                docId: $scope.currImg.id
                             };
 
                             $('#spinner').show();

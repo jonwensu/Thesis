@@ -108,7 +108,9 @@ class FacultyController extends Controller {
      */
     public function updateAction(Request $request) {
         $id = $request->request->get('id');
+        $changed = $request->request->get('changed');
         $em = $this->getDoctrine()->getManager();
+        $docId = $request->request->get('docId');
         $entity = $em->getRepository("ThesisBulletinBundle:Faculty")->find($id);
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -118,7 +120,18 @@ class FacultyController extends Controller {
             $depId = $request->request->get('dep_id');
             $dep = $em->getRepository("ThesisBulletinBundle:Department")->find($depId);
             $entity->setDepartment($dep);
-            $em->persist($entity);
+
+
+
+            if ($changed == 'true') {
+                $doc = $em->getRepository('ThesisBulletinBundle:Document')->find($docId);
+                $doc->removeUpload();
+                $entity->setPicture(null);
+                $em->persist($entity);
+                $em->remove($doc);
+            } else {
+                $em->persist($entity);
+            }
             $em->flush();
 
             $response = ['valid' => true, 'id' => $entity->getId()];
