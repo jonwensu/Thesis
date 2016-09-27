@@ -103,9 +103,9 @@ body {
 }
 
 .ui-keyboard-button{
-    font-size: 2.5em;
-    border-radius: 0.2em;
-    margin: 0.2em;
+    font-size: 5vh;
+    border-radius: 1vh;
+    margin: 1vmin;
     background-color: #88c5f6;
     color: #606061;
     border: 0.1em solid #a9aeb2;

@@ -296,7 +296,8 @@ textarea {
 .search-item{
     border: 0.2em solid #aaafaa;
     border-radius: 5px; 
-    padding: 1em;
+    padding: 2vmin;
+    margin-bottom: 1vh;
 }
 
 .search-even{
@@ -389,7 +390,7 @@ textarea {
 
 .calendar-month {
     color: white;
-    font-size: 4vmin;
+    font-size: 3.5vmin;
 }
 
 .calendar-date {
@@ -406,11 +407,11 @@ textarea {
 }
 
 .clock .time {
-    font-size: 7.5vmin;
+    font-size: 7vmin;
 }
 
 .clock .am-pm {
-    font-size: 4vmin;
+    font-size: 3.5vmin;
 }
 
 .announcement-summary {
@@ -504,4 +505,6 @@ textarea {
     color: white;
 }
 
-
+.profile-field{
+    word-break: break-all;
+}
